@@ -5,10 +5,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "RedPulse AI"
-    app_version: str = "0.0.1"
+    app_version: str = "0.0.2"
     environment: str = "development"
     debug: bool = False
     api_v1_prefix: str = "/api/v1"
+
+    database_url: str = "postgresql+asyncpg://redpulse:redpulse@localhost:5433/redpulse"
+    redis_url: str = "redis://localhost:6379/0"
 
     model_config = SettingsConfigDict(
         env_file=".env",

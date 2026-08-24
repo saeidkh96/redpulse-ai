@@ -1,0 +1,34 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: redpulse-timescaledb
+    environment:
+      POSTGRES_DB: redpulse
+      POSTGRES_USER: redpulse
+      POSTGRES_PASSWORD: redpulse
+    ports:
+      - "5433:5432"
+    volumes:
+      - redpulse_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U redpulse -d redpulse"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: redpulse-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redpulse_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  redpulse_postgres_data:
+  redpulse_redis_data:

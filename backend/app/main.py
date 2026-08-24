@@ -1,12 +1,15 @@
 import logging
-from contextlib import asynccontextmanager
 from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
 from app.api.v1.health import router as health_router
 from app.core.config import get_settings
+from app.core.database import close_database_connections
 from app.core.logging import configure_logging
+from app.core.redis import close_redis_connection
+
 
 settings = get_settings()
 configure_logging()
@@ -17,8 +20,13 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     logger.info("Starting %s v%s", settings.app_name, settings.app_version)
+
     yield
+
     logger.info("Stopping %s", settings.app_name)
+
+    await close_database_connections()
+    await close_redis_connection()
 
 
 app = FastAPI(

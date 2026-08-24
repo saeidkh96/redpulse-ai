@@ -3,20 +3,19 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-client = TestClient(app)
-
-
 def test_root() -> None:
-    response = client.get("/")
+    with TestClient(app) as client:
+        response = client.get("/")
 
     assert response.status_code == 200
     assert response.json()["name"] == "RedPulse AI"
-    assert response.json()["version"] == "0.0.1"
+    assert response.json()["version"] == "0.0.2"
     assert response.json()["status"] == "running"
 
 
 def test_health() -> None:
-    response = client.get("/api/v1/health")
+    with TestClient(app) as client:
+        response = client.get("/api/v1/health")
 
     assert response.status_code == 200
     assert response.json() == {
@@ -26,10 +25,13 @@ def test_health() -> None:
 
 
 def test_readiness() -> None:
-    response = client.get("/api/v1/ready")
+    with TestClient(app) as client:
+        response = client.get("/api/v1/ready")
+
+    payload = response.json()
 
     assert response.status_code == 200
-    assert response.json() == {
-        "status": "ready",
-        "service": "redpulse-ai",
-    }
+    assert payload["status"] == "ready"
+    assert payload["service"] == "redpulse-ai"
+    assert payload["dependencies"]["database"] == "up"
+    assert payload["dependencies"]["redis"] == "up"
