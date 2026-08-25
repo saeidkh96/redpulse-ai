@@ -421,9 +421,6 @@ The next milestone introduces comparison between current machine behavior and it
 
 **Saeid Khalilian**
 
-M.Sc. Computer Science — University of Passau  
-AI & Python Developer
-
 ---
 
 <div align="center">
