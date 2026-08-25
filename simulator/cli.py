@@ -5,6 +5,20 @@ from datetime import datetime, timedelta, timezone
 from simulator.client import RedPulseClient
 from simulator.config import SimulatorConfig
 from simulator.engine import CNCSimulator
+from simulator.profiles.degradation import (
+    MILD_DEGRADATION,
+    MODERATE_DEGRADATION,
+    NORMAL_DEGRADATION,
+    SEVERE_DEGRADATION,
+)
+
+
+DEGRADATION_PROFILES = {
+    "normal": NORMAL_DEGRADATION,
+    "mild": MILD_DEGRADATION,
+    "moderate": MODERATE_DEGRADATION,
+    "severe": SEVERE_DEGRADATION,
+}
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -48,7 +62,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--no-wait",
         action="store_true",
-        help="Generate historical samples without real-time waiting",
+        help="Generate samples without real-time waiting",
+    )
+
+    parser.add_argument(
+        "--degradation",
+        choices=sorted(DEGRADATION_PROFILES.keys()),
+        default="normal",
+        help="Behavior degradation profile",
     )
 
     return parser
@@ -70,12 +91,31 @@ def main() -> None:
         sampling_interval_seconds=args.interval,
     )
 
-    simulator = CNCSimulator(config)
-    client = RedPulseClient(base_url=args.base_url)
+    degradation = DEGRADATION_PROFILES[
+        args.degradation
+    ]
 
-    start_time = datetime.now(timezone.utc)
+    simulator = CNCSimulator(
+        config,
+        degradation=degradation,
+    )
+
+    client = RedPulseClient(
+        base_url=args.base_url
+    )
+
+    start_time = datetime.now(
+        timezone.utc
+    )
 
     total_inserted = 0
+
+    print(
+        f"Starting simulation: "
+        f"machine={args.machine_id}, "
+        f"samples={args.samples}, "
+        f"degradation={args.degradation}"
+    )
 
     for index in range(args.samples):
         timestamp = (
@@ -85,9 +125,13 @@ def main() -> None:
             )
         )
 
-        snapshot = simulator.generate_snapshot(timestamp)
+        snapshot = simulator.generate_snapshot(
+            timestamp
+        )
 
-        inserted = client.send_snapshot(snapshot)
+        inserted = client.send_snapshot(
+            snapshot
+        )
 
         total_inserted += inserted
 
@@ -97,13 +141,17 @@ def main() -> None:
             f"inserted={inserted}"
         )
 
-        if not args.no_wait and index < args.samples - 1:
+        if (
+            not args.no_wait
+            and index < args.samples - 1
+        ):
             time.sleep(args.interval)
 
     print(
         f"Simulation complete: "
         f"snapshots={args.samples}, "
-        f"measurements={total_inserted}"
+        f"measurements={total_inserted}, "
+        f"degradation={args.degradation}"
     )
 
 

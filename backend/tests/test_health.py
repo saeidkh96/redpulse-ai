@@ -9,7 +9,7 @@ def test_root() -> None:
 
     assert response.status_code == 200
     assert response.json()["name"] == "RedPulse AI"
-    assert response.json()["version"] == "0.1.0"
+    assert response.json()["version"] == "0.1.1"
     assert response.json()["status"] == "running"
 
 

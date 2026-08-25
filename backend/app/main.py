@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from app.api.v1.machines import router as machines_router
 from app.api.v1.telemetry import router as telemetry_router
 from app.api.v1.machine_dna import router as machine_dna_router
+from app.api.v1.deviation import router as deviation_router
 
 from fastapi import FastAPI
 
@@ -13,6 +14,7 @@ from app.api.v1.health import router as health_router
 from app.api.v1.machines import router as machines_router
 from app.api.v1.telemetry import router as telemetry_router
 from app.api.v1.machine_dna import router as machine_dna_router
+from app.api.v1.deviation import router as deviation_router
 from app.core.config import get_settings
 from app.core.database import close_database_connections
 from app.core.logging import configure_logging
@@ -62,6 +64,11 @@ app.include_router(
 
 app.include_router(
     machine_dna_router,
+    prefix=settings.api_v1_prefix,
+)
+
+app.include_router(
+    deviation_router,
     prefix=settings.api_v1_prefix,
 )
 
