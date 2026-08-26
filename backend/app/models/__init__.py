@@ -4,6 +4,7 @@ from app.models.behavior_event import (
     BehaviorEventType,
     BehaviorSeverity,
 )
+from app.models.failure_fingerprint import FailureFingerprint
 from app.models.machine import Machine, MachineStatus
 from app.models.machine_baseline import MachineBaseline
 from app.models.telemetry import Telemetry
@@ -13,6 +14,7 @@ __all__ = [
     "BehaviorEvent",
     "BehaviorEventType",
     "BehaviorSeverity",
+    "FailureFingerprint",
     "Machine",
     "MachineStatus",
     "MachineBaseline",
