@@ -613,8 +613,6 @@ matching live behavior against known failure trajectories.
 
 ------------------------------------------------------------------------
 
----
-
 ## Author
 
 **Saeid Khalilian**
@@ -622,7 +620,7 @@ matching live behavior against known failure trajectories.
 ---
 
 ## License
-...
+
 
 <div align="center">
 
