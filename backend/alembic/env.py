@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-from app.models import Base, Machine, MachineBaseline, Telemetry  # noqa: F401
+from app.models import Base, BehaviorEvent, Machine, MachineBaseline, Telemetry  # noqa: F401
 
 
 config = context.config

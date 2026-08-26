@@ -11,6 +11,9 @@ from app.services.behavioral_deviation import (
     InsufficientTelemetryError,
     behavioral_deviation_service,
 )
+from app.services.behavioral_memory import (
+    behavioral_memory_service,
+)
 
 
 router = APIRouter(
@@ -60,6 +63,22 @@ async def analyze_behavioral_deviation(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(exc),
         )
+
+    await behavioral_memory_service.record_deviation(
+        session,
+        machine_id=machine_id,
+        baseline_version=result.baseline_version,
+        window_start=result.window_start,
+        window_end=result.window_end,
+        overall_score=result.report.overall_score,
+        severity=result.report.severity,
+        sensor_deviations=(
+            result.report.sensor_deviations
+        ),
+        correlation_shifts=(
+            result.report.correlation_shifts
+        ),
+    )
 
     return DeviationAnalysisRead(
         machine_id=machine_id,

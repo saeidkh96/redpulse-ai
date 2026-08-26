@@ -6,6 +6,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db_session
 from app.repositories.machine import machine_repository
 from app.schemas.drift import DriftAnalysisRead
+from app.services.behavioral_memory import (
+    behavioral_memory_service,
+)
 from app.services.drift_analysis import (
     DriftBaselineNotFoundError,
     DriftTelemetryError,
@@ -58,6 +61,22 @@ async def analyze_slow_drift(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(exc),
         )
+
+    first_window = result.windows[0]
+    last_window = result.windows[-1]
+
+    await behavioral_memory_service.record_drift(
+        session,
+        machine_id=machine_id,
+        baseline_version=result.baseline_version,
+        window_start=first_window.window_start,
+        window_end=last_window.window_end,
+        overall_score=(
+            result.drift_report.overall_score
+        ),
+        state=result.drift_report.state,
+        signals=result.drift_report.signals,
+    )
 
     return DriftAnalysisRead(
         machine_id=machine_id,
