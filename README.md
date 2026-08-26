@@ -613,6 +613,17 @@ matching live behavior against known failure trajectories.
 
 ------------------------------------------------------------------------
 
+---
+
+## Author
+
+**Saeid Khalilian**
+
+---
+
+## License
+...
+
 <div align="center">
 
 <strong>RedPulse AI</strong>
