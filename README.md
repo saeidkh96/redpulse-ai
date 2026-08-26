@@ -1,11 +1,14 @@
-::: {align="center"}
-`<img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="520"/>`{=html}
+<div align="center">
+
+<img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="520"/>
 
 # RedPulse AI
 
 ### Behavioral Intelligence & Predictive Maintenance Platform
 
 **Behavior. Insight. Uptime.**
+
+</div>
 
 [![Version](https://img.shields.io/badge/version-v0.2.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v0.2.0)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
@@ -610,8 +613,10 @@ matching live behavior against known failure trajectories.
 
 ------------------------------------------------------------------------
 
-::: {align="center"}
-**RedPulse AI**
+<div align="center">
 
-*Behavior. Insight. Uptime.*
-:::
+<strong>RedPulse AI</strong>
+
+<em>Behavior. Insight. Uptime.</em>
+
+</div>
