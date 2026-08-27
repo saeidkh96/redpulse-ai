@@ -10,41 +10,41 @@
 
 </div>
 
-[![Version](https://img.shields.io/badge/version-v0.2.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v0.2.0)
+[![Version](https://img.shields.io/badge/version-v0.5.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v0.5.0)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
-
-------------------------------------------------------------------------
+---
 
 ## What is RedPulse AI?
 
-**RedPulse AI** is a production-oriented behavioral intelligence and
-predictive-maintenance platform designed to learn how individual
-industrial machines normally behave.
+**RedPulse AI** is a production-oriented behavioral intelligence and predictive-maintenance platform designed to learn how individual industrial machines normally behave, detect when that behavior changes, estimate failure risk, recommend maintenance, verify intervention outcomes, and compare possible maintenance decisions.
 
-Instead of treating every machine as identical, RedPulse builds a
-**machine-specific behavioral fingerprint --- Machine DNA** --- from
-multivariate telemetry. That baseline captures sensor statistics,
-trends, and relationships between signals so future behavior can be
-compared against what is normal for that specific machine.
+Instead of treating every machine as identical, RedPulse builds a **machine-specific behavioral fingerprint — Machine DNA** — from multivariate telemetry. That baseline captures sensor statistics, trends, and relationships between signals so future behavior can be compared against what is normal for that specific machine.
 
-The long-term goal is to move beyond simple threshold monitoring toward
-**early behavioral deviation detection, slow-drift analysis,
-failure-trajectory matching, explainable maintenance evidence, and
-post-maintenance verification**.
+RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-maintenance intelligence pipeline:
 
-> **Current milestone --- v0.2.0:** RedPulse now combines versioned
-> Machine DNA with behavioral deviation scoring, slow-drift detection,
-> and persistent Behavioral Memory. Deviation and drift analyses are
-> stored as machine-specific historical events with evidence, creating
-> the foundation for cross-machine learning and failure-trajectory
-> intelligence.
+- machine-specific behavioral baselines;
+- multivariate behavioral deviation detection;
+- slow-drift analysis;
+- persistent behavioral memory;
+- historical failure fingerprint storage;
+- failure-trajectory matching;
+- machine health scoring;
+- predictive failure intelligence;
+- explainable failure evidence and root-cause hints;
+- maintenance decision intelligence;
+- post-maintenance verification;
+- maintenance intervention history;
+- maintenance outcome learning;
+- counterfactual maintenance analysis.
 
-------------------------------------------------------------------------
+> **Current milestone — v0.5.0:** RedPulse can now estimate a conservative no-maintenance trajectory, compare historically supported intervention candidates, quantify expected maintenance benefit, and recommend the intervention with the strongest evidence-adjusted expected outcome.
+
+---
 
 ## Why Machine DNA?
 
@@ -52,31 +52,31 @@ Traditional monitoring often asks:
 
 > "Did a sensor cross a fixed threshold?"
 
-RedPulse is being built to ask a richer question:
+RedPulse is built to ask a richer question:
 
-> **"Is this machine behaving differently from its own learned normal
-> behavior?"**
+> **"Is this machine behaving differently from its own learned normal behavior?"**
 
-Two machines of the same model may operate under different loads,
-environments, ages, maintenance histories, and sensor characteristics. A
-single global threshold can miss that context.
+Two machines of the same model may operate under different loads, environments, ages, maintenance histories, and sensor characteristics. A single global threshold can miss that context.
 
 Machine DNA provides a per-machine baseline containing:
 
--   sensor distributions and operating ranges;
--   mean, median, standard deviation, minimum, and maximum;
--   temporal trend/slope information;
--   multivariate sensor correlations;
--   baseline observation window and sample count;
--   persistent, automatically versioned baseline history.
+- sensor distributions and operating ranges;
+- mean, median, standard deviation, minimum, and maximum;
+- temporal trend/slope information;
+- multivariate sensor correlations;
+- baseline observation window and sample count;
+- persistent, automatically versioned baseline history.
 
-------------------------------------------------------------------------
+Machine DNA is the foundation for later reasoning: deviation, drift, failure matching, health scoring, prediction, maintenance verification, and counterfactual analysis all depend on understanding what is normal for the machine itself.
 
-## Current Architecture
+---
 
-``` mermaid
-flowchart LR
-    SIM[CNC Machine Simulator] -->|Telemetry batches| API[FastAPI API]
+## Current Intelligence Architecture
+
+```mermaid
+flowchart TD
+    SIM[CNC Machine Simulator] --> API[FastAPI API]
+
     API --> TS[(TimescaleDB)]
     API --> PG[(PostgreSQL)]
     API -. infrastructure .-> REDIS[(Redis)]
@@ -86,142 +86,290 @@ flowchart LR
     FE --> TREND[Trend / Slope]
     FE --> CORR[Correlation Engine]
 
-    STAT --> DNA[Machine DNA Service]
+    STAT --> DNA[Machine DNA]
     TREND --> DNA
     CORR --> DNA
     DNA --> BASE[(Versioned Machine Baselines)]
 
-    TS --> DEV[Behavioral Deviation Engine]
+    TS --> DEV[Behavioral Deviation]
     BASE --> DEV
     DEV --> DRIFT[Slow Drift Detection]
+
     DEV --> MEM[Behavioral Memory]
     DRIFT --> MEM
     MEM --> EVENTS[(Behavior Events)]
 
-    EVENTS -. roadmap .-> CROSS[Cross-Machine Learning]
-    CROSS -. roadmap .-> FAIL[Failure Fingerprint Library]
-    FAIL -. roadmap .-> MATCH[Failure Trajectory Matching]
-    MATCH -. roadmap .-> HEALTH[Early Warning / Health Score]
-    HEALTH -. roadmap .-> EXPLAIN[Explainable Maintenance Evidence]
-    EXPLAIN -. roadmap .-> VERIFY[Post-Maintenance Verification]
+    EVENTS --> FPLIB[Failure Fingerprint Library]
+    FPLIB --> MATCH[Failure Trajectory Matching]
+
+    MATCH --> HEALTH[Machine Health Scoring]
+    DEV --> HEALTH
+    DRIFT --> HEALTH
+
+    HEALTH --> PRED[Predictive Failure Intelligence]
+    PRED --> EXPLAIN[Explainable Failure Intelligence]
+
+    EXPLAIN --> DECIDE[Maintenance Decision Intelligence]
+    DECIDE --> INTERVENTION[Maintenance Intervention]
+
+    INTERVENTION --> VERIFY[Post-Maintenance Verification]
+    VERIFY --> HISTORY[(Maintenance History)]
+
+    HISTORY --> OUTCOME[Maintenance Outcome Learning]
+    OUTCOME --> CF[Counterfactual Maintenance Intelligence]
+    HEALTH --> CF
+
+    CF --> RECOMMEND[Evidence-Adjusted Intervention Recommendation]
+
+    HISTORY -. next phase .-> CROSS[Cross-Machine Learning]
+    CROSS -. next phase .-> FLEET[Fleet Intelligence]
 ```
 
-------------------------------------------------------------------------
+---
 
-## v0.2.0 Capabilities
+## v0.5.0 Capabilities
 
-  ------------------------------------------------------------------------
-  Area                Capability                       Status
-  ------------------- ------------------- --------------------------------
-  Platform            FastAPI backend                    ✅
-                      foundation          
+| Area | Capability | Status |
+|---|---|:---:|
+| Platform | FastAPI backend foundation | ✅ |
+| Infrastructure | PostgreSQL / TimescaleDB | ✅ |
+| Infrastructure | Redis service | ✅ |
+| Data Model | Machine registry | ✅ |
+| Telemetry | Single and batch measurement ingestion | ✅ |
+| Telemetry | Machine / sensor / time-window queries | ✅ |
+| Telemetry | TimescaleDB hypertable | ✅ |
+| Simulation | Reproducible CNC telemetry generator | ✅ |
+| Simulation | RPM, load, temperature, current, vibration | ✅ |
+| Simulation | Normal, moderate, and severe degradation profiles | ✅ |
+| Features | Statistical sensor features | ✅ |
+| Features | Trend / slope extraction | ✅ |
+| Features | Cross-sensor correlation fingerprint | ✅ |
+| Machine DNA | Baseline generation and persistence | ✅ |
+| Machine DNA | Automatic baseline versioning | ✅ |
+| Behavioral Intelligence | Behavioral deviation scoring | ✅ |
+| Behavioral Intelligence | Per-sensor deviation evidence | ✅ |
+| Behavioral Intelligence | Correlation-shift detection | ✅ |
+| Behavioral Intelligence | Severity classification | ✅ |
+| Behavioral Intelligence | Multi-window slow-drift analysis | ✅ |
+| Behavioral Intelligence | Trend, persistence, monotonicity, cumulative-change signals | ✅ |
+| Memory | Persistent behavioral event history | ✅ |
+| Memory | Deviation and drift event recording | ✅ |
+| Failure Intelligence | Historical failure fingerprint library | ✅ |
+| Failure Intelligence | Failure trajectory matching | ✅ |
+| Health | Machine health scoring | ✅ |
+| Prediction | Predictive failure intelligence | ✅ |
+| Explainability | Evidence and root-cause hints | ✅ |
+| Maintenance | Maintenance decision intelligence | ✅ |
+| Maintenance | Post-maintenance verification | ✅ |
+| Maintenance | Intervention history and lifecycle tracking | ✅ |
+| Maintenance | Before / after snapshots | ✅ |
+| Maintenance | Verification result persistence | ✅ |
+| Learning | Maintenance outcome learning | ✅ |
+| Learning | Historical success rate and confidence | ✅ |
+| Counterfactual | No-maintenance trajectory estimation | ✅ |
+| Counterfactual | Candidate intervention comparison | ✅ |
+| Counterfactual | Avoided risk / health loss / drift estimation | ✅ |
+| Counterfactual | Evidence-adjusted intervention ranking | ✅ |
+| Counterfactual | Historical support and confidence | ✅ |
+| Fleet Intelligence | Cross-machine learning | 🔜 |
+| Fleet Intelligence | Fleet health / risk / prioritization | 🔜 |
 
-  Infrastructure      PostgreSQL /                       ✅
-                      TimescaleDB         
+---
 
-  Infrastructure      Redis service                      ✅
+## End-to-End Intelligence Flow
 
-  Data model          Machine registry                   ✅
+```text
+Machine Telemetry
+      ↓
+Machine DNA
+      ↓
+Behavioral Deviation
+      ↓
+Slow Drift Detection
+      ↓
+Behavioral Memory
+      ↓
+Failure Fingerprint Library
+      ↓
+Failure Trajectory Matching
+      ↓
+Machine Health Scoring
+      ↓
+Failure Prediction
+      ↓
+Explainability / Root-Cause Hints
+      ↓
+Maintenance Recommendation
+      ↓
+Maintenance Intervention
+      ↓
+Post-Maintenance Verification
+      ↓
+Maintenance History
+      ↓
+Maintenance Outcome Learning
+      ↓
+Counterfactual Maintenance Intelligence
+      ↓
+Evidence-Adjusted Intervention Recommendation
+```
 
-  Telemetry           Single and batch                   ✅
-                      measurement         
-                      ingestion           
+---
 
-  Telemetry           Machine / sensor /                 ✅
-                      time-window queries 
+## Counterfactual Maintenance Intelligence
 
-  Telemetry           TimescaleDB                        ✅
-                      hypertable          
+`v0.5.0` adds a new reasoning layer on top of the maintenance history and outcome-learning pipeline.
 
-  Simulation          Reproducible CNC                   ✅
-                      telemetry generator 
+RedPulse now evaluates:
 
-  Simulation          RPM, load,                         ✅
-                      temperature,        
-                      current, vibration  
+> **What is the estimated trajectory if no maintenance is performed?**
 
-  Simulation          Normal, moderate,                  ✅
-                      and severe          
-                      degradation         
-                      profiles            
+and:
 
-  Features            Statistical sensor                 ✅
-                      features            
+> **Which historically supported intervention is expected to produce the strongest outcome?**
 
-  Features            Trend / slope                      ✅
-                      extraction          
+The counterfactual engine compares the current machine condition with:
 
-  Features            Cross-sensor                       ✅
-                      correlation         
-                      fingerprint         
+```text
+Current Machine State
+        │
+        ├── No Maintenance
+        │      ↓
+        │   Estimated Degradation
+        │
+        ├── Candidate Intervention A
+        │      ↓
+        │   Expected Outcome
+        │
+        ├── Candidate Intervention B
+        │      ↓
+        │   Expected Outcome
+        │
+        └── Candidate Intervention N
+               ↓
+            Expected Outcome
+                  ↓
+        Evidence-Adjusted Ranking
+```
 
-  Machine DNA         Baseline generation                ✅
-                      and persistence     
+Representative outputs include:
 
-  Machine DNA         Automatic baseline                 ✅
-                      versioning          
+```text
+predicted_health_score
+predicted_risk_score
+predicted_deviation_score
+predicted_drift_score
+predicted_failure_match_score
 
-  Intelligence        Behavioral                         ✅
-                      deviation scoring   
+expected_recovery_score
 
-  Intelligence        Per-sensor                         ✅
-                      deviation evidence  
+avoided_risk
+avoided_health_loss
+avoided_drift
 
-  Intelligence        Correlation-shift                  ✅
-                      detection           
+estimated_intervention_benefit
+confidence
+historical_support
+evidence_scope
+recommended_intervention
+```
 
-  Intelligence        Severity                           ✅
-                      classification      
+Counterfactual results are explicitly treated as **estimated projections rather than guaranteed future states**.
 
-  Intelligence        Multi-window                       ✅
-                      slow-drift analysis 
+Machine-type-specific intervention history is preferred when available. If the platform must fall back to global maintenance history, recommendation confidence is reduced.
 
-  Intelligence        Trend, persistence,                ✅
-                      monotonicity, and   
-                      cumulative-change   
-                      signals             
+---
 
-  Memory              Persistent                         ✅
-                      behavioral event    
-                      history             
+## Maintenance Outcome Learning
 
-  Memory              Deviation event                    ✅
-                      recording           
+Maintenance interventions are stored as persistent entities instead of temporary events.
 
-  Memory              Drift event                        ✅
-                      recording           
+A maintenance record can include:
 
-  Memory              Evidence-rich                      ✅
-                      machine history API 
+```text
+Machine
+Failure Prediction Context
+Maintenance Recommendation
+Intervention Type
+Lifecycle Status
+Technician Notes
+Before Snapshot
+After Snapshot
+Verification Result
+Outcome Classification
+Outcome Evidence
+Start / Completion Time
+```
 
-  Intelligence        Cross-machine                      🔜
-                      learning            
+Completed maintenance history is aggregated by intervention type.
 
-  Intelligence        Failure fingerprint                🔜
-                      library             
+Example:
 
-  Intelligence        Failure trajectory                 🔜
-                      matching            
+```text
+Bearing Replacement
+      ↓
+Average Recovery Score
+Average Risk Reduction
+Average Drift Reduction
+Average Health Improvement
+Success Rate
+Historical Support
+Confidence
+      ↓
+Learned Intervention Profile
+```
 
-  Maintenance         Early warning /                    🔜
-                      health scoring      
+This learned evidence becomes the input for counterfactual intervention comparison.
 
-  Maintenance         Explainable                        🔜
-                      evidence /          
-                      root-cause hints    
+---
 
-  Maintenance         Post-maintenance                   🔜
-                      verification        
-  ------------------------------------------------------------------------
+## Post-Maintenance Verification
 
-------------------------------------------------------------------------
+RedPulse does not stop after recommending maintenance.
+
+After an intervention, the platform can compare the machine's current behavior against the pre-maintenance snapshot and determine whether the intervention produced measurable recovery.
+
+Verification considers signals such as:
+
+```text
+Health Improvement
+Risk Reduction
+Deviation Reduction
+Drift Reduction
+Failure-Match Reduction
+```
+
+The result is persisted in the maintenance history so later versions can learn which actions work under which machine conditions.
+
+---
+
+## Failure Intelligence
+
+RedPulse maintains reusable historical failure knowledge.
+
+### Failure Fingerprints
+
+Historical degradation patterns can be stored as structured failure fingerprints containing behavioral and trajectory evidence.
+
+### Failure Trajectory Matching
+
+Current machine behavior can be compared against known historical failure trajectories to estimate whether the machine is evolving toward a previously observed failure pattern.
+
+### Predictive Failure Intelligence
+
+Trajectory evidence, machine health, deviation, drift, and historical failure similarity are combined into predictive failure signals.
+
+### Explainability
+
+Predictions are accompanied by evidence so maintenance decisions are not based on an opaque score alone.
+
+---
 
 ## Machine DNA Example
 
-A Machine DNA baseline is generated from synchronized telemetry and
-persisted for later comparison.
+A Machine DNA baseline is generated from synchronized telemetry and persisted for later comparison.
 
-``` json
+```json
 {
   "baseline_version": "1",
   "sample_count": 1010,
@@ -234,7 +382,7 @@ persisted for later comparison.
       "maximum": 2.382
     },
     "temperature": {
-      "mean": 64.1570,
+      "mean": 64.157,
       "std": 1.2313
     }
   },
@@ -246,20 +394,17 @@ persisted for later comparison.
 }
 ```
 
-The baseline is not just a collection of independent thresholds. The
-correlations preserve part of the **relationship structure** between
-machine signals.
+The baseline is not just a collection of independent thresholds. The correlations preserve part of the **relationship structure** between machine signals.
 
-------------------------------------------------------------------------
+---
 
 ## CNC Telemetry Simulator
 
-RedPulse includes a deterministic CNC simulator for development and
-validation.
+RedPulse includes a deterministic CNC simulator for development and validation.
 
 It currently generates five signals:
 
-``` text
+```text
 rpm
 load
 temperature
@@ -267,31 +412,19 @@ current
 vibration
 ```
 
-The signals are intentionally related. For example, load influences
-temperature and current, while RPM contributes to vibration. Seeded
-generation makes experiments reproducible. The simulator also supports
-degradation profiles so deviation and drift behavior can be validated
-against controlled moderate and severe deterioration scenarios.
+The signals are intentionally related. For example, load influences temperature and current, while RPM contributes to vibration.
 
-A 1,000-snapshot validation run produced **5,000 measurements** and
-demonstrated the expected baseline relationships before Machine DNA
-generation.
+Seeded generation makes experiments reproducible. The simulator also supports normal, moderate-degradation, and severe-degradation profiles so the intelligence pipeline can be validated against controlled deterioration scenarios.
 
-------------------------------------------------------------------------
+---
 
 ## Behavioral Intelligence Example
 
-With degradation telemetry, RedPulse can distinguish healthy operation
-from meaningful behavioral change.
+With degradation telemetry, RedPulse can distinguish healthy operation from meaningful behavioral change.
 
-A severe-degradation validation run produced an anomalous deviation
-result with strong evidence in vibration, temperature, and current. The
-drift engine then analyzed multiple consecutive windows and identified a
-sustained `drifting` state.
+A behavioral-memory event can preserve evidence such as:
 
-Example behavioral-memory event:
-
-``` json
+```json
 {
   "event_type": "drift",
   "severity": "anomalous",
@@ -321,49 +454,55 @@ Example behavioral-memory event:
 }
 ```
 
-Behavioral Memory turns individual analyses into a persistent machine
-history that later stages can use for failure-pattern learning,
-trajectory matching, and maintenance verification.
+Behavioral Memory converts individual analyses into structured historical evidence used by failure intelligence and maintenance reasoning.
 
-------------------------------------------------------------------------
+---
 
 ## Technology Stack
 
-**Backend**
+### Backend
 
--   Python
--   FastAPI
--   Pydantic
--   SQLAlchemy
--   Alembic
--   asyncpg
+- Python
+- FastAPI
+- Pydantic
+- SQLAlchemy
+- Alembic
+- asyncpg
 
-**Data & Infrastructure**
+### Data & Infrastructure
 
--   PostgreSQL 17
--   TimescaleDB
--   Redis
--   Docker / Docker Compose
+- PostgreSQL 17
+- TimescaleDB
+- Redis
+- Docker / Docker Compose
 
-**Simulation & Analytics**
+### Intelligence & Analytics
 
--   deterministic Python simulation
--   statistical feature extraction
--   trend analysis
--   Pearson correlation fingerprints
+- statistical feature extraction
+- multivariate behavioral fingerprints
+- correlation analysis
+- behavioral deviation scoring
+- multi-window drift analysis
+- failure trajectory matching
+- health scoring
+- evidence aggregation
+- maintenance outcome learning
+- counterfactual intervention comparison
 
-**Quality**
+### Quality
 
--   pytest
--   integration/API tests
--   migration validation
--   reproducible simulator tests
+- pytest
+- unit tests
+- service-layer tests
+- API / OpenAPI tests
+- migration validation
+- reproducible simulator tests
 
-------------------------------------------------------------------------
+---
 
 ## Repository Structure
 
-``` text
+```text
 redpulse-ai/
 ├── backend/
 │   ├── alembic/
@@ -373,9 +512,14 @@ redpulse-ai/
 │   │   ├── core/
 │   │   ├── deviation/
 │   │   ├── drift/
+│   │   ├── explainability/
+│   │   ├── failure/
 │   │   ├── features/
+│   │   ├── health/
+│   │   ├── maintenance/
 │   │   ├── memory/
 │   │   ├── models/
+│   │   ├── prediction/
 │   │   ├── repositories/
 │   │   ├── schemas/
 │   │   └── services/
@@ -390,13 +534,13 @@ redpulse-ai/
 └── README.md
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Quick Start
 
 ### 1. Clone the repository
 
-``` bash
+```bash
 git clone https://github.com/saeidkh96/redpulse-ai.git
 cd redpulse-ai
 ```
@@ -405,131 +549,171 @@ cd redpulse-ai
 
 Windows PowerShell:
 
-``` powershell
+```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
 ### 3. Install backend dependencies
 
-``` powershell
+```powershell
 pip install -r backend\requirements.txt
 ```
 
 ### 4. Start TimescaleDB and Redis
 
-``` powershell
+```powershell
 docker compose up -d
 docker ps
 ```
 
-The development infrastructure exposes:
+Development infrastructure:
 
-``` text
+```text
 TimescaleDB / PostgreSQL : localhost:5433
 Redis                    : localhost:6379
 ```
 
 ### 5. Apply database migrations
 
-``` powershell
+```powershell
 cd backend
 alembic upgrade head
 ```
 
 ### 6. Start the API
 
-``` powershell
+```powershell
 python -m uvicorn app.main:app --reload --port 8001
 ```
 
 API root:
 
-``` text
+```text
 http://127.0.0.1:8001/
 ```
 
 Interactive API documentation:
 
-``` text
+```text
 http://127.0.0.1:8001/docs
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Core API Flow
 
-The current platform supports an end-to-end behavioral-intelligence
-workflow:
-
-``` text
+```text
 Register Machine
       ↓
 Ingest / Simulate Telemetry
       ↓
-Extract Behavioral Features
+Build Machine DNA
       ↓
-Build Versioned Machine DNA
+Analyze Behavioral Deviation
       ↓
-Compare Current Behavior with Machine DNA
+Analyze Slow Drift
       ↓
-Score Sensor Deviations + Correlation Shifts
+Persist Behavioral Memory
       ↓
-Analyze Multi-Window Slow Drift
+Build / Query Failure Intelligence
       ↓
-Persist Deviation / Drift Events
+Assess Machine Health
       ↓
-Retrieve Behavioral Memory
+Predict Failure Risk
+      ↓
+Explain Failure Evidence
+      ↓
+Generate Maintenance Recommendation
+      ↓
+Track Maintenance Intervention
+      ↓
+Verify Post-Maintenance Recovery
+      ↓
+Learn Maintenance Outcomes
+      ↓
+Analyze Counterfactual Maintenance Options
 ```
 
-Representative endpoints include:
+Representative endpoint groups include:
 
-``` text
-POST   /api/v1/machines
-GET    /api/v1/machines
-GET    /api/v1/machines/{machine_id}
-PATCH  /api/v1/machines/{machine_id}
-
-POST   /api/v1/telemetry
-POST   /api/v1/telemetry/batch
-GET    /api/v1/telemetry/machines/{machine_id}
-
-POST   /api/v1/machines/{machine_id}/dna/build
-GET    /api/v1/machines/{machine_id}/dna
-
-POST   /api/v1/machines/{machine_id}/deviation/analyze
-POST   /api/v1/machines/{machine_id}/drift/analyze
-
-GET    /api/v1/machines/{machine_id}/memory
+```text
+Machines
+Telemetry
+Machine DNA
+Deviation
+Drift
+Behavioral Memory
+Failure Fingerprints
+Failure Matching
+Machine Health
+Failure Prediction
+Failure Explanation
+Maintenance Recommendation
+Maintenance Verification
+Maintenance Intervention History
+Maintenance Outcome Learning
+Counterfactual Maintenance
 ```
 
-------------------------------------------------------------------------
+Representative maintenance endpoints include:
+
+```text
+POST   /api/v1/machines/{machine_id}/maintenance-interventions
+GET    /api/v1/machines/{machine_id}/maintenance-interventions
+GET    /api/v1/maintenance-interventions/{intervention_id}
+POST   /api/v1/maintenance-interventions/{intervention_id}/complete
+
+GET    /api/v1/maintenance-outcomes
+
+POST   /api/v1/machines/{machine_id}/counterfactual-maintenance
+```
+
+Use the interactive FastAPI documentation at `/docs` for the complete current endpoint surface.
+
+---
 
 ## Testing
 
 Run the backend and simulator test suites from the repository root:
 
-``` powershell
+```powershell
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v0.2.0` milestone:
+At the `v0.5.0` milestone:
 
-``` text
-63 passed
+```text
+159 passed
 ```
 
-The suite covers platform health, infrastructure, machine registry,
-telemetry ingestion, simulator behavior and degradation profiles,
-feature extraction, Machine DNA generation and versioning, behavioral
-deviation scoring, slow-drift detection, Behavioral Memory persistence,
-API integration, and database-backed event history.
+The suite covers:
 
-------------------------------------------------------------------------
+- platform health and infrastructure;
+- machine registry;
+- telemetry ingestion and queries;
+- simulator behavior and degradation profiles;
+- feature extraction;
+- Machine DNA generation and versioning;
+- behavioral deviation scoring;
+- slow-drift detection;
+- Behavioral Memory;
+- failure fingerprints and trajectory matching;
+- machine health scoring;
+- predictive failure intelligence;
+- explainability;
+- maintenance decision intelligence;
+- post-maintenance verification;
+- maintenance history and outcome learning;
+- counterfactual maintenance intelligence;
+- service-layer behavior;
+- API / OpenAPI integration.
+
+---
 
 ## Milestones
 
-``` text
+```text
 v0.0.1  Platform Foundation
    ↓
 v0.0.2  Data Infrastructure
@@ -546,72 +730,207 @@ v0.1.1  Behavioral Deviation Engine
    ↓
 v0.1.2  Slow Drift Detection
    ↓
-v0.2.0  Behavioral Memory                 ← current
+v0.2.0  Behavioral Memory
    ↓
-         Cross-Machine Learning
+v0.2.1  Historical Failure Fingerprint Library
    ↓
-         Failure Fingerprint Library
+v0.2.2  Failure Trajectory Matching
    ↓
-         Failure Trajectory Matching
+v0.3.0  Machine Health Scoring
    ↓
-         Early Warning / Health Scoring
+v0.3.1  Predictive Failure Intelligence
    ↓
-         Explainable Maintenance Evidence
+v0.3.2  Explainable Failure Intelligence
    ↓
-         Post-Maintenance Verification
+v0.4.0  Maintenance Decision Intelligence
+   ↓
+v0.4.1  Post-Maintenance Verification
+   ↓
+v0.4.2  Maintenance History & Intervention Tracking
+   ↓
+v0.4.3  Maintenance Outcome Learning
+   ↓
+v0.5.0  Counterfactual Maintenance Intelligence   ← current
 ```
 
-------------------------------------------------------------------------
+---
+
+## Roadmap
+
+The project is intentionally evolving in layers. New infrastructure is added only when it has a concrete architectural use case.
+
+### Phase 3 — Cross-Machine & Fleet Intelligence
+
+- cross-machine learning;
+- shared failure knowledge between similar machines;
+- fleet-level health;
+- failure hotspots;
+- plant / site risk;
+- maintenance prioritization.
+
+### Phase 4 — Streaming & Large-Scale Data Platform
+
+Planned when machine count and telemetry volume justify distributed processing:
+
+- Kafka for high-throughput telemetry and event streaming;
+- Spark for large-scale telemetry processing, feature engineering, historical failure analytics, and fleet analytics;
+- Airflow for scheduled data and ML pipelines;
+- Data Lake / Hive-style analytics when scale requires it.
+
+### Phase 5 — Production MLOps
+
+- experiment tracking;
+- model registry;
+- model versioning;
+- data and model monitoring;
+- drift monitoring;
+- automated retraining;
+- A/B testing;
+- champion / challenger evaluation.
+
+Important production metrics will include false-alert rate, precision / recall, early-warning lead time, and maintenance outcome quality.
+
+### Phase 6 — Industrial AI / Engineer Copilot
+
+The predictive core remains independent of the LLM layer.
+
+Planned components include:
+
+- evidence-grounded industrial assistant;
+- RAG over manuals, SOPs, maintenance reports, and technical documentation;
+- provider-independent LLM Gateway;
+- local models;
+- vLLM;
+- LoRA / fine-tuning when domain adaptation is justified;
+- prompt evaluation and prompt-tuning workflows.
+
+### Phase 7 — Automation & Enterprise Integration
+
+A vendor-independent Integration Gateway is planned with separate adapters for:
+
+- n8n;
+- Microsoft Power Automate;
+- generic webhooks;
+- future enterprise integrations.
+
+Expected integration targets include Jira, Slack, Teams, Outlook, email, Planner, SharePoint, CMMS, ERP, and external APIs.
+
+### Phase 8 — Multi-Tenant SaaS
+
+Planned capabilities include:
+
+- organizations / tenants;
+- users and RBAC;
+- tenant isolation;
+- plants / sites;
+- tenant API keys;
+- tenant-specific integrations;
+- audit logs;
+- quotas and rate limits.
+
+### Phase 9 — Cloud & Enterprise Infrastructure
+
+Primary cloud direction:
+
+- Azure;
+- AKS;
+- Azure Container Registry;
+- managed PostgreSQL;
+- Blob Storage;
+- Key Vault;
+- Entra ID;
+- cloud monitoring.
+
+Portability will be preserved where practical for GCP.
+
+Infrastructure evolution:
+
+```text
+Docker
+   ↓
+Kubernetes
+   ↓
+OpenShift
+
+Terraform
+   ↓
+Infrastructure as Code
+
+Ansible
+   ↓
+Configuration / Deployment Automation
+```
+
+### Phase 10 — Enterprise AI Infrastructure
+
+Advanced GPU-backed AI infrastructure will be introduced only when justified by the workload.
+
+Potential components include:
+
+- vLLM inference infrastructure;
+- GPU-backed fine-tuned models;
+- NVIDIA AI Enterprise / NVIDIA GPU stack where it provides a real architectural benefit.
+
+---
 
 ## Vision
 
-RedPulse AI is being developed around five ideas:
+RedPulse AI is being developed around seven core ideas:
 
-1.  **Every machine has its own normal.**\
-    Learn machine-specific behavior instead of relying only on universal
-    thresholds.
+1. **Every machine has its own normal.**  
+   Learn machine-specific behavior instead of relying only on universal thresholds.
 
-2.  **Relationships matter.**\
-    A machine can change even when individual sensor values still look
-    acceptable.
+2. **Relationships matter.**  
+   A machine can change even when individual sensor values still look acceptable.
 
-3.  **Failures have trajectories.**\
-    Historical degradation patterns can become reusable failure
-    fingerprints.
+3. **Failures have trajectories.**  
+   Historical degradation patterns can become reusable failure fingerprints.
 
-4.  **Predictions need evidence.**\
-    Maintenance recommendations should show which signals, trends, and
-    relationships changed.
+4. **Predictions need evidence.**  
+   Maintenance recommendations should show which signals, trends, and relationships changed.
 
-5.  **Maintenance should be verifiable.**\
-    After intervention, the platform should determine whether the
-    machine actually returned toward healthy behavior.
+5. **Maintenance should be verifiable.**  
+   After intervention, the platform should determine whether the machine actually returned toward healthy behavior.
 
-------------------------------------------------------------------------
+6. **Maintenance history should become reusable knowledge.**  
+   Intervention outcomes should improve future maintenance decisions.
+
+7. **Decisions should consider alternatives.**  
+   The platform should estimate what may happen without intervention and compare historically supported maintenance options before recommending an action.
+
+---
 
 ## Development Status
 
-RedPulse AI is under active development and is currently an
-**experimental engineering/research project**, not a production safety
-system.
+RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The `v0.2.0` release establishes the platform's first persistent
-behavioral-intelligence loop:
+The `v0.5.0` release establishes the first complete maintenance-learning loop:
 
-**Machine DNA → Behavioral Deviation → Slow Drift Detection → Behavioral
-Memory**
+```text
+Machine Behavior
+      ↓
+Failure Intelligence
+      ↓
+Machine Health
+      ↓
+Failure Prediction
+      ↓
+Explainability
+      ↓
+Maintenance Decision
+      ↓
+Post-Maintenance Verification
+      ↓
+Maintenance History
+      ↓
+Outcome Learning
+      ↓
+Counterfactual Maintenance Intelligence
+```
 
-The system can now learn a machine-specific baseline, compare new
-telemetry against that learned normal behavior, identify sustained
-degradation across multiple windows, and preserve important findings as
-structured historical events with supporting evidence.
+The next major stage is **Cross-Machine & Fleet Intelligence**: allowing machines to benefit from shared historical failure and maintenance knowledge while preserving machine-specific behavioral context.
 
-The next major stage is **cross-machine learning and failure
-intelligence**: learning reusable degradation patterns from multiple
-machines, building a historical failure-fingerprint library, and
-matching live behavior against known failure trajectories.
-
-------------------------------------------------------------------------
+---
 
 ## Author
 
@@ -621,6 +940,7 @@ matching live behavior against known failure trajectories.
 
 ## License
 
+See the repository license for usage terms.
 
 <div align="center">
 
