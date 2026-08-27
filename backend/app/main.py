@@ -9,6 +9,7 @@ from app.api.v1.cross_machine import router as cross_machine_router
 from app.api.v1.deviation import router as deviation_router
 from app.api.v1.drift import router as drift_router
 from app.api.v1.failures import router as failures_router
+from app.api.v1.fleet_intelligence import router as fleet_intelligence_router
 from app.api.v1.failure_matching import router as failure_matching_router
 from app.api.v1.failure_prediction import router as failure_prediction_router
 from app.api.v1.maintenance_recommendation import router as maintenance_recommendation_router
@@ -145,6 +146,11 @@ app.include_router(
     prefix=settings.api_v1_prefix,
 )
 
+app.include_router(
+    fleet_intelligence_router,
+    prefix=settings.api_v1_prefix,
+)
+
 
 @app.get("/", tags=["system"])
 async def root() -> dict[str, str]:
@@ -153,6 +159,7 @@ async def root() -> dict[str, str]:
         "version": settings.app_version,
         "status": "running",
     }
+
 
 
 
