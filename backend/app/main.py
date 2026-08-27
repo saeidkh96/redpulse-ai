@@ -9,6 +9,7 @@ from app.api.v1.drift import router as drift_router
 from app.api.v1.failures import router as failures_router
 from app.api.v1.failure_matching import router as failure_matching_router
 from app.api.v1.failure_prediction import router as failure_prediction_router
+from app.api.v1.failure_explanation import router as failure_explanation_router
 from app.api.v1.health import router as health_router
 from app.api.v1.machine_dna import router as machine_dna_router
 from app.api.v1.machine_health import router as machine_health_router
@@ -109,6 +110,11 @@ app.include_router(
     prefix=settings.api_v1_prefix,
 )
 
+app.include_router(
+    failure_explanation_router,
+    prefix=settings.api_v1_prefix,
+)
+
 
 @app.get("/", tags=["system"])
 async def root() -> dict[str, str]:
@@ -117,6 +123,7 @@ async def root() -> dict[str, str]:
         "version": settings.app_version,
         "status": "running",
     }
+
 
 
 
