@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.api.v1.counterfactual_maintenance import router as counterfactual_maintenance_router
+from app.api.v1.cross_machine import router as cross_machine_router
 from app.api.v1.deviation import router as deviation_router
 from app.api.v1.drift import router as drift_router
 from app.api.v1.failures import router as failures_router
@@ -139,6 +140,11 @@ app.include_router(
     prefix=settings.api_v1_prefix,
 )
 
+app.include_router(
+    cross_machine_router,
+    prefix=settings.api_v1_prefix,
+)
+
 
 @app.get("/", tags=["system"])
 async def root() -> dict[str, str]:
@@ -147,6 +153,7 @@ async def root() -> dict[str, str]:
         "version": settings.app_version,
         "status": "running",
     }
+
 
 
 
