@@ -1,4 +1,4 @@
-import logging
+﻿import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
@@ -11,6 +11,7 @@ from app.api.v1.failure_matching import router as failure_matching_router
 from app.api.v1.failure_prediction import router as failure_prediction_router
 from app.api.v1.maintenance_recommendation import router as maintenance_recommendation_router
 from app.api.v1.maintenance_verification import router as maintenance_verification_router
+from app.api.v1.maintenance_history import router as maintenance_history_router
 from app.api.v1.failure_explanation import router as failure_explanation_router
 from app.api.v1.health import router as health_router
 from app.api.v1.machine_dna import router as machine_dna_router
@@ -127,6 +128,11 @@ app.include_router(
     prefix=settings.api_v1_prefix,
 )
 
+app.include_router(
+    maintenance_history_router,
+    prefix=settings.api_v1_prefix,
+)
+
 
 @app.get("/", tags=["system"])
 async def root() -> dict[str, str]:
@@ -135,6 +141,7 @@ async def root() -> dict[str, str]:
         "version": settings.app_version,
         "status": "running",
     }
+
 
 
 
