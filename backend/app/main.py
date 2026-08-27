@@ -10,6 +10,7 @@ from app.api.v1.failures import router as failures_router
 from app.api.v1.failure_matching import router as failure_matching_router
 from app.api.v1.health import router as health_router
 from app.api.v1.machine_dna import router as machine_dna_router
+from app.api.v1.machine_health import router as machine_health_router
 from app.api.v1.machines import router as machines_router
 from app.api.v1.memory import router as memory_router
 from app.api.v1.telemetry import router as telemetry_router
@@ -88,6 +89,11 @@ app.include_router(
 )
 
 app.include_router(
+    machine_health_router,
+    prefix=settings.api_v1_prefix,
+)
+
+app.include_router(
     failures_router,
     prefix=settings.api_v1_prefix,
 )
@@ -105,4 +111,5 @@ async def root() -> dict[str, str]:
         "version": settings.app_version,
         "status": "running",
     }
+
 
