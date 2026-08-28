@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpulse-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redpulse-api
+  template:
+    metadata:
+      labels:
+        app: redpulse-api
+    spec:
+      containers:
+        - name: api
+          image: redpulse-ai:3.0.0
+          ports:
+            - containerPort: 8001
+          readinessProbe:
+            httpGet:
+              path: /api/v1/v3/readiness
+              port: 8001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpulse-api
+spec:
+  selector:
+    app: redpulse-api
+  ports:
+    - port: 80
+      targetPort: 8001

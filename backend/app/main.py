@@ -3,6 +3,7 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from app.api.v1.production_demo_v3 import router as production_demo_v3_router
 
 from app.api.v1.counterfactual_maintenance import router as counterfactual_maintenance_router
 from app.api.v1.cross_machine import router as cross_machine_router
@@ -216,5 +217,10 @@ app.include_router(
 
 app.include_router(
     production_platform_router,
+    prefix=settings.api_v1_prefix,
+)
+
+app.include_router(
+    production_demo_v3_router,
     prefix=settings.api_v1_prefix,
 )
