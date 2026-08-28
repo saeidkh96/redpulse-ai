@@ -10,7 +10,7 @@
 
 </div>
 
-[![Version](https://img.shields.io/badge/version-v1.3.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v1.3.0)
+[![Version](https://img.shields.io/badge/version-v1.4.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v1.4.0)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
@@ -42,7 +42,7 @@ RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-m
 - maintenance outcome learning;
 - counterfactual maintenance analysis.
 
-> **Current milestone — v1.3.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming/data-platform infrastructure, a production-oriented MLOps control plane, and a Hugging Face integration platform for model discovery, caching, embeddings, inference, PEFT/LoRA workflows, metadata synchronization, and provider-independent model access.
+> **Current milestone — v1.4.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming/data-platform infrastructure, production-oriented MLOps, Hugging Face model integration, and a new Industrial Intelligence layer with knowledge ingestion, evidence-grounded copilot services, agentic runtime/planning, enterprise controls, and a vendor-independent integration gateway.
 
 ---
 
@@ -133,7 +133,7 @@ flowchart TD
 
 ---
 
-## Current Capabilities — v1.3.0
+## Current Capabilities — v1.4.0
 
 | Area | Capability | Status |
 |---|---|:---:|
@@ -208,6 +208,18 @@ flowchart TD
 | Hugging Face | Inference adapter | ✅ |
 | Hugging Face | Provider-independent model gateway | ✅ |
 | Hugging Face | Unified model platform API | ✅ |
+| Industrial AI | Knowledge ingestion foundation | ✅ |
+| Industrial AI | Structured knowledge store | ✅ |
+| Industrial AI | Evidence-grounded engineer copilot | ✅ |
+| Industrial AI | Machine-context construction | ✅ |
+| Agentic AI | Tool registry and agent runtime | ✅ |
+| Agentic AI | Maintenance planner foundation | ✅ |
+| Enterprise | RBAC foundation | ✅ |
+| Enterprise | Resilience controls | ✅ |
+| Enterprise | Observability hooks | ✅ |
+| Integrations | Vendor-independent Integration Gateway | ✅ |
+| Integrations | Adapter abstraction for enterprise automation | ✅ |
+| API | Industrial Intelligence API surface | ✅ |
 
 ---
 
@@ -395,6 +407,35 @@ POST  /api/v1/huggingface/generate
 ```
 
 The predictive-maintenance core remains independent of Hugging Face. The integration is an optional AI/model layer that can support later RAG, industrial copilots, local models, fine-tuning, and domain-specific inference.
+
+---
+
+## Industrial Intelligence Platform — v1.4.0
+
+RedPulse v1.4.0 adds the first Industrial Intelligence layer on top of the predictive-maintenance, data-platform, MLOps, and model-platform foundations.
+
+The release introduces:
+
+- knowledge ingestion for industrial and maintenance context;
+- structured knowledge models and an internal knowledge store;
+- evidence-grounded engineer-copilot services;
+- machine-context construction for contextual reasoning;
+- an agentic runtime with tool registration and execution;
+- a maintenance-planning agent foundation;
+- enterprise RBAC, resilience, and observability foundations;
+- a vendor-independent Integration Gateway and adapter abstraction.
+
+Representative endpoints include:
+
+```text
+POST  /api/v1/industrial-ai/knowledge/ingest
+POST  /api/v1/industrial-ai/copilot/ask
+POST  /api/v1/industrial-ai/agents/runs
+```
+
+The Industrial Intelligence layer is intentionally separated from the predictive-maintenance core. LLM- or agent-based reasoning can therefore consume machine evidence without replacing the deterministic behavioral, failure, health, and maintenance intelligence pipeline.
+
+The integration gateway establishes a common boundary for future automation systems such as n8n, Microsoft Power Automate, generic webhooks, and enterprise workflow tools. Individual external adapters can evolve independently from RedPulse core intelligence.
 
 ---
 
@@ -622,6 +663,11 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - embeddings and inference adapters
 - PEFT / LoRA integration
 - provider-independent model gateway
+- evidence-grounded industrial knowledge retrieval
+- engineer-copilot context construction
+- agentic tool execution and maintenance planning
+- enterprise RBAC / resilience / observability foundations
+- vendor-independent integration gateway
 
 ### Quality
 
@@ -643,9 +689,12 @@ redpulse-ai/
 │   │   └── versions/
 │   ├── app/
 │   │   ├── api/v1/
+│   │   ├── agents/
+│   │   ├── copilot/
 │   │   ├── core/
 │   │   ├── deviation/
 │   │   ├── drift/
+│   │   ├── enterprise/
 │   │   ├── explainability/
 │   │   ├── failure/
 │   │   ├── features/
@@ -653,6 +702,8 @@ redpulse-ai/
 │   │   ├── health/
 │   │   ├── integrations/
 │   │   │   └── huggingface/
+│   │   ├── integrations_gateway/
+│   │   ├── knowledge/
 │   │   ├── maintenance/
 │   │   ├── memory/
 │   │   ├── mlops/
@@ -830,10 +881,10 @@ Run the backend and simulator test suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v1.3.0` milestone:
+At the `v1.4.0` milestone:
 
 ```text
-194 passed
+198 passed
 ```
 
 The suite covers:
@@ -856,7 +907,11 @@ The suite covers:
 - maintenance history and outcome learning;
 - counterfactual maintenance intelligence;
 - service-layer behavior;
-- API / OpenAPI integration.
+- API / OpenAPI integration;
+- Hugging Face model-platform integration;
+- Industrial AI knowledge and copilot services;
+- agentic runtime and maintenance-planning foundations;
+- enterprise and integration-gateway foundations.
 
 ---
 
@@ -919,7 +974,9 @@ v1.0.0  Streaming & Large-Scale Data Platform
    ↓
 v1.2.0  Production MLOps Platform
    ↓
-v1.3.0  Hugging Face Integration Platform   ← current
+v1.3.0  Hugging Face Integration Platform
+   ↓
+v1.4.0  Industrial Intelligence Platform   ← current
 ```
 
 ---
@@ -966,26 +1023,31 @@ The first model-platform layer is now implemented:
 - embeddings adapter;
 - inference adapter;
 - PEFT / LoRA adapter;
-- provider-independent model gateway;
+- provider-independent model gateway
+- evidence-grounded industrial knowledge retrieval
+- engineer-copilot context construction
+- agentic tool execution and maintenance planning
+- enterprise RBAC / resilience / observability foundations
+- vendor-independent integration gateway;
 - unified Hugging Face model platform API.
 
-### Phase 6 — Industrial AI / Engineer Copilot
+### Completed in v1.4.0 — Industrial Intelligence Platform
 
-The predictive core remains independent of the LLM layer.
+The first Industrial AI / Engineer Copilot layer is now implemented:
 
-Planned components include:
+- industrial knowledge ingestion and structured knowledge storage;
+- evidence-grounded copilot foundation;
+- machine-context construction;
+- agentic runtime and tool registry;
+- maintenance-planning agent foundation;
+- enterprise RBAC, resilience, and observability foundations;
+- vendor-independent Integration Gateway.
 
-- evidence-grounded industrial assistant;
-- RAG over manuals, SOPs, maintenance reports, and technical documentation;
-- provider-independent LLM Gateway;
-- local models;
-- vLLM;
-- LoRA / fine-tuning when domain adaptation is justified;
-- prompt evaluation and prompt-tuning workflows.
+The predictive core remains independent of the LLM and agent layers. More advanced model serving, domain adaptation, prompt evaluation, and production-grade external automation remain future work.
 
-### Phase 7 — Automation & Enterprise Integration
+### Next Phase — Automation & Enterprise Integration
 
-A vendor-independent Integration Gateway is planned with separate adapters for:
+The Integration Gateway foundation is implemented. Production adapters are planned for:
 
 - n8n;
 - Microsoft Power Automate;
@@ -1083,7 +1145,7 @@ RedPulse AI is being developed around seven core ideas:
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v1.3.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, and a Hugging Face model-integration layer:
+The current `v1.4.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, and the first Industrial Intelligence layer:
 
 ```text
 Machine Behavior
@@ -1107,7 +1169,7 @@ Outcome Learning
 Counterfactual Maintenance Intelligence
 ```
 
-The next major stage is the **Industrial AI / Engineer Copilot**: evidence-grounded RAG, machine-context construction, maintenance and failure-investigation copilots, and citation-backed answers. Enterprise automation and integration layers follow after that.
+The next major stage is to deepen the **Automation & Enterprise Integration** layer: production adapters for n8n, Microsoft Power Automate, generic webhooks, and enterprise workflow systems, followed by stronger multi-tenant and cloud infrastructure. The v1.4.0 Industrial Intelligence foundation can then evolve toward richer RAG, citation-backed reasoning, local model serving, and domain-adapted industrial AI.
 
 ---
 
