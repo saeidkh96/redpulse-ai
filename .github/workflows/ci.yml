@@ -10,6 +10,24 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: redpulse
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d redpulse"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5433/redpulse
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,5 +50,5 @@ jobs:
         continue-on-error: true
         run: ruff check backend/app backend/tests simulator
 
-      - name: Tests
+      - name: Run tests
         run: python -m pytest backend/tests simulator/tests -q
