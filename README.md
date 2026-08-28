@@ -10,7 +10,7 @@
 
 </div>
 
-[![Version](https://img.shields.io/badge/version-v0.5.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v0.5.0)
+[![Version](https://img.shields.io/badge/version-v1.0.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v1.0.0)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
@@ -42,7 +42,7 @@ RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-m
 - maintenance outcome learning;
 - counterfactual maintenance analysis.
 
-> **Current milestone — v0.5.0:** RedPulse can now estimate a conservative no-maintenance trajectory, compare historically supported intervention candidates, quantify expected maintenance benefit, and recommend the intervention with the strongest evidence-adjusted expected outcome.
+> **Current milestone — v1.0.0:** RedPulse now extends machine-level predictive maintenance into cross-machine, fleet, and plant intelligence, with event streaming, an optional Kafka adapter, real-time window processing, Spark analytics jobs, and a unified data-platform orchestration layer.
 
 ---
 
@@ -121,13 +121,16 @@ flowchart TD
 
     CF --> RECOMMEND[Evidence-Adjusted Intervention Recommendation]
 
-    HISTORY -. next phase .-> CROSS[Cross-Machine Learning]
-    CROSS -. next phase .-> FLEET[Fleet Intelligence]
+    HISTORY --> CROSS[Cross-Machine Learning]
+    CROSS --> FLEET[Fleet Intelligence]
+    FLEET --> PLANT[Plant Intelligence]
+    PLANT --> STREAM[Streaming Intelligence]
+    STREAM --> DATA[Data Platform / Spark Analytics]
 ```
 
 ---
 
-## v0.5.0 Capabilities
+## v1.0.0 Capabilities
 
 | Area | Capability | Status |
 |---|---|:---:|
@@ -171,8 +174,20 @@ flowchart TD
 | Counterfactual | Avoided risk / health loss / drift estimation | ✅ |
 | Counterfactual | Evidence-adjusted intervention ranking | ✅ |
 | Counterfactual | Historical support and confidence | ✅ |
-| Fleet Intelligence | Cross-machine learning | 🔜 |
-| Fleet Intelligence | Fleet health / risk / prioritization | 🔜 |
+| Fleet Intelligence | Cross-machine learning | ✅ |
+| Fleet Intelligence | Fleet health / risk / prioritization | ✅ |
+| Fleet Intelligence | Machine similarity and peer grouping | ✅ |
+| Fleet Intelligence | Failure hotspots | ✅ |
+| Plant Intelligence | Site-level intelligence | ✅ |
+| Plant Intelligence | Fleet early warning | ✅ |
+| Plant Intelligence | Fleet risk forecasting | ✅ |
+| Plant Intelligence | Plant maintenance planning | ✅ |
+| Streaming | In-memory event bus foundation | ✅ |
+| Streaming | Kafka event-bus adapter | ✅ |
+| Streaming | Intelligence event publishing | ✅ |
+| Streaming | Real-time window processing | ✅ |
+| Data Platform | Data-platform orchestration | ✅ |
+| Analytics | Spark analytics jobs | ✅ |
 
 ---
 
@@ -277,6 +292,35 @@ recommended_intervention
 Counterfactual results are explicitly treated as **estimated projections rather than guaranteed future states**.
 
 Machine-type-specific intervention history is preferred when available. If the platform must fall back to global maintenance history, recommendation confidence is reduced.
+
+---
+
+## Fleet, Plant & Streaming Intelligence — v1.0.0
+
+RedPulse v1.0.0 expands the intelligence scope beyond an individual machine. Historical machine behavior and maintenance evidence can now contribute to cross-machine reasoning, fleet-level health analysis, failure-hotspot detection, and maintenance prioritization.
+
+At plant level, the platform adds site summaries, fleet early-warning signals, fleet risk forecasting, and plant maintenance planning. This allows machine-level evidence to be aggregated into operational views without removing the machine-specific context established by Machine DNA.
+
+The data platform adds an event-driven foundation for higher telemetry volumes. It includes an in-memory event bus for local/test operation, an optional Kafka adapter, intelligence-event publishing, real-time window processing, and Spark analytics jobs. The unified data-platform API exposes event publication, recent-event retrieval, and analytics execution.
+
+Representative v1.0.0 endpoints include:
+
+```text
+GET/POST  /api/v1/machines/{machine_id}/cross-machine-learning
+GET       /api/v1/fleet/peer-groups
+GET       /api/v1/fleet/health
+GET       /api/v1/fleet/failure-hotspots
+GET       /api/v1/fleet/maintenance-priorities
+GET       /api/v1/plant/sites/summary
+GET       /api/v1/plant/fleet-early-warning
+GET       /api/v1/plant/fleet-risk-forecast
+GET       /api/v1/plant/maintenance-plan
+POST      /api/v1/data-platform/events/publish
+GET       /api/v1/data-platform/events/recent
+POST      /api/v1/data-platform/analytics/run
+```
+
+The streaming stack is intentionally optional: the core predictive-maintenance intelligence remains usable without Kafka or Spark.
 
 ---
 
@@ -474,6 +518,8 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - PostgreSQL 17
 - TimescaleDB
 - Redis
+- Apache Kafka
+- Apache Spark
 - Docker / Docker Compose
 
 ### Intelligence & Analytics
@@ -488,6 +534,11 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - evidence aggregation
 - maintenance outcome learning
 - counterfactual intervention comparison
+- cross-machine learning and machine similarity
+- fleet health, hotspots, and prioritization
+- plant-level risk and maintenance planning
+- real-time event/window processing
+- large-scale Spark analytics
 
 ### Quality
 
@@ -515,21 +566,28 @@ redpulse-ai/
 │   │   ├── explainability/
 │   │   ├── failure/
 │   │   ├── features/
+│   │   ├── fleet/
 │   │   ├── health/
 │   │   ├── maintenance/
 │   │   ├── memory/
 │   │   ├── models/
+│   │   ├── plant/
 │   │   ├── prediction/
 │   │   ├── repositories/
 │   │   ├── schemas/
-│   │   └── services/
+│   │   ├── services/
+│   │   ├── streaming/
+│   │   └── data_platform/
 │   └── tests/
+├── analytics/
+│   └── spark/
 ├── simulator/
 │   ├── profiles/
 │   └── tests/
 ├── docs/
 │   └── images/
 ├── docker-compose.yml
+├── docker-compose.streaming.yml
 ├── .env.example
 └── README.md
 ```
@@ -681,10 +739,10 @@ Run the backend and simulator test suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v0.5.0` milestone:
+At the `v1.0.0` milestone:
 
 ```text
-159 passed
+181 passed
 ```
 
 The suite covers:
@@ -750,7 +808,23 @@ v0.4.2  Maintenance History & Intervention Tracking
    ↓
 v0.4.3  Maintenance Outcome Learning
    ↓
-v0.5.0  Counterfactual Maintenance Intelligence   ← current
+v0.5.0  Counterfactual Maintenance Intelligence
+   ↓
+v0.6.0  Cross-Machine Learning
+   ↓
+v0.7.0  Fleet Intelligence & Maintenance Prioritization
+   ↓
+v0.8.0  Plant Intelligence & Maintenance Planning
+   ↓
+v0.8.1  Streaming Foundation
+   ↓
+v0.8.2  Kafka Adapter
+   ↓
+v0.8.3  Intelligence Events
+   ↓
+v0.9.0  Real-Time Streaming
+   ↓
+v1.0.0  Streaming & Large-Scale Data Platform   ← current
 ```
 
 ---
@@ -759,23 +833,18 @@ v0.5.0  Counterfactual Maintenance Intelligence   ← current
 
 The project is intentionally evolving in layers. New infrastructure is added only when it has a concrete architectural use case.
 
-### Phase 3 — Cross-Machine & Fleet Intelligence
+### Completed in v1.0.0 — Fleet, Plant & Streaming Data Platform
 
-- cross-machine learning;
-- shared failure knowledge between similar machines;
-- fleet-level health;
-- failure hotspots;
-- plant / site risk;
-- maintenance prioritization.
+The v1.0.0 milestone completes the planned cross-machine, fleet, plant, and initial distributed-data layers:
 
-### Phase 4 — Streaming & Large-Scale Data Platform
-
-Planned when machine count and telemetry volume justify distributed processing:
-
-- Kafka for high-throughput telemetry and event streaming;
-- Spark for large-scale telemetry processing, feature engineering, historical failure analytics, and fleet analytics;
-- Airflow for scheduled data and ML pipelines;
-- Data Lake / Hive-style analytics when scale requires it.
+- cross-machine learning and shared historical evidence;
+- machine similarity and peer grouping;
+- fleet health, failure hotspots, and maintenance prioritization;
+- plant/site intelligence, early warning, risk forecasting, and maintenance planning;
+- event-streaming foundation with an optional Kafka adapter;
+- real-time streaming windows and intelligence events;
+- Spark analytics jobs for telemetry, features, and fleet analytics;
+- data-platform orchestration and API endpoints.
 
 ### Phase 5 — Production MLOps
 
@@ -904,7 +973,7 @@ RedPulse AI is being developed around seven core ideas:
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The `v0.5.0` release establishes the first complete maintenance-learning loop:
+The `v1.0.0` release extends the maintenance-learning loop into fleet-, plant-, and streaming-data intelligence:
 
 ```text
 Machine Behavior
@@ -928,7 +997,7 @@ Outcome Learning
 Counterfactual Maintenance Intelligence
 ```
 
-The next major stage is **Cross-Machine & Fleet Intelligence**: allowing machines to benefit from shared historical failure and maintenance knowledge while preserving machine-specific behavioral context.
+The next major stage is **Production MLOps**: experiment tracking, model registry/versioning, monitoring, automated retraining, and champion/challenger evaluation, followed by the industrial AI copilot and enterprise integration layers.
 
 ---
 
