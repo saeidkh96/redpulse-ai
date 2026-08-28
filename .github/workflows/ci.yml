@@ -41,7 +41,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
-          pip install pytest ruff
+          pip install pytest ruff alembic
 
       - name: Compile
         run: python -m compileall backend/app backend/tests orchestration analytics simulator
@@ -49,6 +49,10 @@ jobs:
       - name: Ruff
         continue-on-error: true
         run: ruff check backend/app backend/tests simulator
+
+      - name: Apply database migrations
+        working-directory: backend
+        run: alembic upgrade head
 
       - name: Run tests
         run: python -m pytest backend/tests simulator/tests -q
