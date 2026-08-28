@@ -1,50 +1,63 @@
-<div align="center">
-
-<img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="520"/>
+::: {align="center"}
+`<img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="520"/>`{=html}
 
 # RedPulse AI
 
 ### Behavioral Intelligence & Predictive Maintenance Platform
 
 **Behavior. Insight. Uptime.**
+:::
 
-</div>
-
-[![Version](https://img.shields.io/badge/version-v1.4.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v1.4.0)
+[![Version](https://img.shields.io/badge/version-v2.0.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v2.0.0)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
----
+------------------------------------------------------------------------
 
 ## What is RedPulse AI?
 
-**RedPulse AI** is a production-oriented behavioral intelligence and predictive-maintenance platform designed to learn how individual industrial machines normally behave, detect when that behavior changes, estimate failure risk, recommend maintenance, verify intervention outcomes, and compare possible maintenance decisions.
+**RedPulse AI** is a production-oriented behavioral intelligence and
+predictive-maintenance platform designed to learn how individual
+industrial machines normally behave, detect when that behavior changes,
+estimate failure risk, recommend maintenance, verify intervention
+outcomes, and compare possible maintenance decisions.
 
-Instead of treating every machine as identical, RedPulse builds a **machine-specific behavioral fingerprint — Machine DNA** — from multivariate telemetry. That baseline captures sensor statistics, trends, and relationships between signals so future behavior can be compared against what is normal for that specific machine.
+Instead of treating every machine as identical, RedPulse builds a
+**machine-specific behavioral fingerprint --- Machine DNA** --- from
+multivariate telemetry. That baseline captures sensor statistics,
+trends, and relationships between signals so future behavior can be
+compared against what is normal for that specific machine.
 
-RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-maintenance intelligence pipeline:
+RedPulse has evolved beyond threshold monitoring into an end-to-end
+predictive-maintenance intelligence pipeline:
 
-- machine-specific behavioral baselines;
-- multivariate behavioral deviation detection;
-- slow-drift analysis;
-- persistent behavioral memory;
-- historical failure fingerprint storage;
-- failure-trajectory matching;
-- machine health scoring;
-- predictive failure intelligence;
-- explainable failure evidence and root-cause hints;
-- maintenance decision intelligence;
-- post-maintenance verification;
-- maintenance intervention history;
-- maintenance outcome learning;
-- counterfactual maintenance analysis.
+-   machine-specific behavioral baselines;
+-   multivariate behavioral deviation detection;
+-   slow-drift analysis;
+-   persistent behavioral memory;
+-   historical failure fingerprint storage;
+-   failure-trajectory matching;
+-   machine health scoring;
+-   predictive failure intelligence;
+-   explainable failure evidence and root-cause hints;
+-   maintenance decision intelligence;
+-   post-maintenance verification;
+-   maintenance intervention history;
+-   maintenance outcome learning;
+-   counterfactual maintenance analysis.
 
-> **Current milestone — v1.4.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming/data-platform infrastructure, production-oriented MLOps, Hugging Face model integration, and a new Industrial Intelligence layer with knowledge ingestion, evidence-grounded copilot services, agentic runtime/planning, enterprise controls, and a vendor-independent integration gateway.
+> **Current milestone --- v2.0.0:** RedPulse now combines machine-,
+> fleet-, and plant-level predictive-maintenance intelligence with
+> streaming and large-scale data infrastructure, production-oriented
+> MLOps, Hugging Face integration, Industrial Intelligence, enterprise
+> automation, multi-tenant controls, and a production-platform control
+> plane for approvals, jobs, predictive-AI operations, data quality,
+> governance, security, observability, and readiness validation.
 
----
+------------------------------------------------------------------------
 
 ## Why Machine DNA?
 
@@ -54,26 +67,32 @@ Traditional monitoring often asks:
 
 RedPulse is built to ask a richer question:
 
-> **"Is this machine behaving differently from its own learned normal behavior?"**
+> **"Is this machine behaving differently from its own learned normal
+> behavior?"**
 
-Two machines of the same model may operate under different loads, environments, ages, maintenance histories, and sensor characteristics. A single global threshold can miss that context.
+Two machines of the same model may operate under different loads,
+environments, ages, maintenance histories, and sensor characteristics. A
+single global threshold can miss that context.
 
 Machine DNA provides a per-machine baseline containing:
 
-- sensor distributions and operating ranges;
-- mean, median, standard deviation, minimum, and maximum;
-- temporal trend/slope information;
-- multivariate sensor correlations;
-- baseline observation window and sample count;
-- persistent, automatically versioned baseline history.
+-   sensor distributions and operating ranges;
+-   mean, median, standard deviation, minimum, and maximum;
+-   temporal trend/slope information;
+-   multivariate sensor correlations;
+-   baseline observation window and sample count;
+-   persistent, automatically versioned baseline history.
 
-Machine DNA is the foundation for later reasoning: deviation, drift, failure matching, health scoring, prediction, maintenance verification, and counterfactual analysis all depend on understanding what is normal for the machine itself.
+Machine DNA is the foundation for later reasoning: deviation, drift,
+failure matching, health scoring, prediction, maintenance verification,
+and counterfactual analysis all depend on understanding what is normal
+for the machine itself.
 
----
+------------------------------------------------------------------------
 
 ## Current Intelligence Architecture
 
-```mermaid
+``` mermaid
 flowchart TD
     SIM[CNC Machine Simulator] --> API[FastAPI API]
 
@@ -129,103 +148,318 @@ flowchart TD
     DATA --> MLOPS[Production MLOps Platform]
     MLOPS --> HF[Hugging Face Model Platform]
     HF --> AILAYER[Industrial AI / Copilot Layer]
+    AILAYER --> AUTO[Enterprise Automation Runtime]
+    AUTO --> TENANT[Multi-Tenant Platform]
+    TENANT --> PROD[Production Control Plane]
+    PROD --> OPS[Governance / Security / Observability]
 ```
 
----
+------------------------------------------------------------------------
 
-## Current Capabilities — v1.4.0
+## Current Capabilities --- v2.0.0
 
-| Area | Capability | Status |
-|---|---|:---:|
-| Platform | FastAPI backend foundation | ✅ |
-| Infrastructure | PostgreSQL / TimescaleDB | ✅ |
-| Infrastructure | Redis service | ✅ |
-| Data Model | Machine registry | ✅ |
-| Telemetry | Single and batch measurement ingestion | ✅ |
-| Telemetry | Machine / sensor / time-window queries | ✅ |
-| Telemetry | TimescaleDB hypertable | ✅ |
-| Simulation | Reproducible CNC telemetry generator | ✅ |
-| Simulation | RPM, load, temperature, current, vibration | ✅ |
-| Simulation | Normal, moderate, and severe degradation profiles | ✅ |
-| Features | Statistical sensor features | ✅ |
-| Features | Trend / slope extraction | ✅ |
-| Features | Cross-sensor correlation fingerprint | ✅ |
-| Machine DNA | Baseline generation and persistence | ✅ |
-| Machine DNA | Automatic baseline versioning | ✅ |
-| Behavioral Intelligence | Behavioral deviation scoring | ✅ |
-| Behavioral Intelligence | Per-sensor deviation evidence | ✅ |
-| Behavioral Intelligence | Correlation-shift detection | ✅ |
-| Behavioral Intelligence | Severity classification | ✅ |
-| Behavioral Intelligence | Multi-window slow-drift analysis | ✅ |
-| Behavioral Intelligence | Trend, persistence, monotonicity, cumulative-change signals | ✅ |
-| Memory | Persistent behavioral event history | ✅ |
-| Memory | Deviation and drift event recording | ✅ |
-| Failure Intelligence | Historical failure fingerprint library | ✅ |
-| Failure Intelligence | Failure trajectory matching | ✅ |
-| Health | Machine health scoring | ✅ |
-| Prediction | Predictive failure intelligence | ✅ |
-| Explainability | Evidence and root-cause hints | ✅ |
-| Maintenance | Maintenance decision intelligence | ✅ |
-| Maintenance | Post-maintenance verification | ✅ |
-| Maintenance | Intervention history and lifecycle tracking | ✅ |
-| Maintenance | Before / after snapshots | ✅ |
-| Maintenance | Verification result persistence | ✅ |
-| Learning | Maintenance outcome learning | ✅ |
-| Learning | Historical success rate and confidence | ✅ |
-| Counterfactual | No-maintenance trajectory estimation | ✅ |
-| Counterfactual | Candidate intervention comparison | ✅ |
-| Counterfactual | Avoided risk / health loss / drift estimation | ✅ |
-| Counterfactual | Evidence-adjusted intervention ranking | ✅ |
-| Counterfactual | Historical support and confidence | ✅ |
-| Fleet Intelligence | Cross-machine learning | ✅ |
-| Fleet Intelligence | Fleet health / risk / prioritization | ✅ |
-| Fleet Intelligence | Machine similarity and peer grouping | ✅ |
-| Fleet Intelligence | Failure hotspots | ✅ |
-| Plant Intelligence | Site-level intelligence | ✅ |
-| Plant Intelligence | Fleet early warning | ✅ |
-| Plant Intelligence | Fleet risk forecasting | ✅ |
-| Plant Intelligence | Plant maintenance planning | ✅ |
-| Streaming | In-memory event bus foundation | ✅ |
-| Streaming | Kafka event-bus adapter | ✅ |
-| Streaming | Intelligence event publishing | ✅ |
-| Streaming | Real-time window processing | ✅ |
-| Data Platform | Data-platform orchestration | ✅ |
-| Analytics | Spark analytics jobs | ✅ |
-| MLOps | Experiment tracking | ✅ |
-| MLOps | Model registry and version lifecycle | ✅ |
-| MLOps | Feature-store foundation | ✅ |
-| MLOps | Model/data monitoring | ✅ |
-| MLOps | Automated retraining control | ✅ |
-| MLOps | Champion / challenger evaluation | ✅ |
-| MLOps | Model serving abstraction | ✅ |
-| MLOps | MLflow adapter | ✅ |
-| MLOps | Airflow retraining adapter / DAG | ✅ |
-| Hugging Face | Hub adapter and model inspection | ✅ |
-| Hugging Face | Model metadata / model-card synchronization | ✅ |
-| Hugging Face | Local model cache | ✅ |
-| Hugging Face | Embedding adapter | ✅ |
-| Hugging Face | PEFT / LoRA training adapter | ✅ |
-| Hugging Face | Inference adapter | ✅ |
-| Hugging Face | Provider-independent model gateway | ✅ |
-| Hugging Face | Unified model platform API | ✅ |
-| Industrial AI | Knowledge ingestion foundation | ✅ |
-| Industrial AI | Structured knowledge store | ✅ |
-| Industrial AI | Evidence-grounded engineer copilot | ✅ |
-| Industrial AI | Machine-context construction | ✅ |
-| Agentic AI | Tool registry and agent runtime | ✅ |
-| Agentic AI | Maintenance planner foundation | ✅ |
-| Enterprise | RBAC foundation | ✅ |
-| Enterprise | Resilience controls | ✅ |
-| Enterprise | Observability hooks | ✅ |
-| Integrations | Vendor-independent Integration Gateway | ✅ |
-| Integrations | Adapter abstraction for enterprise automation | ✅ |
-| API | Industrial Intelligence API surface | ✅ |
+  ----------------------------------------------------------------------------
+  Area                Capability                           Status
+  ------------------- ----------------------- --------------------------------
+  Platform            FastAPI backend                        ✅
+                      foundation              
 
----
+  Infrastructure      PostgreSQL /                           ✅
+                      TimescaleDB             
+
+  Infrastructure      Redis service                          ✅
+
+  Data Model          Machine registry                       ✅
+
+  Telemetry           Single and batch                       ✅
+                      measurement ingestion   
+
+  Telemetry           Machine / sensor /                     ✅
+                      time-window queries     
+
+  Telemetry           TimescaleDB hypertable                 ✅
+
+  Simulation          Reproducible CNC                       ✅
+                      telemetry generator     
+
+  Simulation          RPM, load, temperature,                ✅
+                      current, vibration      
+
+  Simulation          Normal, moderate, and                  ✅
+                      severe degradation      
+                      profiles                
+
+  Features            Statistical sensor                     ✅
+                      features                
+
+  Features            Trend / slope                          ✅
+                      extraction              
+
+  Features            Cross-sensor                           ✅
+                      correlation fingerprint 
+
+  Machine DNA         Baseline generation and                ✅
+                      persistence             
+
+  Machine DNA         Automatic baseline                     ✅
+                      versioning              
+
+  Behavioral          Behavioral deviation                   ✅
+  Intelligence        scoring                 
+
+  Behavioral          Per-sensor deviation                   ✅
+  Intelligence        evidence                
+
+  Behavioral          Correlation-shift                      ✅
+  Intelligence        detection               
+
+  Behavioral          Severity classification                ✅
+  Intelligence                                
+
+  Behavioral          Multi-window slow-drift                ✅
+  Intelligence        analysis                
+
+  Behavioral          Trend, persistence,                    ✅
+  Intelligence        monotonicity,           
+                      cumulative-change       
+                      signals                 
+
+  Memory              Persistent behavioral                  ✅
+                      event history           
+
+  Memory              Deviation and drift                    ✅
+                      event recording         
+
+  Failure             Historical failure                     ✅
+  Intelligence        fingerprint library     
+
+  Failure             Failure trajectory                     ✅
+  Intelligence        matching                
+
+  Health              Machine health scoring                 ✅
+
+  Prediction          Predictive failure                     ✅
+                      intelligence            
+
+  Explainability      Evidence and root-cause                ✅
+                      hints                   
+
+  Maintenance         Maintenance decision                   ✅
+                      intelligence            
+
+  Maintenance         Post-maintenance                       ✅
+                      verification            
+
+  Maintenance         Intervention history                   ✅
+                      and lifecycle tracking  
+
+  Maintenance         Before / after                         ✅
+                      snapshots               
+
+  Maintenance         Verification result                    ✅
+                      persistence             
+
+  Learning            Maintenance outcome                    ✅
+                      learning                
+
+  Learning            Historical success rate                ✅
+                      and confidence          
+
+  Counterfactual      No-maintenance                         ✅
+                      trajectory estimation   
+
+  Counterfactual      Candidate intervention                 ✅
+                      comparison              
+
+  Counterfactual      Avoided risk / health                  ✅
+                      loss / drift estimation 
+
+  Counterfactual      Evidence-adjusted                      ✅
+                      intervention ranking    
+
+  Counterfactual      Historical support and                 ✅
+                      confidence              
+
+  Fleet Intelligence  Cross-machine learning                 ✅
+
+  Fleet Intelligence  Fleet health / risk /                  ✅
+                      prioritization          
+
+  Fleet Intelligence  Machine similarity and                 ✅
+                      peer grouping           
+
+  Fleet Intelligence  Failure hotspots                       ✅
+
+  Plant Intelligence  Site-level intelligence                ✅
+
+  Plant Intelligence  Fleet early warning                    ✅
+
+  Plant Intelligence  Fleet risk forecasting                 ✅
+
+  Plant Intelligence  Plant maintenance                      ✅
+                      planning                
+
+  Streaming           In-memory event bus                    ✅
+                      foundation              
+
+  Streaming           Kafka event-bus adapter                ✅
+
+  Streaming           Intelligence event                     ✅
+                      publishing              
+
+  Streaming           Real-time window                       ✅
+                      processing              
+
+  Data Platform       Data-platform                          ✅
+                      orchestration           
+
+  Analytics           Spark analytics jobs                   ✅
+
+  MLOps               Experiment tracking                    ✅
+
+  MLOps               Model registry and                     ✅
+                      version lifecycle       
+
+  MLOps               Feature-store                          ✅
+                      foundation              
+
+  MLOps               Model/data monitoring                  ✅
+
+  MLOps               Automated retraining                   ✅
+                      control                 
+
+  MLOps               Champion / challenger                  ✅
+                      evaluation              
+
+  MLOps               Model serving                          ✅
+                      abstraction             
+
+  MLOps               MLflow adapter                         ✅
+
+  MLOps               Airflow retraining                     ✅
+                      adapter / DAG           
+
+  Hugging Face        Hub adapter and model                  ✅
+                      inspection              
+
+  Hugging Face        Model metadata /                       ✅
+                      model-card              
+                      synchronization         
+
+  Hugging Face        Local model cache                      ✅
+
+  Hugging Face        Embedding adapter                      ✅
+
+  Hugging Face        PEFT / LoRA training                   ✅
+                      adapter                 
+
+  Hugging Face        Inference adapter                      ✅
+
+  Hugging Face        Provider-independent                   ✅
+                      model gateway           
+
+  Hugging Face        Unified model platform                 ✅
+                      API                     
+
+  Industrial AI       Knowledge ingestion                    ✅
+                      foundation              
+
+  Industrial AI       Structured knowledge                   ✅
+                      store                   
+
+  Industrial AI       Evidence-grounded                      ✅
+                      engineer copilot        
+
+  Industrial AI       Machine-context                        ✅
+                      construction            
+
+  Agentic AI          Tool registry and agent                ✅
+                      runtime                 
+
+  Agentic AI          Maintenance planner                    ✅
+                      foundation              
+
+  Enterprise          RBAC foundation                        ✅
+
+  Enterprise          Resilience controls                    ✅
+
+  Enterprise          Observability hooks                    ✅
+
+  Integrations        Vendor-independent                     ✅
+                      Integration Gateway     
+
+  Integrations        Adapter abstraction for                ✅
+                      enterprise automation   
+
+  API                 Industrial Intelligence                ✅
+                      API surface             
+
+  Automation          Enterprise automation                  ✅
+                      control plane           
+
+  Automation          n8n adapter                            ✅
+
+  Automation          Microsoft Power                        ✅
+                      Automate adapter        
+
+  Automation          Generic webhook support                ✅
+
+  Automation          Retry / reliability                    ✅
+                      foundations             
+
+  Multi-Tenancy       Tenant and user                        ✅
+                      management              
+
+  Multi-Tenancy       Tenant RBAC and API-key                ✅
+                      foundations             
+
+  Multi-Tenancy       Tenant-specific                        ✅
+                      integrations and audit  
+                      trail                   
+
+  Production Runtime  Automation job runtime                 ✅
+                      and lifecycle           
+
+  Production Runtime  Approval workflow                      ✅
+                      foundation              
+
+  Production AI       Model serving router                   ✅
+
+  Production AI       Drift-triggered                        ✅
+                      retraining policy       
+
+  Production AI       Champion / challenger                  ✅
+                      evaluation              
+
+  Production AI       Failure-risk and                       ✅
+                      remaining-useful-life   
+                      model foundations       
+
+  Production Data     Dataset catalog and                    ✅
+                      lineage foundation      
+
+  Production Data     Data-quality validation                ✅
+
+  Production Data     Fleet work partitioning                ✅
+
+  Production Platform Production control                     ✅
+                      plane and readiness     
+                      reporting               
+
+  Production Platform Governance,                            ✅
+                      persistence, security,  
+                      and observability       
+                      foundations             
+
+  API                 Production Platform API                ✅
+                      surface                 
+  ----------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 ## End-to-End Intelligence Flow
 
-```text
+``` text
 Machine Telemetry
       ↓
 Machine DNA
@@ -261,11 +495,12 @@ Counterfactual Maintenance Intelligence
 Evidence-Adjusted Intervention Recommendation
 ```
 
----
+------------------------------------------------------------------------
 
 ## Counterfactual Maintenance Intelligence
 
-`v0.5.0` adds a new reasoning layer on top of the maintenance history and outcome-learning pipeline.
+`v0.5.0` adds a new reasoning layer on top of the maintenance history
+and outcome-learning pipeline.
 
 RedPulse now evaluates:
 
@@ -273,11 +508,12 @@ RedPulse now evaluates:
 
 and:
 
-> **Which historically supported intervention is expected to produce the strongest outcome?**
+> **Which historically supported intervention is expected to produce the
+> strongest outcome?**
 
 The counterfactual engine compares the current machine condition with:
 
-```text
+``` text
 Current Machine State
         │
         ├── No Maintenance
@@ -301,7 +537,7 @@ Current Machine State
 
 Representative outputs include:
 
-```text
+``` text
 predicted_health_score
 predicted_risk_score
 predicted_deviation_score
@@ -321,23 +557,38 @@ evidence_scope
 recommended_intervention
 ```
 
-Counterfactual results are explicitly treated as **estimated projections rather than guaranteed future states**.
+Counterfactual results are explicitly treated as **estimated projections
+rather than guaranteed future states**.
 
-Machine-type-specific intervention history is preferred when available. If the platform must fall back to global maintenance history, recommendation confidence is reduced.
+Machine-type-specific intervention history is preferred when available.
+If the platform must fall back to global maintenance history,
+recommendation confidence is reduced.
 
----
+------------------------------------------------------------------------
 
-## Fleet, Plant & Streaming Intelligence — v1.0.0
+## Fleet, Plant & Streaming Intelligence --- v1.0.0
 
-RedPulse v1.0.0 expands the intelligence scope beyond an individual machine. Historical machine behavior and maintenance evidence can now contribute to cross-machine reasoning, fleet-level health analysis, failure-hotspot detection, and maintenance prioritization.
+RedPulse v1.0.0 expands the intelligence scope beyond an individual
+machine. Historical machine behavior and maintenance evidence can now
+contribute to cross-machine reasoning, fleet-level health analysis,
+failure-hotspot detection, and maintenance prioritization.
 
-At plant level, the platform adds site summaries, fleet early-warning signals, fleet risk forecasting, and plant maintenance planning. This allows machine-level evidence to be aggregated into operational views without removing the machine-specific context established by Machine DNA.
+At plant level, the platform adds site summaries, fleet early-warning
+signals, fleet risk forecasting, and plant maintenance planning. This
+allows machine-level evidence to be aggregated into operational views
+without removing the machine-specific context established by Machine
+DNA.
 
-The data platform adds an event-driven foundation for higher telemetry volumes. It includes an in-memory event bus for local/test operation, an optional Kafka adapter, intelligence-event publishing, real-time window processing, and Spark analytics jobs. The unified data-platform API exposes event publication, recent-event retrieval, and analytics execution.
+The data platform adds an event-driven foundation for higher telemetry
+volumes. It includes an in-memory event bus for local/test operation, an
+optional Kafka adapter, intelligence-event publishing, real-time window
+processing, and Spark analytics jobs. The unified data-platform API
+exposes event publication, recent-event retrieval, and analytics
+execution.
 
 Representative v1.0.0 endpoints include:
 
-```text
+``` text
 GET/POST  /api/v1/machines/{machine_id}/cross-machine-learning
 GET       /api/v1/fleet/peer-groups
 GET       /api/v1/fleet/health
@@ -352,21 +603,30 @@ GET       /api/v1/data-platform/events/recent
 POST      /api/v1/data-platform/analytics/run
 ```
 
-The streaming stack is intentionally optional: the core predictive-maintenance intelligence remains usable without Kafka or Spark.
+The streaming stack is intentionally optional: the core
+predictive-maintenance intelligence remains usable without Kafka or
+Spark.
 
----
+------------------------------------------------------------------------
 
-## Production MLOps Platform — v1.2.0
+## Production MLOps Platform --- v1.2.0
 
-RedPulse v1.2.0 adds a production-oriented MLOps control plane around the predictive-maintenance intelligence stack.
+RedPulse v1.2.0 adds a production-oriented MLOps control plane around
+the predictive-maintenance intelligence stack.
 
-The platform includes experiment tracking, model registration and lifecycle management, feature-store foundations, model/data monitoring, automated retraining controls, champion/challenger evaluation, model serving abstractions, observability hooks, and adapters for MLflow and Airflow.
+The platform includes experiment tracking, model registration and
+lifecycle management, feature-store foundations, model/data monitoring,
+automated retraining controls, champion/challenger evaluation, model
+serving abstractions, observability hooks, and adapters for MLflow and
+Airflow.
 
-The MLOps layer is designed to keep model operations separate from the core machine-intelligence logic, so predictive-maintenance services can evolve without becoming tightly coupled to a single MLOps vendor.
+The MLOps layer is designed to keep model operations separate from the
+core machine-intelligence logic, so predictive-maintenance services can
+evolve without becoming tightly coupled to a single MLOps vendor.
 
 Representative areas include:
 
-```text
+``` text
 Experiments
 Model Registry
 Model Lifecycle
@@ -381,71 +641,181 @@ Observability
 MLOps Control Plane
 ```
 
----
+------------------------------------------------------------------------
 
-## Hugging Face Integration Platform — v1.3.0
+## Hugging Face Integration Platform --- v1.3.0
 
-RedPulse v1.3.0 introduces a dedicated Hugging Face integration layer for model discovery and future industrial-AI workloads.
+RedPulse v1.3.0 introduces a dedicated Hugging Face integration layer
+for model discovery and future industrial-AI workloads.
 
 The integration provides:
 
-- Hugging Face Hub model inspection;
-- model metadata and model-card synchronization;
-- local model caching;
-- embedding-model abstraction;
-- inference-model abstraction;
-- PEFT / LoRA training configuration;
-- a provider-independent model gateway;
-- a unified Hugging Face model platform and API.
+-   Hugging Face Hub model inspection;
+-   model metadata and model-card synchronization;
+-   local model caching;
+-   embedding-model abstraction;
+-   inference-model abstraction;
+-   PEFT / LoRA training configuration;
+-   a provider-independent model gateway;
+-   a unified Hugging Face model platform and API.
 
 Representative endpoints:
 
-```text
+``` text
 POST  /api/v1/huggingface/models/inspect
 POST  /api/v1/huggingface/models/pull
 POST  /api/v1/huggingface/generate
 ```
 
-The predictive-maintenance core remains independent of Hugging Face. The integration is an optional AI/model layer that can support later RAG, industrial copilots, local models, fine-tuning, and domain-specific inference.
+The predictive-maintenance core remains independent of Hugging Face. The
+integration is an optional AI/model layer that can support later RAG,
+industrial copilots, local models, fine-tuning, and domain-specific
+inference.
 
----
+------------------------------------------------------------------------
 
-## Industrial Intelligence Platform — v1.4.0
+## Industrial Intelligence Platform --- v1.4.0
 
-RedPulse v1.4.0 adds the first Industrial Intelligence layer on top of the predictive-maintenance, data-platform, MLOps, and model-platform foundations.
+RedPulse v1.4.0 adds the first Industrial Intelligence layer on top of
+the predictive-maintenance, data-platform, MLOps, and model-platform
+foundations.
 
 The release introduces:
 
-- knowledge ingestion for industrial and maintenance context;
-- structured knowledge models and an internal knowledge store;
-- evidence-grounded engineer-copilot services;
-- machine-context construction for contextual reasoning;
-- an agentic runtime with tool registration and execution;
-- a maintenance-planning agent foundation;
-- enterprise RBAC, resilience, and observability foundations;
-- a vendor-independent Integration Gateway and adapter abstraction.
+-   knowledge ingestion for industrial and maintenance context;
+-   structured knowledge models and an internal knowledge store;
+-   evidence-grounded engineer-copilot services;
+-   machine-context construction for contextual reasoning;
+-   an agentic runtime with tool registration and execution;
+-   a maintenance-planning agent foundation;
+-   enterprise RBAC, resilience, and observability foundations;
+-   a vendor-independent Integration Gateway and adapter abstraction.
 
 Representative endpoints include:
 
-```text
+``` text
 POST  /api/v1/industrial-ai/knowledge/ingest
 POST  /api/v1/industrial-ai/copilot/ask
 POST  /api/v1/industrial-ai/agents/runs
 ```
 
-The Industrial Intelligence layer is intentionally separated from the predictive-maintenance core. LLM- or agent-based reasoning can therefore consume machine evidence without replacing the deterministic behavioral, failure, health, and maintenance intelligence pipeline.
+The Industrial Intelligence layer is intentionally separated from the
+predictive-maintenance core. LLM- or agent-based reasoning can therefore
+consume machine evidence without replacing the deterministic behavioral,
+failure, health, and maintenance intelligence pipeline.
 
-The integration gateway establishes a common boundary for future automation systems such as n8n, Microsoft Power Automate, generic webhooks, and enterprise workflow tools. Individual external adapters can evolve independently from RedPulse core intelligence.
+The integration gateway establishes a common boundary for future
+automation systems such as n8n, Microsoft Power Automate, generic
+webhooks, and enterprise workflow tools. Individual external adapters
+can evolve independently from RedPulse core intelligence.
 
----
+------------------------------------------------------------------------
+
+## Enterprise Automation & Multi-Tenant Platform --- v1.6.0
+
+RedPulse v1.6.0 turns the earlier Integration Gateway foundation into an
+enterprise automation layer while introducing tenant-aware platform
+controls.
+
+The release adds:
+
+-   an enterprise automation control plane;
+-   dedicated n8n and Microsoft Power Automate adapters;
+-   generic webhook handling;
+-   retry and reliability foundations for workflow dispatch;
+-   tenant creation and tenant-user membership;
+-   tenant RBAC and API-key foundations;
+-   tenant-specific integration configuration;
+-   tenant audit records;
+-   an Enterprise Automation service and API.
+
+Representative endpoints include:
+
+``` text
+POST  /api/v1/enterprise-automation/tenants
+POST  /api/v1/enterprise-automation/tenants/{tenant_id}/users
+POST  /api/v1/enterprise-automation/integrations
+GET   /api/v1/enterprise-automation/tenants/{tenant_id}/integrations
+POST  /api/v1/enterprise-automation/dispatch
+GET   /api/v1/enterprise-automation/tenants/{tenant_id}/audit
+```
+
+The automation layer remains vendor-independent: external workflow
+systems are adapters around RedPulse intelligence rather than
+dependencies embedded in the predictive-maintenance core.
+
+------------------------------------------------------------------------
+
+## Production Industrial Intelligence Platform --- v2.0.0
+
+RedPulse v2.0.0 adds a production-oriented platform layer that connects
+automation runtime, predictive-AI operations, data-platform controls,
+governance, security, observability, persistence, and readiness
+validation.
+
+### Automation Runtime
+
+The production runtime introduces job lifecycle handling, approval
+storage, HTTP workflow execution, retry behavior, and dead-letter
+foundations for enterprise automation workloads.
+
+### Production Predictive AI
+
+The production AI layer adds:
+
+-   model registration and champion routing;
+-   drift-signal evaluation and retraining policy;
+-   champion/challenger comparison;
+-   feature-contract validation;
+-   prediction envelopes with evidence;
+-   failure-risk model foundations;
+-   remaining-useful-life model foundations.
+
+### Production Data Platform
+
+The production data layer adds:
+
+-   telemetry repository contracts;
+-   dataset registration and cataloging;
+-   data-quality checks;
+-   lineage records;
+-   replay-plan models;
+-   Spark job specifications;
+-   fleet work partitioning.
+
+### Production Control Plane
+
+The control plane exposes readiness information and connects
+production-platform services with governance, security, observability,
+and operational validation foundations.
+
+Representative endpoints include:
+
+``` text
+GET   /api/v1/production-platform/readiness
+POST  /api/v1/production-platform/approvals
+POST  /api/v1/production-platform/approvals/{approval_id}/decision
+POST  /api/v1/production-platform/jobs
+POST  /api/v1/production-platform/ml/drift/evaluate
+POST  /api/v1/production-platform/data/quality
+POST  /api/v1/production-platform/fleet/partitions
+```
+
+> **Scope note:** `v2.0.0` is a production-oriented engineering
+> milestone. RedPulse remains an experimental engineering/research
+> project and is not presented as a production safety system or as a
+> platform already deployed in a real industrial plant.
+
+------------------------------------------------------------------------
 
 ## Maintenance Outcome Learning
 
-Maintenance interventions are stored as persistent entities instead of temporary events.
+Maintenance interventions are stored as persistent entities instead of
+temporary events.
 
 A maintenance record can include:
 
-```text
+``` text
 Machine
 Failure Prediction Context
 Maintenance Recommendation
@@ -464,7 +834,7 @@ Completed maintenance history is aggregated by intervention type.
 
 Example:
 
-```text
+``` text
 Bearing Replacement
       ↓
 Average Recovery Score
@@ -478,19 +848,22 @@ Confidence
 Learned Intervention Profile
 ```
 
-This learned evidence becomes the input for counterfactual intervention comparison.
+This learned evidence becomes the input for counterfactual intervention
+comparison.
 
----
+------------------------------------------------------------------------
 
 ## Post-Maintenance Verification
 
 RedPulse does not stop after recommending maintenance.
 
-After an intervention, the platform can compare the machine's current behavior against the pre-maintenance snapshot and determine whether the intervention produced measurable recovery.
+After an intervention, the platform can compare the machine's current
+behavior against the pre-maintenance snapshot and determine whether the
+intervention produced measurable recovery.
 
 Verification considers signals such as:
 
-```text
+``` text
 Health Improvement
 Risk Reduction
 Deviation Reduction
@@ -498,9 +871,10 @@ Drift Reduction
 Failure-Match Reduction
 ```
 
-The result is persisted in the maintenance history so later versions can learn which actions work under which machine conditions.
+The result is persisted in the maintenance history so later versions can
+learn which actions work under which machine conditions.
 
----
+------------------------------------------------------------------------
 
 ## Failure Intelligence
 
@@ -508,27 +882,33 @@ RedPulse maintains reusable historical failure knowledge.
 
 ### Failure Fingerprints
 
-Historical degradation patterns can be stored as structured failure fingerprints containing behavioral and trajectory evidence.
+Historical degradation patterns can be stored as structured failure
+fingerprints containing behavioral and trajectory evidence.
 
 ### Failure Trajectory Matching
 
-Current machine behavior can be compared against known historical failure trajectories to estimate whether the machine is evolving toward a previously observed failure pattern.
+Current machine behavior can be compared against known historical
+failure trajectories to estimate whether the machine is evolving toward
+a previously observed failure pattern.
 
 ### Predictive Failure Intelligence
 
-Trajectory evidence, machine health, deviation, drift, and historical failure similarity are combined into predictive failure signals.
+Trajectory evidence, machine health, deviation, drift, and historical
+failure similarity are combined into predictive failure signals.
 
 ### Explainability
 
-Predictions are accompanied by evidence so maintenance decisions are not based on an opaque score alone.
+Predictions are accompanied by evidence so maintenance decisions are not
+based on an opaque score alone.
 
----
+------------------------------------------------------------------------
 
 ## Machine DNA Example
 
-A Machine DNA baseline is generated from synchronized telemetry and persisted for later comparison.
+A Machine DNA baseline is generated from synchronized telemetry and
+persisted for later comparison.
 
-```json
+``` json
 {
   "baseline_version": "1",
   "sample_count": 1010,
@@ -553,17 +933,20 @@ A Machine DNA baseline is generated from synchronized telemetry and persisted fo
 }
 ```
 
-The baseline is not just a collection of independent thresholds. The correlations preserve part of the **relationship structure** between machine signals.
+The baseline is not just a collection of independent thresholds. The
+correlations preserve part of the **relationship structure** between
+machine signals.
 
----
+------------------------------------------------------------------------
 
 ## CNC Telemetry Simulator
 
-RedPulse includes a deterministic CNC simulator for development and validation.
+RedPulse includes a deterministic CNC simulator for development and
+validation.
 
 It currently generates five signals:
 
-```text
+``` text
 rpm
 load
 temperature
@@ -571,19 +954,24 @@ current
 vibration
 ```
 
-The signals are intentionally related. For example, load influences temperature and current, while RPM contributes to vibration.
+The signals are intentionally related. For example, load influences
+temperature and current, while RPM contributes to vibration.
 
-Seeded generation makes experiments reproducible. The simulator also supports normal, moderate-degradation, and severe-degradation profiles so the intelligence pipeline can be validated against controlled deterioration scenarios.
+Seeded generation makes experiments reproducible. The simulator also
+supports normal, moderate-degradation, and severe-degradation profiles
+so the intelligence pipeline can be validated against controlled
+deterioration scenarios.
 
----
+------------------------------------------------------------------------
 
 ## Behavioral Intelligence Example
 
-With degradation telemetry, RedPulse can distinguish healthy operation from meaningful behavioral change.
+With degradation telemetry, RedPulse can distinguish healthy operation
+from meaningful behavioral change.
 
 A behavioral-memory event can preserve evidence such as:
 
-```json
+``` json
 {
   "event_type": "drift",
   "severity": "anomalous",
@@ -613,76 +1001,87 @@ A behavioral-memory event can preserve evidence such as:
 }
 ```
 
-Behavioral Memory converts individual analyses into structured historical evidence used by failure intelligence and maintenance reasoning.
+Behavioral Memory converts individual analyses into structured
+historical evidence used by failure intelligence and maintenance
+reasoning.
 
----
+------------------------------------------------------------------------
 
 ## Technology Stack
 
 ### Backend
 
-- Python
-- FastAPI
-- Pydantic
-- SQLAlchemy
-- Alembic
-- asyncpg
+-   Python
+-   FastAPI
+-   Pydantic
+-   SQLAlchemy
+-   Alembic
+-   asyncpg
 
 ### Data & Infrastructure
 
-- PostgreSQL 17
-- TimescaleDB
-- Redis
-- Apache Kafka
-- Apache Spark
-- Apache Airflow
-- MLflow integration adapter
-- Docker / Docker Compose
+-   PostgreSQL 17
+-   TimescaleDB
+-   Redis
+-   Apache Kafka
+-   Apache Spark
+-   Apache Airflow
+-   MLflow integration adapter
+-   Docker / Docker Compose
 
 ### Intelligence & Analytics
 
-- statistical feature extraction
-- multivariate behavioral fingerprints
-- correlation analysis
-- behavioral deviation scoring
-- multi-window drift analysis
-- failure trajectory matching
-- health scoring
-- evidence aggregation
-- maintenance outcome learning
-- counterfactual intervention comparison
-- cross-machine learning and machine similarity
-- fleet health, hotspots, and prioritization
-- plant-level risk and maintenance planning
-- real-time event/window processing
-- large-scale Spark analytics
-- experiment tracking and model lifecycle management
-- model monitoring and automated retraining
-- champion / challenger evaluation
-- Hugging Face Hub / model caching
-- embeddings and inference adapters
-- PEFT / LoRA integration
-- provider-independent model gateway
-- evidence-grounded industrial knowledge retrieval
-- engineer-copilot context construction
-- agentic tool execution and maintenance planning
-- enterprise RBAC / resilience / observability foundations
-- vendor-independent integration gateway
+-   statistical feature extraction
+-   multivariate behavioral fingerprints
+-   correlation analysis
+-   behavioral deviation scoring
+-   multi-window drift analysis
+-   failure trajectory matching
+-   health scoring
+-   evidence aggregation
+-   maintenance outcome learning
+-   counterfactual intervention comparison
+-   cross-machine learning and machine similarity
+-   fleet health, hotspots, and prioritization
+-   plant-level risk and maintenance planning
+-   real-time event/window processing
+-   large-scale Spark analytics
+-   experiment tracking and model lifecycle management
+-   model monitoring and automated retraining
+-   champion / challenger evaluation
+-   Hugging Face Hub / model caching
+-   embeddings and inference adapters
+-   PEFT / LoRA integration
+-   provider-independent model gateway
+-   evidence-grounded industrial knowledge retrieval
+-   engineer-copilot context construction
+-   agentic tool execution and maintenance planning
+-   enterprise RBAC / resilience / observability foundations
+-   vendor-independent integration gateway
+-   enterprise automation control plane
+-   n8n and Microsoft Power Automate adapters
+-   generic webhook workflows
+-   multi-tenant RBAC and API-key foundations
+-   production automation jobs and approvals
+-   production model serving and retraining policies
+-   production data quality, lineage, and fleet partitioning
+-   governance, security, persistence, observability, and readiness
+    controls
 
 ### Quality
 
-- pytest
-- unit tests
-- service-layer tests
-- API / OpenAPI tests
-- migration validation
-- reproducible simulator tests
+-   pytest
+-   unit tests
+-   service-layer tests
+-   API / OpenAPI tests
+-   migration validation
+-   reproducible simulator tests
 
----
+------------------------------------------------------------------------
 
 ## Repository Structure
 
-```text
+``` text
 redpulse-ai/
 ├── backend/
 │   ├── alembic/
@@ -710,6 +1109,9 @@ redpulse-ai/
 │   │   ├── models/
 │   │   ├── plant/
 │   │   ├── prediction/
+│   │   ├── production/
+│   │   ├── tenancy/
+│   │   ├── automation/
 │   │   ├── repositories/
 │   │   ├── schemas/
 │   │   ├── services/
@@ -734,13 +1136,13 @@ redpulse-ai/
 └── README.md
 ```
 
----
+------------------------------------------------------------------------
 
 ## Quick Start
 
 ### 1. Clone the repository
 
-```bash
+``` bash
 git clone https://github.com/saeidkh96/redpulse-ai.git
 cd redpulse-ai
 ```
@@ -749,61 +1151,61 @@ cd redpulse-ai
 
 Windows PowerShell:
 
-```powershell
+``` powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
 ### 3. Install backend dependencies
 
-```powershell
+``` powershell
 pip install -r backend\requirements.txt
 ```
 
 ### 4. Start TimescaleDB and Redis
 
-```powershell
+``` powershell
 docker compose up -d
 docker ps
 ```
 
 Development infrastructure:
 
-```text
+``` text
 TimescaleDB / PostgreSQL : localhost:5433
 Redis                    : localhost:6379
 ```
 
 ### 5. Apply database migrations
 
-```powershell
+``` powershell
 cd backend
 alembic upgrade head
 ```
 
 ### 6. Start the API
 
-```powershell
+``` powershell
 python -m uvicorn app.main:app --reload --port 8001
 ```
 
 API root:
 
-```text
+``` text
 http://127.0.0.1:8001/
 ```
 
 Interactive API documentation:
 
-```text
+``` text
 http://127.0.0.1:8001/docs
 ```
 
----
+------------------------------------------------------------------------
 
 ## Core API Flow
 
-```text
+``` text
 Register Machine
       ↓
 Ingest / Simulate Telemetry
@@ -837,7 +1239,7 @@ Analyze Counterfactual Maintenance Options
 
 Representative endpoint groups include:
 
-```text
+``` text
 Machines
 Telemetry
 Machine DNA
@@ -858,7 +1260,7 @@ Counterfactual Maintenance
 
 Representative maintenance endpoints include:
 
-```text
+``` text
 POST   /api/v1/machines/{machine_id}/maintenance-interventions
 GET    /api/v1/machines/{machine_id}/maintenance-interventions
 GET    /api/v1/maintenance-interventions/{intervention_id}
@@ -869,55 +1271,62 @@ GET    /api/v1/maintenance-outcomes
 POST   /api/v1/machines/{machine_id}/counterfactual-maintenance
 ```
 
-Use the interactive FastAPI documentation at `/docs` for the complete current endpoint surface.
+Use the interactive FastAPI documentation at `/docs` for the complete
+current endpoint surface.
 
----
+------------------------------------------------------------------------
 
 ## Testing
 
 Run the backend and simulator test suites from the repository root:
 
-```powershell
+``` powershell
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v1.4.0` milestone:
+At the `v2.0.0` milestone:
 
-```text
-198 passed
+``` text
+210 passed
 ```
 
 The suite covers:
 
-- platform health and infrastructure;
-- machine registry;
-- telemetry ingestion and queries;
-- simulator behavior and degradation profiles;
-- feature extraction;
-- Machine DNA generation and versioning;
-- behavioral deviation scoring;
-- slow-drift detection;
-- Behavioral Memory;
-- failure fingerprints and trajectory matching;
-- machine health scoring;
-- predictive failure intelligence;
-- explainability;
-- maintenance decision intelligence;
-- post-maintenance verification;
-- maintenance history and outcome learning;
-- counterfactual maintenance intelligence;
-- service-layer behavior;
-- API / OpenAPI integration;
-- Hugging Face model-platform integration;
-- Industrial AI knowledge and copilot services;
-- agentic runtime and maintenance-planning foundations;
-- enterprise and integration-gateway foundations.
+-   platform health and infrastructure;
+-   machine registry;
+-   telemetry ingestion and queries;
+-   simulator behavior and degradation profiles;
+-   feature extraction;
+-   Machine DNA generation and versioning;
+-   behavioral deviation scoring;
+-   slow-drift detection;
+-   Behavioral Memory;
+-   failure fingerprints and trajectory matching;
+-   machine health scoring;
+-   predictive failure intelligence;
+-   explainability;
+-   maintenance decision intelligence;
+-   post-maintenance verification;
+-   maintenance history and outcome learning;
+-   counterfactual maintenance intelligence;
+-   service-layer behavior;
+-   API / OpenAPI integration;
+-   Hugging Face model-platform integration;
+-   Industrial AI knowledge and copilot services;
+-   agentic runtime and maintenance-planning foundations;
+-   enterprise and integration-gateway foundations;
+-   enterprise automation, n8n, Power Automate, and webhook foundations;
+-   multi-tenant platform controls;
+-   production automation runtime and approvals;
+-   production predictive-AI operations;
+-   production data-quality, lineage, and partitioning foundations;
+-   production control-plane and readiness APIs.
 
----
+------------------------------------------------------------------------
 
 ## Milestones
 
-```text
+``` text
 v0.0.1  Platform Foundation
    ↓
 v0.0.2  Data Infrastructure
@@ -976,178 +1385,196 @@ v1.2.0  Production MLOps Platform
    ↓
 v1.3.0  Hugging Face Integration Platform
    ↓
-v1.4.0  Industrial Intelligence Platform   ← current
+v1.4.0  Industrial Intelligence Platform
+   ↓
+v1.6.0  Enterprise Automation & Multi-Tenant Platform
+   ↓
+v2.0.0  Production Industrial Intelligence Platform   ← current
 ```
 
----
+------------------------------------------------------------------------
 
 ## Roadmap
 
-The project is intentionally evolving in layers. New infrastructure is added only when it has a concrete architectural use case.
+The project is intentionally evolving in layers. New infrastructure is
+added only when it has a concrete architectural use case.
 
-### Completed in v1.0.0 — Fleet, Plant & Streaming Data Platform
+### Completed in v1.0.0 --- Fleet, Plant & Streaming Data Platform
 
-The v1.0.0 milestone completes the planned cross-machine, fleet, plant, and initial distributed-data layers:
+The v1.0.0 milestone completes the planned cross-machine, fleet, plant,
+and initial distributed-data layers:
 
-- cross-machine learning and shared historical evidence;
-- machine similarity and peer grouping;
-- fleet health, failure hotspots, and maintenance prioritization;
-- plant/site intelligence, early warning, risk forecasting, and maintenance planning;
-- event-streaming foundation with an optional Kafka adapter;
-- real-time streaming windows and intelligence events;
-- Spark analytics jobs for telemetry, features, and fleet analytics;
-- data-platform orchestration and API endpoints.
+-   cross-machine learning and shared historical evidence;
+-   machine similarity and peer grouping;
+-   fleet health, failure hotspots, and maintenance prioritization;
+-   plant/site intelligence, early warning, risk forecasting, and
+    maintenance planning;
+-   event-streaming foundation with an optional Kafka adapter;
+-   real-time streaming windows and intelligence events;
+-   Spark analytics jobs for telemetry, features, and fleet analytics;
+-   data-platform orchestration and API endpoints.
 
-### Completed in v1.2.0 — Production MLOps
+### Completed in v1.2.0 --- Production MLOps
 
-- experiment tracking;
-- model registry and model lifecycle management;
-- feature-store foundation;
-- data and model monitoring;
-- automated retraining controls;
-- champion / challenger evaluation;
-- serving abstraction;
-- MLflow integration adapter;
-- Airflow retraining adapter and DAG;
-- MLOps observability and control-plane services.
+-   experiment tracking;
+-   model registry and model lifecycle management;
+-   feature-store foundation;
+-   data and model monitoring;
+-   automated retraining controls;
+-   champion / challenger evaluation;
+-   serving abstraction;
+-   MLflow integration adapter;
+-   Airflow retraining adapter and DAG;
+-   MLOps observability and control-plane services.
 
-Important production metrics continue to include false-alert rate, precision / recall, early-warning lead time, and maintenance outcome quality.
+Important production metrics continue to include false-alert rate,
+precision / recall, early-warning lead time, and maintenance outcome
+quality.
 
-### Completed in v1.3.0 — Hugging Face Integration Platform
+### Completed in v1.3.0 --- Hugging Face Integration Platform
 
 The first model-platform layer is now implemented:
 
-- Hugging Face Hub adapter;
-- model metadata and model-card synchronization;
-- local model cache;
-- embeddings adapter;
-- inference adapter;
-- PEFT / LoRA adapter;
-- provider-independent model gateway
-- evidence-grounded industrial knowledge retrieval
-- engineer-copilot context construction
-- agentic tool execution and maintenance planning
-- enterprise RBAC / resilience / observability foundations
-- vendor-independent integration gateway;
-- unified Hugging Face model platform API.
+-   Hugging Face Hub adapter;
+-   model metadata and model-card synchronization;
+-   local model cache;
+-   embeddings adapter;
+-   inference adapter;
+-   PEFT / LoRA adapter;
+-   provider-independent model gateway
+-   evidence-grounded industrial knowledge retrieval
+-   engineer-copilot context construction
+-   agentic tool execution and maintenance planning
+-   enterprise RBAC / resilience / observability foundations
+-   vendor-independent integration gateway
+-   enterprise automation control plane
+-   n8n and Microsoft Power Automate adapters
+-   generic webhook workflows
+-   multi-tenant RBAC and API-key foundations
+-   production automation jobs and approvals
+-   production model serving and retraining policies
+-   production data quality, lineage, and fleet partitioning
+-   governance, security, persistence, observability, and readiness
+    controls;
+-   unified Hugging Face model platform API.
 
-### Completed in v1.4.0 — Industrial Intelligence Platform
+### Completed in v1.4.0 --- Industrial Intelligence Platform
 
 The first Industrial AI / Engineer Copilot layer is now implemented:
 
-- industrial knowledge ingestion and structured knowledge storage;
-- evidence-grounded copilot foundation;
-- machine-context construction;
-- agentic runtime and tool registry;
-- maintenance-planning agent foundation;
-- enterprise RBAC, resilience, and observability foundations;
-- vendor-independent Integration Gateway.
+-   industrial knowledge ingestion and structured knowledge storage;
+-   evidence-grounded copilot foundation;
+-   machine-context construction;
+-   agentic runtime and tool registry;
+-   maintenance-planning agent foundation;
+-   enterprise RBAC, resilience, and observability foundations;
+-   vendor-independent Integration Gateway.
 
-The predictive core remains independent of the LLM and agent layers. More advanced model serving, domain adaptation, prompt evaluation, and production-grade external automation remain future work.
+The predictive core remains independent of the LLM and agent layers.
+More advanced model serving, domain adaptation, prompt evaluation, and
+production-grade external automation remain future work.
 
-### Next Phase — Automation & Enterprise Integration
+### Completed in v1.6.0 --- Enterprise Automation & Multi-Tenancy
 
-The Integration Gateway foundation is implemented. Production adapters are planned for:
+The Integration Gateway was extended into an executable enterprise
+automation layer:
 
-- n8n;
-- Microsoft Power Automate;
-- generic webhooks;
-- future enterprise integrations.
+-   n8n adapter;
+-   Microsoft Power Automate adapter;
+-   generic webhook support;
+-   automation dispatch and reliability foundations;
+-   organizations / tenants;
+-   tenant users and RBAC;
+-   tenant API-key foundations;
+-   tenant-specific integrations;
+-   audit records.
 
-Expected integration targets include Jira, Slack, Teams, Outlook, email, Planner, SharePoint, CMMS, ERP, and external APIs.
+### Completed in v2.0.0 --- Production Platform Foundation
 
-### Phase 8 — Multi-Tenant SaaS
+The v2.0.0 milestone adds production-oriented operational building
+blocks:
 
-Planned capabilities include:
+-   automation jobs, approvals, retries, and dead-letter foundations;
+-   production predictive-AI routing and retraining policy;
+-   champion/challenger evaluation;
+-   failure-risk and remaining-useful-life model foundations;
+-   data-quality validation, dataset catalog, lineage, replay models,
+    and fleet partitioning;
+-   governance, persistence, security, and observability foundations;
+-   production readiness reporting and API endpoints.
 
-- organizations / tenants;
-- users and RBAC;
-- tenant isolation;
-- plants / sites;
-- tenant API keys;
-- tenant-specific integrations;
-- audit logs;
-- quotas and rate limits.
+### Next Phase --- Cloud, Deployment & Deeper Production Hardening
 
-### Phase 9 — Cloud & Enterprise Infrastructure
+The next stage can move the platform from production-oriented
+architecture toward stronger deployability and operational maturity.
+Planned directions include:
 
-Primary cloud direction:
+-   Azure deployment architecture;
+-   Kubernetes / AKS;
+-   Azure Container Registry;
+-   managed PostgreSQL and object storage;
+-   Key Vault and Entra ID integration;
+-   Terraform-based infrastructure as code;
+-   stronger secrets, identity, quotas, and rate limiting;
+-   persistent production job and approval storage;
+-   richer metrics, tracing, alerting, and SLOs;
+-   end-to-end integration tests with external automation systems;
+-   scalable model serving such as vLLM when justified;
+-   GPU-backed and domain-adapted models where they provide measurable
+    value.
 
-- Azure;
-- AKS;
-- Azure Container Registry;
-- managed PostgreSQL;
-- Blob Storage;
-- Key Vault;
-- Entra ID;
-- cloud monitoring.
+Portability should be preserved where practical, and infrastructure
+should be introduced only when it has a concrete architectural use case.
 
-Portability will be preserved where practical for GCP.
-
-Infrastructure evolution:
-
-```text
-Docker
-   ↓
-Kubernetes
-   ↓
-OpenShift
-
-Terraform
-   ↓
-Infrastructure as Code
-
-Ansible
-   ↓
-Configuration / Deployment Automation
-```
-
-### Phase 10 — Enterprise AI Infrastructure
-
-Advanced GPU-backed AI infrastructure will be introduced only when justified by the workload.
-
-Potential components include:
-
-- vLLM inference infrastructure;
-- GPU-backed fine-tuned models;
-- NVIDIA AI Enterprise / NVIDIA GPU stack where it provides a real architectural benefit.
-
----
+------------------------------------------------------------------------
 
 ## Vision
 
 RedPulse AI is being developed around seven core ideas:
 
-1. **Every machine has its own normal.**  
-   Learn machine-specific behavior instead of relying only on universal thresholds.
+1.  **Every machine has its own normal.**\
+    Learn machine-specific behavior instead of relying only on universal
+    thresholds.
 
-2. **Relationships matter.**  
-   A machine can change even when individual sensor values still look acceptable.
+2.  **Relationships matter.**\
+    A machine can change even when individual sensor values still look
+    acceptable.
 
-3. **Failures have trajectories.**  
-   Historical degradation patterns can become reusable failure fingerprints.
+3.  **Failures have trajectories.**\
+    Historical degradation patterns can become reusable failure
+    fingerprints.
 
-4. **Predictions need evidence.**  
-   Maintenance recommendations should show which signals, trends, and relationships changed.
+4.  **Predictions need evidence.**\
+    Maintenance recommendations should show which signals, trends, and
+    relationships changed.
 
-5. **Maintenance should be verifiable.**  
-   After intervention, the platform should determine whether the machine actually returned toward healthy behavior.
+5.  **Maintenance should be verifiable.**\
+    After intervention, the platform should determine whether the
+    machine actually returned toward healthy behavior.
 
-6. **Maintenance history should become reusable knowledge.**  
-   Intervention outcomes should improve future maintenance decisions.
+6.  **Maintenance history should become reusable knowledge.**\
+    Intervention outcomes should improve future maintenance decisions.
 
-7. **Decisions should consider alternatives.**  
-   The platform should estimate what may happen without intervention and compare historically supported maintenance options before recommending an action.
+7.  **Decisions should consider alternatives.**\
+    The platform should estimate what may happen without intervention
+    and compare historically supported maintenance options before
+    recommending an action.
 
----
+------------------------------------------------------------------------
 
 ## Development Status
 
-RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
+RedPulse AI is under active development and is currently an
+**experimental engineering/research project**, not a production safety
+system.
 
-The current `v1.4.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, and the first Industrial Intelligence layer:
+The current `v2.0.0` release extends the maintenance-learning loop with
+fleet/plant intelligence, streaming and large-scale analytics,
+production-oriented MLOps, Hugging Face model integration, Industrial
+Intelligence, enterprise automation, multi-tenancy, and a
+production-platform control plane:
 
-```text
+``` text
 Machine Behavior
       ↓
 Failure Intelligence
@@ -1169,24 +1596,28 @@ Outcome Learning
 Counterfactual Maintenance Intelligence
 ```
 
-The next major stage is to deepen the **Automation & Enterprise Integration** layer: production adapters for n8n, Microsoft Power Automate, generic webhooks, and enterprise workflow systems, followed by stronger multi-tenant and cloud infrastructure. The v1.4.0 Industrial Intelligence foundation can then evolve toward richer RAG, citation-backed reasoning, local model serving, and domain-adapted industrial AI.
+The next major stage is **cloud deployment and deeper production
+hardening**: Azure/AKS infrastructure, stronger persistent runtime
+state, identity and secrets integration, richer observability and SLOs,
+end-to-end external integration validation, and scalable model serving
+where justified. The core behavioral and predictive-maintenance
+intelligence remains independent from optional LLM, automation, and
+infrastructure vendors.
 
----
+------------------------------------------------------------------------
 
 ## Author
 
 **Saeid Khalilian**
 
----
+------------------------------------------------------------------------
 
 ## License
 
 See the repository license for usage terms.
 
-<div align="center">
+::: {align="center"}
+`<strong>`{=html}RedPulse AI`</strong>`{=html}
 
-<strong>RedPulse AI</strong>
-
-<em>Behavior. Insight. Uptime.</em>
-
-</div>
+`<em>`{=html}Behavior. Insight. Uptime.`</em>`{=html}
+:::
