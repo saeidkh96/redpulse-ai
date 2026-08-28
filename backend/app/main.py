@@ -27,6 +27,7 @@ from app.api.v1.machines import router as machines_router
 from app.api.v1.memory import router as memory_router
 from app.api.v1.telemetry import router as telemetry_router
 from app.api.v1.industrial_ai import router as industrial_ai_router
+from app.api.v1.enterprise_automation import router as enterprise_automation_router
 from app.core.config import get_settings
 from app.core.database import close_database_connections
 from app.core.logging import configure_logging
@@ -206,3 +207,8 @@ app.include_router(
     prefix=settings.api_v1_prefix,
 )
 
+
+app.include_router(
+    enterprise_automation_router,
+    prefix=settings.api_v1_prefix,
+)
