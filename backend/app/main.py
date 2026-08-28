@@ -20,6 +20,7 @@ from app.api.v1.failure_explanation import router as failure_explanation_router
 from app.api.v1.health import router as health_router
 from app.api.v1.machine_dna import router as machine_dna_router
 from app.api.v1.mlops_platform import router as mlops_platform_router
+from app.api.v1.huggingface_platform import router as huggingface_platform_router
 from app.api.v1.plant_intelligence import router as plant_intelligence_router
 from app.api.v1.machine_health import router as machine_health_router
 from app.api.v1.machines import router as machines_router
@@ -169,6 +170,11 @@ app.include_router(
     prefix=settings.api_v1_prefix,
 )
 
+app.include_router(
+    huggingface_platform_router,
+    prefix=settings.api_v1_prefix,
+)
+
 
 @app.get("/", tags=["system"])
 async def root() -> dict[str, str]:
@@ -177,6 +183,7 @@ async def root() -> dict[str, str]:
         "version": settings.app_version,
         "status": "running",
     }
+
 
 
 
