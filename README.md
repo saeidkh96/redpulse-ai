@@ -10,7 +10,7 @@
 
 </div>
 
-[![Version](https://img.shields.io/badge/version-v2.0.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v2.0.0)
+[![Version](https://img.shields.io/badge/version-v3.0.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.0.0)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
@@ -42,7 +42,7 @@ RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-m
 - maintenance outcome learning;
 - counterfactual maintenance analysis.
 
-> **Current milestone — v2.0.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenant controls, and a production-platform layer for approvals, jobs, predictive-AI operations, data quality, governance, security, observability, persistence contracts, and readiness validation.
+> **Current milestone — v3.0.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming and large-scale analytics, production-oriented MLOps, Hugging Face integration, Industrial Intelligence, enterprise automation, multi-tenant controls, persistent runtime foundations, tenant-aware security, production model serving, industrial data runtime controls, Industrial Copilot v2, observability/reliability primitives, Kubernetes deployment assets, an Azure/Terraform deployment scaffold, and an end-to-end production demonstration API.
 
 ---
 
@@ -136,11 +136,19 @@ flowchart TD
     PROD --> OBS[Observability / Readiness]
     PROD --> PAI[Production Predictive AI]
     PROD --> PDATA[Production Data Controls]
+    PROD --> RUNTIME3[Persistent Runtime / Idempotency]
+    RUNTIME3 --> SEC3[Tenant Security / Signed Tokens / Secrets]
+    SEC3 --> INT3[Runnable Automation Integrations]
+    INT3 --> ML3[Production Model Runtime]
+    ML3 --> DATA3[Data Quality / Replay / Lineage]
+    DATA3 --> COP3[Industrial Copilot v2]
+    COP3 --> DEPLOY3[Kubernetes / Azure Deployment Path]
+    DEPLOY3 --> DEMO3[v3 End-to-End Production Demo]
 ```
 
 ---
 
-## Current Capabilities — v2.0.0
+## Current Capabilities — v3.0.0
 
 | Area | Capability | Status |
 |---|---|:---:|
@@ -259,6 +267,33 @@ flowchart TD
 | Production Platform | Governance / security / persistence / observability foundations | ✅ |
 | API | Enterprise Automation API surface | ✅ |
 | API | Production Platform API surface | ✅ |
+| v3 Runtime | Persistent local runtime repository | ✅ |
+| v3 Runtime | Restart-safe job records | ✅ |
+| v3 Runtime | Stable idempotency keys | ✅ |
+| v3 Runtime | Retry / dead-state job execution | ✅ |
+| v3 Security | Signed token reference implementation | ✅ |
+| v3 Security | Tenant-aware authorization policy | ✅ |
+| v3 Security | Environment-backed secret provider | ✅ |
+| v3 Integrations | Runnable n8n webhook adapter | ✅ |
+| v3 Integrations | Runnable Power Automate webhook adapter | ✅ |
+| v3 Integrations | Notification routing abstraction | ✅ |
+| v3 Reliability | Metrics registry and timing | ✅ |
+| v3 Reliability | Circuit-breaker foundation | ✅ |
+| v3 ML Runtime | Production model router | ✅ |
+| v3 ML Runtime | Active model selection | ✅ |
+| v3 ML Runtime | Drift assessment and retraining coordinator | ✅ |
+| v3 ML Runtime | Failure-risk reference model | ✅ |
+| v3 ML Runtime | Remaining-useful-life reference model | ✅ |
+| v3 Data Runtime | Replay buffer | ✅ |
+| v3 Data Runtime | Data-quality gate | ✅ |
+| v3 Data Runtime | Lineage registry | ✅ |
+| v3 Copilot | Citation model / evidence formatting | ✅ |
+| v3 Copilot | Industrial Copilot v2 orchestration foundation | ✅ |
+| v3 Deployment | Deployment readiness checks | ✅ |
+| v3 Deployment | Kubernetes deployment/service manifest | ✅ |
+| v3 Deployment | Azure/Terraform deployment scaffold | ✅ |
+| v3 Demo | End-to-end production demonstration service | ✅ |
+| API | v3 readiness and demo endpoints | ✅ |
 
 ---
 
@@ -570,6 +605,115 @@ POST  /api/v1/production-platform/fleet/partitions
 
 ---
 
+## Production Demonstration Platform — v3.0.0
+
+RedPulse v3.0.0 focuses on production maturity and demonstrability rather than adding another isolated intelligence layer.
+
+### Persistent Runtime & Idempotency
+
+The v3 runtime adds:
+
+- persistent local runtime records through a restart-safe JSON repository reference implementation;
+- stable idempotency-key generation;
+- job submission and execution lifecycle;
+- retry handling and terminal dead-state behavior.
+
+The local JSON repository is a reference persistence implementation. It does not replace the existing PostgreSQL/TimescaleDB infrastructure or imply that all runtime state has already been migrated to a production relational repository.
+
+### Identity, Tenant Security & Secrets
+
+The v3 security layer adds:
+
+- a signed-token reference implementation;
+- tenant-aware authorization context and policy evaluation;
+- environment-backed secret resolution.
+
+The signed-token helper is intentionally lightweight and is **not** presented as a replacement for a production OAuth2/OIDC/Entra ID integration.
+
+### Runnable Enterprise Integration Layer
+
+RedPulse now includes HTTP-based runtime adapters for:
+
+- n8n webhook workflows;
+- Microsoft Power Automate flow endpoints;
+- generic JSON webhook invocation;
+- notification routing.
+
+These adapters can perform real HTTP calls when valid external endpoints and credentials are configured. The repository does not claim that a live external enterprise environment is bundled or currently connected.
+
+### Production ML Runtime
+
+The v3 model runtime includes:
+
+- model registration and activation;
+- production model routing;
+- drift assessment;
+- retraining coordination;
+- failure-risk reference prediction;
+- remaining-useful-life reference prediction.
+
+These reference models demonstrate serving and orchestration contracts. They are not presented as plant-certified or production-trained industrial models.
+
+### Industrial Data Runtime
+
+The data-runtime layer adds:
+
+- replayable pipeline events;
+- data-quality gates;
+- lineage registry records.
+
+These components complement the existing Kafka, Spark, Airflow, TimescaleDB, and MLOps foundations.
+
+### Industrial Copilot v2
+
+Industrial Copilot v2 adds:
+
+- citation structures;
+- evidence packaging;
+- retriever-driven context assembly;
+- optional generator integration.
+
+If no approved generator is connected, the orchestrator returns prepared evidence instead of pretending that an LLM answer was generated.
+
+### Deployment Path
+
+v3.0.0 introduces:
+
+- Kubernetes Deployment and Service manifests;
+- readiness probing;
+- an Azure/Terraform scaffold.
+
+These are deployment paths and scaffolds, not evidence of a live Azure or AKS deployment.
+
+### End-to-End Production Demonstration
+
+The v3 demonstration service connects machine signals to production-oriented decision output:
+
+```text
+Machine Signals
+      ↓
+Failure-Risk Reference Model
+      ↓
+Remaining-Useful-Life Reference Model
+      ↓
+Maintenance Recommendation
+      ↓
+Persistent Runtime Record
+      ↓
+Approval Requirement
+```
+
+Representative endpoints:
+
+```text
+GET   /api/v1/v3/readiness
+POST  /api/v1/v3/demo/run
+```
+
+> **Scope note:** v3.0.0 is a production-demonstration engineering release. It validates architecture, runtime contracts, APIs, and deployment paths, but it is not a claim of real-plant production deployment or safety certification.
+
+---
+
 ## Maintenance Outcome Learning
 
 Maintenance interventions are stored as persistent entities instead of temporary events.
@@ -769,6 +913,8 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - Apache Airflow
 - MLflow integration adapter
 - Docker / Docker Compose
+- Kubernetes deployment manifest
+- Terraform Azure scaffold
 
 ### Intelligence & Analytics
 
@@ -809,6 +955,18 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - failure-risk and RUL model foundations
 - dataset catalog, data quality, lineage, replay, and partitioning
 - governance, persistence, security, observability, and readiness foundations
+- persistent runtime and idempotency foundations
+- signed-token and tenant authorization reference implementation
+- environment-based secret provider
+- runnable n8n / Power Automate webhook clients
+- metrics registry and circuit breaker
+- production model routing and retraining coordination
+- failure-risk and RUL reference models
+- replay, data-quality, and lineage runtime controls
+- Industrial Copilot v2 citation/evidence orchestration
+- Kubernetes deployment manifests
+- Azure / Terraform deployment scaffold
+- end-to-end v3 production demonstration service
 
 ### Quality
 
@@ -833,6 +991,7 @@ redpulse-ai/
 │   │   ├── agents/
 │   │   ├── automation/
 │   │   ├── copilot/
+│   │   ├── copilot_v3/
 │   │   ├── core/
 │   │   ├── deviation/
 │   │   ├── drift/
@@ -845,16 +1004,21 @@ redpulse-ai/
 │   │   ├── integrations/
 │   │   │   └── huggingface/
 │   │   ├── integrations_gateway/
+│   │   ├── integrations_v3/
 │   │   ├── knowledge/
 │   │   ├── maintenance/
 │   │   ├── memory/
+│   │   ├── ml_runtime_v3/
 │   │   ├── mlops/
 │   │   ├── models/
 │   │   ├── plant/
 │   │   ├── prediction/
+│   │   ├── observability_v3/
 │   │   ├── production/
 │   │   ├── repositories/
+│   │   ├── runtime_v3/
 │   │   ├── schemas/
+│   │   ├── security_v3/
 │   │   ├── services/
 │   │   ├── streaming/
 │   │   ├── tenancy/
@@ -865,6 +1029,9 @@ redpulse-ai/
 ├── orchestration/
 │   └── airflow/
 │       └── dags/
+├── infra/
+│   ├── k8s/
+│   └── terraform/azure/
 ├── simulator/
 │   ├── profiles/
 │   └── tests/
@@ -989,6 +1156,18 @@ Industrial AI / Copilot
 Enterprise Automation / Multi-Tenancy
       ↓
 Production Control Plane
+      ↓
+Persistent Runtime / Security
+      ↓
+Runnable Enterprise Integrations
+      ↓
+Production ML & Data Runtime
+      ↓
+Industrial Copilot v2
+      ↓
+Deployment Readiness
+      ↓
+v3 Production Demonstration
 ```
 
 Representative endpoint groups include:
@@ -1017,6 +1196,7 @@ Hugging Face Platform
 Industrial AI
 Enterprise Automation
 Production Platform
+v3 Production Demo
 ```
 
 Representative maintenance endpoints include:
@@ -1044,10 +1224,10 @@ Run the backend and simulator test suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v2.0.0` milestone:
+At the `v3.0.0` milestone:
 
 ```text
-210 passed
+222 passed
 ```
 
 The suite covers:
@@ -1080,7 +1260,12 @@ The suite covers:
 - production automation runtime and approvals;
 - production predictive-AI operations;
 - production data-quality, lineage, replay, and partitioning foundations;
-- production control-plane and readiness APIs.
+- production control-plane and readiness APIs;
+- persistent runtime and idempotency;
+- signed-token and tenant policy foundations;
+- v3 production model runtime;
+- data replay, quality, and lineage controls;
+- v3 production demonstration service and API.
 
 ---
 
@@ -1149,7 +1334,27 @@ v1.4.0  Industrial Intelligence Platform
    ↓
 v1.6.0  Enterprise Automation & Multi-Tenant Platform
    ↓
-v2.0.0  Production Industrial Intelligence Platform   ← current
+v2.0.0  Production Industrial Intelligence Platform
+   ↓
+v2.1.0  Persistent Runtime & Idempotency
+   ↓
+v2.2.0  Identity, Tenant Security & Secrets
+   ↓
+v2.3.0  Runnable Enterprise Integration Layer
+   ↓
+v2.4.0  Observability & Reliability Foundations
+   ↓
+v2.5.0  Production Model Serving & Drift/Retraining
+   ↓
+v2.6.0  Industrial Data Runtime, Replay & Lineage
+   ↓
+v2.7.0  Industrial Copilot v2
+   ↓
+v2.8.0  Kubernetes Deployment Path
+   ↓
+v2.9.0  Azure / Terraform Deployment Scaffold
+   ↓
+v3.0.0  Production Demonstration Platform   ← current
 ```
 
 ---
@@ -1238,20 +1443,37 @@ The v2.0.0 milestone adds production-oriented operational building blocks:
 - governance, persistence, security, and observability foundations;
 - production control-plane readiness reporting.
 
-### Next Phase — Deployment & Production Hardening
+### Completed in v3.0.0 — Production Demonstration Platform
 
-Future work should deepen deployability and operational maturity rather than only adding more abstractions:
+The v3.0.0 milestone adds the next production-maturity layer:
 
-- persistent production storage for jobs, approvals, audit, and tenant state;
-- stronger OAuth2 / OIDC identity and secrets management;
-- live end-to-end validation against n8n / Power Automate / enterprise workflow targets;
-- richer Prometheus / OpenTelemetry metrics, traces, alerts, and SLOs;
-- load, failure, recovery, and chaos-style validation;
-- Kubernetes / AKS and cloud deployment architecture;
-- Terraform-based infrastructure as code;
-- managed PostgreSQL, object storage, Key Vault, and Entra ID integration;
-- scalable model serving such as vLLM where justified;
-- GPU-backed or domain-adapted models only when they provide measurable value.
+- persistent runtime reference implementation and idempotency keys;
+- tenant-aware signed-token and authorization foundations;
+- environment-backed secret resolution;
+- runnable HTTP adapters for n8n and Power Automate endpoints;
+- metrics and circuit-breaker primitives;
+- production model routing and retraining coordination;
+- failure-risk and RUL reference models;
+- replay, data-quality, and lineage runtime components;
+- Industrial Copilot v2 evidence/citation orchestration;
+- Kubernetes deployment/service manifests;
+- Azure/Terraform deployment scaffold;
+- end-to-end v3 readiness and demonstration APIs.
+
+### Next Phase — Real Deployment & Operational Validation
+
+Future work should now focus less on adding new modules and more on validating the existing platform in realistic environments:
+
+- migrate reference/local runtime persistence to durable database-backed repositories;
+- production OAuth2 / OIDC / Entra ID integration;
+- secure secret storage such as Azure Key Vault;
+- live n8n and/or Power Automate end-to-end environments;
+- Prometheus / OpenTelemetry integration with dashboards and alerting;
+- load, recovery, failure-injection, and resilience testing;
+- deploy the API and supporting services to Kubernetes / AKS;
+- expand Terraform from scaffold to reproducible cloud infrastructure;
+- connect production model serving to trained industrial datasets and model registry;
+- evaluate early-warning quality, false-alert rate, precision/recall, lead time, and maintenance outcomes on realistic datasets.
 
 RedPulse should continue to preserve separation between its core machine intelligence and optional automation, LLM, MLOps, and cloud vendors.
 
@@ -1288,7 +1510,7 @@ RedPulse AI is being developed around seven core ideas:
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v2.0.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenancy, and a production-platform control plane:
+The current `v3.0.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenancy, a production-platform control plane, persistent runtime foundations, production ML/data runtime components, deployment assets, and an end-to-end production demonstration service:
 
 ```text
 Machine Behavior
@@ -1312,7 +1534,7 @@ Outcome Learning
 Counterfactual Maintenance Intelligence
 ```
 
-The next major stage is **deployment and deeper production hardening**: persistent runtime state, stronger identity and secrets, live external-integration validation, richer observability and SLOs, cloud/Kubernetes infrastructure, and scalable model serving where justified. The behavioral and predictive-maintenance core remains independent from optional LLM, automation, MLOps, and cloud vendors.
+The next major stage is **real deployment and operational validation**: durable database-backed runtime state, production identity and secrets, live external-integration environments, richer observability and SLOs, load/recovery testing, Kubernetes/AKS deployment, reproducible cloud infrastructure, and model validation on realistic industrial datasets. The behavioral and predictive-maintenance core remains independent from optional LLM, automation, MLOps, and cloud vendors.
 
 ---
 
