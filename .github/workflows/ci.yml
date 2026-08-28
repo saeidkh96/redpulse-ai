@@ -12,7 +12,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:17-alpine
+        image: timescale/timescaledb:latest-pg17
         env:
           POSTGRES_USER: redpulse
           POSTGRES_PASSWORD: redpulse
@@ -56,3 +56,4 @@ jobs:
 
       - name: Run tests
         run: python -m pytest backend/tests simulator/tests -q
+
