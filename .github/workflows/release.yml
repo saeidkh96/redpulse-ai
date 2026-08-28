@@ -1,0 +1,14 @@
+name: Release Validation
+on:
+  push:
+    tags: ['v*']
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install -r backend/requirements.txt pytest
+      - run: python -m compileall backend/app backend/tests simulator
+      - run: python -m pytest backend/tests simulator/tests -q

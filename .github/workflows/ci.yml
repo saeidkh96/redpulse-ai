@@ -1,0 +1,69 @@
+﻿name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: timescale/timescaledb:latest-pg17
+        env:
+          POSTGRES_USER: redpulse
+          POSTGRES_PASSWORD: redpulse
+          POSTGRES_DB: redpulse
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U redpulse -d redpulse"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql+asyncpg://redpulse:redpulse@localhost:5433/redpulse
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install pytest ruff alembic
+
+      - name: Compile
+        run: python -m compileall backend/app backend/tests orchestration analytics simulator
+
+      - name: Ruff
+        continue-on-error: true
+        run: ruff check backend/app backend/tests simulator
+
+      - name: Apply database migrations
+        working-directory: backend
+        run: alembic upgrade head
+
+      - name: Run tests
+        run: python -m pytest backend/tests simulator/tests -q
+
