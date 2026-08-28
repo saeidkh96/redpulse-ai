@@ -10,8 +10,8 @@
 
 </div>
 
-[![Version](https://img.shields.io/badge/version-v3.0.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.0.0)
-[![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Version](https://img.shields.io/badge/version-v3.1.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.1.0)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
@@ -42,7 +42,7 @@ RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-m
 - maintenance outcome learning;
 - counterfactual maintenance analysis.
 
-> **Current milestone — v3.0.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming and large-scale analytics, production-oriented MLOps, Hugging Face integration, Industrial Intelligence, enterprise automation, multi-tenant controls, persistent runtime foundations, tenant-aware security, production model serving, industrial data runtime controls, Industrial Copilot v2, observability/reliability primitives, Kubernetes deployment assets, an Azure/Terraform deployment scaffold, and an end-to-end production demonstration API.
+> **Current milestone — v3.1.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming and large-scale analytics, production-oriented MLOps, Hugging Face integration, Industrial Intelligence, enterprise automation, multi-tenant controls, persistent runtime foundations, tenant-aware security, production model serving, industrial data runtime controls, Industrial Copilot v2, observability/reliability primitives, Kubernetes deployment assets, an Azure/Terraform deployment scaffold, an end-to-end production demonstration API, production CI/CD validation, industrial Digital Twin foundations, and advanced predictive-intelligence components.
 
 ---
 
@@ -144,11 +144,14 @@ flowchart TD
     DATA3 --> COP3[Industrial Copilot v2]
     COP3 --> DEPLOY3[Kubernetes / Azure Deployment Path]
     DEPLOY3 --> DEMO3[v3 End-to-End Production Demo]
+    DEMO3 --> ENG31[Production Engineering / CI-CD]
+    ENG31 --> TWIN31[Industrial Digital Twin]
+    TWIN31 --> ADV31[Advanced Predictive Intelligence]
 ```
 
 ---
 
-## Current Capabilities — v3.0.0
+## Current Capabilities — v3.1.0
 
 | Area | Capability | Status |
 |---|---|:---:|
@@ -294,6 +297,20 @@ flowchart TD
 | v3 Deployment | Azure/Terraform deployment scaffold | ✅ |
 | v3 Demo | End-to-end production demonstration service | ✅ |
 | API | v3 readiness and demo endpoints | ✅ |
+| Production Engineering | GitHub Actions CI workflow | ✅ |
+| Production Engineering | TimescaleDB + Redis CI services | ✅ |
+| Production Engineering | Alembic migration validation in CI | ✅ |
+| Production Engineering | Docker backend image validation | ✅ |
+| Production Engineering | CodeQL security scanning | ✅ |
+| Production Engineering | Release validation workflow | ✅ |
+| Digital Twin | Machine-state representation | ✅ |
+| Digital Twin | What-if scenario simulation | ✅ |
+| Digital Twin | Projected health / drift / failure-risk evaluation | ✅ |
+| Advanced Predictive | Prediction uncertainty foundation | ✅ |
+| Advanced Predictive | Multimodal evidence fusion foundation | ✅ |
+| Advanced Predictive | Probabilistic RUL foundation | ✅ |
+| Advanced Predictive | Counterfactual-analysis reference layer | ✅ |
+| Advanced Predictive | Time-series foundation-model gateway abstraction | ✅ |
 
 ---
 
@@ -714,6 +731,70 @@ POST  /api/v1/v3/demo/run
 
 ---
 
+
+## Production Engineering, Digital Twin & Advanced Predictive Intelligence — v3.1.0
+
+RedPulse v3.1.0 adds three cross-cutting engineering layers on top of the v3 production demonstration platform.
+
+### Production Engineering & CI/CD
+
+The repository now includes GitHub Actions workflows for continuous integration, Docker validation, security scanning, and release validation.
+
+The CI environment validates the backend against infrastructure dependencies that mirror the development stack:
+
+- Python 3.12;
+- TimescaleDB / PostgreSQL;
+- Redis;
+- Alembic migrations;
+- full backend and simulator test suites;
+- Docker backend image builds;
+- CodeQL security analysis;
+- non-blocking Ruff quality reporting.
+
+The v3.1.0 release milestone validates **227 automated tests**.
+
+### Industrial Digital Twin Foundations
+
+The Digital Twin layer introduces software abstractions for representing machine state and evaluating controlled what-if scenarios.
+
+Current foundations include:
+
+- machine-state representation;
+- telemetry-driven state updates;
+- scenario simulation;
+- projected health estimation;
+- projected drift estimation;
+- projected failure-risk evaluation;
+- fleet-level twin aggregation and risk ranking.
+
+These components are engineering/reference foundations for future physics-informed or plant-integrated digital twins. They are not presented as certified physical twins of real industrial assets.
+
+### Advanced Predictive Intelligence
+
+The advanced predictive layer introduces additional decision-support foundations for uncertainty-aware and scenario-aware prediction.
+
+Current foundations include:
+
+- predictive uncertainty estimation;
+- multimodal evidence fusion;
+- probabilistic Remaining Useful Life estimation;
+- counterfactual maintenance-analysis references;
+- time-series foundation-model gateway abstractions.
+
+These capabilities extend the existing Machine DNA, behavioral-deviation, drift, failure-intelligence, health, and maintenance reasoning pipeline. They are reference implementations and software contracts rather than claims of validated plant-specific predictive models.
+
+### Representative v3.1 API
+
+```text
+POST  /api/v1/v31/digital-twin/simulate
+POST  /api/v1/v31/advanced-predictive/evaluate
+GET   /api/v1/v31/production-engineering/readiness
+```
+
+> **Scope note:** v3.1.0 strengthens production engineering and introduces Digital Twin and advanced predictive-intelligence foundations. RedPulse remains an experimental engineering/research platform and is not presented as a safety-certified industrial control or maintenance system.
+
+---
+
 ## Maintenance Outcome Learning
 
 Maintenance interventions are stored as persistent entities instead of temporary events.
@@ -967,6 +1048,9 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - Kubernetes deployment manifests
 - Azure / Terraform deployment scaffold
 - end-to-end v3 production demonstration service
+- industrial Digital Twin state/scenario foundations
+- uncertainty-aware and multimodal predictive-intelligence foundations
+- probabilistic RUL and time-series model-gateway abstractions
 
 ### Quality
 
@@ -976,6 +1060,10 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - API / OpenAPI tests
 - migration validation
 - reproducible simulator tests
+- GitHub Actions CI and release validation
+- TimescaleDB / Redis integration validation
+- Docker build validation
+- CodeQL security scanning
 
 ---
 
@@ -1168,6 +1256,12 @@ Industrial Copilot v2
 Deployment Readiness
       ↓
 v3 Production Demonstration
+      ↓
+Production Engineering / CI-CD
+      ↓
+Industrial Digital Twin
+      ↓
+Advanced Predictive Intelligence
 ```
 
 Representative endpoint groups include:
@@ -1197,6 +1291,9 @@ Industrial AI
 Enterprise Automation
 Production Platform
 v3 Production Demo
+v3.1 Production Engineering
+v3.1 Digital Twin
+v3.1 Advanced Predictive Intelligence
 ```
 
 Representative maintenance endpoints include:
@@ -1224,10 +1321,10 @@ Run the backend and simulator test suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v3.0.0` milestone:
+At the `v3.1.0` milestone:
 
 ```text
-222 passed
+227 passed
 ```
 
 The suite covers:
@@ -1354,7 +1451,9 @@ v2.8.0  Kubernetes Deployment Path
    ↓
 v2.9.0  Azure / Terraform Deployment Scaffold
    ↓
-v3.0.0  Production Demonstration Platform   ← current
+v3.0.0  Production Demonstration Platform
+   ↓
+v3.1.0  Production Engineering, Digital Twin & Advanced Predictive Intelligence   ← current
 ```
 
 ---
@@ -1460,6 +1559,24 @@ The v3.0.0 milestone adds the next production-maturity layer:
 - Azure/Terraform deployment scaffold;
 - end-to-end v3 readiness and demonstration APIs.
 
+### Completed in v3.1.0 — Production Engineering, Digital Twin & Advanced Predictive Intelligence
+
+The v3.1.0 milestone adds:
+
+- GitHub Actions-based CI/CD validation;
+- TimescaleDB and Redis service dependencies in CI;
+- automated Alembic migration validation;
+- backend Docker image validation;
+- CodeQL security scanning;
+- release-validation workflow hardening;
+- machine-state and what-if Digital Twin foundations;
+- projected health, drift, and failure-risk simulation;
+- uncertainty-aware predictive foundations;
+- multimodal predictive-evidence fusion;
+- probabilistic Remaining Useful Life foundations;
+- counterfactual-analysis references;
+- time-series foundation-model gateway abstractions.
+
 ### Next Phase — Real Deployment & Operational Validation
 
 Future work should now focus less on adding new modules and more on validating the existing platform in realistic environments:
@@ -1510,7 +1627,7 @@ RedPulse AI is being developed around seven core ideas:
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v3.0.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenancy, a production-platform control plane, persistent runtime foundations, production ML/data runtime components, deployment assets, and an end-to-end production demonstration service:
+The current `v3.1.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenancy, a production-platform control plane, persistent runtime foundations, production ML/data runtime components, deployment assets, an end-to-end production demonstration service, production CI/CD validation, industrial Digital Twin foundations, and advanced predictive-intelligence components:
 
 ```text
 Machine Behavior
