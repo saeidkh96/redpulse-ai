@@ -10,7 +10,7 @@
 
 </div>
 
-[![Version](https://img.shields.io/badge/version-v3.1.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.1.0)
+[![Version](https://img.shields.io/badge/version-v3.2.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.2.0)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
@@ -42,7 +42,7 @@ RedPulse has evolved beyond threshold monitoring into an end-to-end predictive-m
 - maintenance outcome learning;
 - counterfactual maintenance analysis.
 
-> **Current milestone — v3.1.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming and large-scale analytics, production-oriented MLOps, Hugging Face integration, Industrial Intelligence, enterprise automation, multi-tenant controls, persistent runtime foundations, tenant-aware security, production model serving, industrial data runtime controls, Industrial Copilot v2, observability/reliability primitives, Kubernetes deployment assets, an Azure/Terraform deployment scaffold, an end-to-end production demonstration API, production CI/CD validation, industrial Digital Twin foundations, and advanced predictive-intelligence components.
+> **Current milestone — v3.2.0:** RedPulse now combines machine-, fleet-, and plant-level predictive-maintenance intelligence with streaming and large-scale analytics, production-oriented MLOps, Hugging Face integration, Industrial Intelligence, enterprise automation, multi-tenant controls, persistent runtime foundations, tenant-aware security, production model serving, industrial data runtime controls, Industrial Copilot v2, observability/reliability primitives, Kubernetes deployment assets, an Azure/Terraform deployment scaffold, an end-to-end production demonstration API, production CI/CD validation, industrial Digital Twin foundations, and advanced predictive-intelligence components.
 
 ---
 
@@ -151,7 +151,7 @@ flowchart TD
 
 ---
 
-## Current Capabilities — v3.1.0
+## Current Capabilities — v3.2.0
 
 | Area | Capability | Status |
 |---|---|:---:|
@@ -751,7 +751,7 @@ The CI environment validates the backend against infrastructure dependencies tha
 - CodeQL security analysis;
 - non-blocking Ruff quality reporting.
 
-The v3.1.0 release milestone validates **227 automated tests**.
+The v3.2.0 milestone validates **236 automated tests**.
 
 ### Industrial Digital Twin Foundations
 
@@ -992,6 +992,11 @@ Behavioral Memory converts individual analyses into structured historical eviden
 - Apache Kafka
 - Apache Spark
 - Apache Airflow
+- Databricks Lakehouse architecture
+- Medallion Architecture (Bronze / Silver / Gold)
+- Databricks Auto Loader foundation
+- Unity Catalog governance foundation
+- Databricks Asset Bundles
 - MLflow integration adapter
 - Docker / Docker Compose
 - Kubernetes deployment manifest
@@ -1120,6 +1125,11 @@ redpulse-ai/
 ├── infra/
 │   ├── k8s/
 │   └── terraform/azure/
+├── databricks/
+│   ├── databricks.yml
+│   └── jobs/
+│       ├── bronze_to_silver.py
+│       └── silver_to_gold.py
 ├── simulator/
 │   ├── profiles/
 │   └── tests/
@@ -1262,6 +1272,10 @@ Production Engineering / CI-CD
 Industrial Digital Twin
       ↓
 Advanced Predictive Intelligence
+      ↓
+Databricks Lakehouse / Medallion Data Platform
+      ↓
+Unity Catalog Governance / Asset Bundles
 ```
 
 Representative endpoint groups include:
@@ -1294,6 +1308,10 @@ v3 Production Demo
 v3.1 Production Engineering
 v3.1 Digital Twin
 v3.1 Advanced Predictive Intelligence
+      ↓
+Databricks Lakehouse / Medallion Data Platform
+      ↓
+Unity Catalog Governance / Asset Bundles
 ```
 
 Representative maintenance endpoints include:
@@ -1321,10 +1339,10 @@ Run the backend and simulator test suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the `v3.1.0` milestone:
+At the `v3.2.0` milestone:
 
 ```text
-227 passed
+236 passed
 ```
 
 The suite covers:
@@ -1453,7 +1471,25 @@ v2.9.0  Azure / Terraform Deployment Scaffold
    ↓
 v3.0.0  Production Demonstration Platform
    ↓
-v3.1.0  Production Engineering, Digital Twin & Advanced Predictive Intelligence   ← current
+v3.1.0  Production Engineering, Digital Twin & Advanced Predictive Intelligence
+   ↓
+v3.2.0  Databricks Lakehouse & Enterprise Data Platform   ← current
+   ↓
+v3.3.0  Unified Data Governance
+   ↓
+v3.4.0  Databricks Deployment Automation
+   ↓
+v3.5.0  Streaming & Scale Expansion
+   ↓
+v3.6.0  Production Orchestration
+   ↓
+v3.7.0  Advanced MLOps
+   ↓
+v3.8.0  Enterprise Integration Expansion
+   ↓
+v3.9.0  Platform Hardening
+   ↓
+v4.0.0  Operational Validation Platform
 ```
 
 ---
@@ -1577,6 +1613,33 @@ The v3.1.0 milestone adds:
 - counterfactual-analysis references;
 - time-series foundation-model gateway abstractions.
 
+### Completed in v3.2.0 — Databricks Lakehouse & Enterprise Data Platform
+
+The v3.2.0 milestone adds:
+
+- Databricks-oriented Lakehouse architecture foundations;
+- Bronze / Silver / Gold Medallion processing boundaries;
+- Auto Loader-oriented ingestion foundations;
+- Unity Catalog governance abstractions;
+- Databricks Asset Bundle configuration;
+- Bronze-to-Silver and Silver-to-Gold job entry points;
+- GitHub Actions validation for Databricks bundle assets;
+- a dedicated v3.2 roadmap API;
+- validated foundations for the v3.3.0–v4.0.0 roadmap.
+
+### Planned v3.3.0–v4.0.0
+
+The next roadmap sequence focuses on turning the new foundations into deeper operational capabilities:
+
+- **v3.3.0 — Unified Data Governance:** expand governance policies, lineage, access controls, and catalog integration.
+- **v3.4.0 — Databricks Deployment Automation:** strengthen Asset Bundle deployment and environment promotion workflows.
+- **v3.5.0 — Streaming & Scale Expansion:** deepen high-throughput streaming and distributed analytics.
+- **v3.6.0 — Production Orchestration:** expand scheduled and event-driven pipeline orchestration.
+- **v3.7.0 — Advanced MLOps:** deepen registry, monitoring, retraining, and champion/challenger workflows.
+- **v3.8.0 — Enterprise Integration Expansion:** extend enterprise workflow and external-system adapters.
+- **v3.9.0 — Platform Hardening:** strengthen security, resilience, observability, and deployment readiness.
+- **v4.0.0 — Operational Validation Platform:** consolidate realistic end-to-end deployment, load, recovery, and operational validation.
+
 ### Next Phase — Real Deployment & Operational Validation
 
 Future work should now focus less on adding new modules and more on validating the existing platform in realistic environments:
@@ -1627,7 +1690,7 @@ RedPulse AI is being developed around seven core ideas:
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v3.1.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenancy, a production-platform control plane, persistent runtime foundations, production ML/data runtime components, deployment assets, an end-to-end production demonstration service, production CI/CD validation, industrial Digital Twin foundations, and advanced predictive-intelligence components:
+The current `v3.2.0` release extends the maintenance-learning loop with fleet/plant intelligence, streaming and large-scale analytics, production-oriented MLOps, Hugging Face model integration, Industrial Intelligence, enterprise automation, multi-tenancy, a production-platform control plane, persistent runtime foundations, production ML/data runtime components, deployment assets, an end-to-end production demonstration service, production CI/CD validation, industrial Digital Twin foundations, and advanced predictive-intelligence components:
 
 ```text
 Machine Behavior

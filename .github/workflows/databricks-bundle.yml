@@ -1,0 +1,21 @@
+name: Databricks Bundle Validation
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  validate-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate files
+        run: |
+          test -f databricks/databricks.yml
+          test -f databricks/jobs/bronze_to_silver.py
+          test -f databricks/jobs/silver_to_gold.py
+      - name: Compile roadmap modules
+        run: python -m compileall backend/app/lakehouse_v32 backend/app/governance_v33 backend/app/databricks_deploy_v34 backend/app/streaming_scale_v35 backend/app/orchestration_v36 backend/app/mlops_v37 backend/app/enterprise_integration_v38 backend/app/platform_hardening_v39 backend/app/operational_validation_v40
