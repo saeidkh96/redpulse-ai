@@ -1,0 +1,28 @@
+bundle:
+  name: redpulse-ai
+variables:
+  catalog:
+    default: redpulse
+  schema:
+    default: industrial
+resources:
+  jobs:
+    telemetry_medallion:
+      name: redpulse-telemetry-medallion
+      tasks:
+        - task_key: bronze_to_silver
+          spark_python_task:
+            python_file: ./jobs/bronze_to_silver.py
+          job_cluster_key: default
+        - task_key: silver_to_gold
+          depends_on:
+            - task_key: bronze_to_silver
+          spark_python_task:
+            python_file: ./jobs/silver_to_gold.py
+          job_cluster_key: default
+targets:
+  dev:
+    mode: development
+    default: true
+  prod:
+    mode: production
