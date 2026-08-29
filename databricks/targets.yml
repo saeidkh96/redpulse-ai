@@ -1,0 +1,8 @@
+targets:
+  dev:
+    mode: development
+    default: true
+  staging:
+    mode: development
+  prod:
+    mode: production
