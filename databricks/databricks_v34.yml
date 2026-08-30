@@ -1,0 +1,40 @@
+bundle:
+  name: redpulse-ai
+
+variables:
+  environment:
+    description: Deployment environment
+    default: dev
+
+resources:
+  jobs:
+    bronze_to_silver:
+      name: redpulse-${var.environment}-bronze-to-silver
+      tasks:
+        - task_key: bronze_to_silver
+          spark_python_task:
+            python_file: ./jobs/bronze_to_silver.py
+
+    silver_to_gold:
+      name: redpulse-${var.environment}-silver-to-gold
+      tasks:
+        - task_key: silver_to_gold
+          spark_python_task:
+            python_file: ./jobs/silver_to_gold.py
+
+targets:
+  dev:
+    mode: development
+    default: true
+    variables:
+      environment: dev
+
+  staging:
+    mode: development
+    variables:
+      environment: staging
+
+  prod:
+    mode: production
+    variables:
+      environment: prod

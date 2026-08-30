@@ -1,0 +1,32 @@
+name: Databricks v3.4 Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  databricks-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install pytest
+
+      - name: Compile v3.4 deployment modules
+        run: python -m compileall backend/app/databricks_deploy_v34 backend/tests/test_v34_databricks_deployment.py
+
+      - name: Run v3.4 deployment tests
+        run: python -m pytest backend/tests/test_v34_databricks_deployment.py -q
