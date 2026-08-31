@@ -7,7 +7,7 @@
 **Behavior. Insight. Uptime.**
 </div>
 
-[![Version](https://img.shields.io/badge/version-v3.4.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.4.0)
+[![Version](https://img.shields.io/badge/version-v3.5.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.5.0)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
@@ -24,7 +24,7 @@ Instead of treating every machine as identical, RedPulse builds a **machine-spec
 
 The platform has evolved from machine-level behavioral analytics into a broader industrial intelligence architecture that includes streaming, large-scale analytics, MLOps, model-platform integration, Industrial AI, enterprise automation, multi-tenancy, production engineering, Digital Twin foundations, and a Databricks-oriented enterprise data platform.
 
-> **Current release — v3.4.0: Databricks Production Deployment.** This milestone builds on the v3.2.0 Lakehouse and v3.3.0 governance foundations with production-oriented Databricks deployment contracts, environment-aware `dev` / `staging` / `prod` targets, deployment-readiness validation, Bronze-to-Silver and Silver-to-Gold job specifications, and dedicated CI validation.
+> **Current release — v3.5.0: Streaming & Scale Expansion.** This milestone strengthens the event-streaming and scale boundary with explicit Kafka topic contracts, machine-based partition keys, consumer-group definitions, publish retry and dead-letter routing, streaming metrics and health evaluation, deterministic fleet partitioning, micro-batch foundations, and Lakehouse handoff planning for Bronze → Silver → Gold processing.
 
 > **Scope:** RedPulse AI is an experimental engineering/research project. The repository demonstrates architecture, runtime contracts, APIs, deployment paths, and validation foundations; it does not claim a live industrial deployment, safety certification, a connected corporate Databricks workspace, or production identity-provider integration.
 
@@ -50,7 +50,7 @@ This baseline becomes the reference point for deviation detection, drift analysi
 
 ---
 
-## Current Release — v3.4.0
+## Current Release — v3.5.0
 
 ### v3.2.0 — Databricks Lakehouse & Enterprise Data Platform
 
@@ -91,6 +91,25 @@ The current milestone moves the Databricks boundary toward controlled, productio
 - automated tests for deployment targets and readiness.
 
 The deployment layer remains an engineering foundation. It does **not** claim a live corporate Databricks workspace or a completed production deployment.
+
+---
+
+### v3.5.0 — Streaming & Scale Expansion
+
+The current milestone strengthens RedPulse AI's existing streaming and distributed-processing architecture:
+
+- explicit Kafka contracts for telemetry, alert, and maintenance event streams;
+- stable machine-based partition keys for per-machine event ordering;
+- defined consumer groups for streaming workloads;
+- bounded Kafka publish retries with dead-letter queue routing;
+- streaming counters for publish, consume, failure, retry, and DLQ activity;
+- consumer-lag state and streaming health evaluation;
+- deterministic fleet partition planning and micro-batch processing foundations;
+- Lakehouse handoff planning from Kafka-backed telemetry toward Bronze → Silver → Gold processing;
+- continued use of the existing Spark analytics layer rather than a duplicate processing stack;
+- dedicated v3.5 CI and regression validation.
+
+The implementation remains infrastructure-independent at the intelligence layer: Kafka and Spark provide scalable transport and processing boundaries while Machine DNA, predictive intelligence, maintenance intelligence, and fleet analytics remain separate domain capabilities.
 
 ---
 
@@ -162,7 +181,7 @@ The behavioral and predictive-maintenance core remains independent from optional
 | Failure intelligence | Failure fingerprints, trajectory matching, health scoring, prediction, explainability | ✅ |
 | Maintenance intelligence | Recommendation, intervention tracking, verification, outcome learning, counterfactual analysis | ✅ |
 | Fleet & plant | Cross-machine learning, similarity, fleet health, prioritization, plant risk/planning | ✅ |
-| Streaming & analytics | Event streaming, Kafka adapter, real-time windows, Spark analytics | ✅ |
+| Streaming & analytics | Kafka topic contracts, machine partitioning, retry/DLQ handling, streaming health/metrics, real-time windows, Spark analytics, Lakehouse handoff | ✅ |
 | MLOps | Experiment tracking, registry/lifecycle, monitoring, retraining, champion/challenger, MLflow/Airflow foundations | ✅ |
 | Model platform | Hugging Face Hub metadata/cache, embeddings, inference, PEFT/LoRA, provider-independent gateway | ✅ |
 | Industrial AI | Knowledge ingestion, evidence-grounded copilot, tool registry, maintenance-planning agent foundations | ✅ |
@@ -218,7 +237,7 @@ After an intervention, RedPulse compares current behavior with the pre-maintenan
 
 Machine-level evidence can be reused across similar assets through cross-machine learning and similarity analysis. This supports fleet health views, failure hotspots, maintenance prioritization, plant/site risk forecasting, and maintenance planning.
 
-The streaming/data-platform layer adds event-streaming foundations, an optional Kafka adapter, real-time windows and intelligence events, Spark analytics jobs, and orchestration foundations for larger telemetry workloads.
+The streaming/data-platform layer provides explicit Kafka topic contracts, machine-based partitioning, consumer-group definitions, bounded publish retries, dead-letter routing, streaming health and metrics, real-time windows and intelligence events, deterministic fleet partitioning, micro-batch foundations, Spark analytics jobs, and Lakehouse handoff planning for larger telemetry workloads.
 
 ---
 
@@ -553,10 +572,10 @@ Run the backend and simulator suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the **v3.4.0** milestone:
+At the **v3.5.0** milestone:
 
 ```text
-240 passed
+259 passed
 ```
 
 Validation covers the machine-intelligence pipeline, maintenance intelligence, fleet/plant services, model-platform and Industrial AI foundations, enterprise automation, production runtime/control-plane components, Databricks assets, governance and deployment foundations, service behavior, API/OpenAPI integration, migrations, simulator behavior, CI/CD, Docker validation, and security scanning.
@@ -592,7 +611,9 @@ v3.2    Databricks Lakehouse & enterprise data platform
   ↓
 v3.3    Unified Data Governance
   ↓
-v3.4    Databricks Production Deployment  ← current
+v3.4    Databricks Production Deployment
+  ↓
+v3.5    Streaming & Scale Expansion  ← current
 ```
 
 For detailed historical release contents, use the repository release history and tags.
@@ -605,8 +626,8 @@ For detailed historical release contents, use the repository release history and
 |---|---|:---:|
 | v3.2.0 | Databricks Lakehouse & Enterprise Data Platform | ✅ Completed |
 | v3.3.0 | Unified Data Governance | ✅ Completed |
-| **v3.4.0** | **Databricks Production Deployment** | **✅ Current** |
-| v3.5.0 | Streaming & Scale Expansion | Planned |
+| v3.4.0 | Databricks Production Deployment | ✅ Completed |
+| **v3.5.0** | **Streaming & Scale Expansion** | **✅ Current** |
 | v3.6.0 | Production Orchestration | Planned |
 | v3.7.0 | Advanced MLOps | Planned |
 | v3.8.0 | Enterprise Integration Expansion | Planned |
@@ -647,9 +668,9 @@ Future work should increasingly validate the existing architecture in realistic 
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v3.4.0` release combines the existing behavioral/predictive-maintenance core with fleet and plant intelligence, streaming and distributed analytics, MLOps/model-platform foundations, Industrial AI, enterprise automation, production runtime and deployment scaffolds, Digital Twin foundations, a Databricks-oriented Lakehouse, unified data-governance abstractions, and production-oriented Databricks deployment foundations.
+The current `v3.5.0` release combines the existing behavioral/predictive-maintenance core with fleet and plant intelligence, a strengthened Kafka streaming boundary, retry and dead-letter handling, streaming health and metrics, deterministic partitioning and micro-batch foundations, Spark-based distributed analytics, Lakehouse handoff planning, MLOps/model-platform foundations, Industrial AI, enterprise automation, production runtime and deployment scaffolds, Digital Twin foundations, and the Databricks-oriented enterprise data platform.
 
-The next milestone is **v3.5.0 — Streaming & Scale Expansion**. The broader objective through v4.0.0 is to move from architectural breadth toward deeper deployment, resilience, security, observability, scale, orchestration, MLOps, enterprise integration, and operational validation.
+The next milestone is **v3.6.0 — Production Orchestration**. The broader objective through v4.0.0 is to move from architectural breadth toward deeper deployment, resilience, security, observability, scale, orchestration, MLOps, enterprise integration, and operational validation.
 
 ---
 
