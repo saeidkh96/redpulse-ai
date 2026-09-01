@@ -1,0 +1,49 @@
+﻿name: RedPulse v3.6 Platform Consolidation Validation
+
+on:
+  push:
+    paths:
+      - "backend/app/orchestration_v36/**"
+      - "backend/app/mlops/**"
+      - "backend/app/integrations_gateway/**"
+      - "backend/app/enterprise_integration_v38/**"
+      - "backend/app/runtime_v3/**"
+      - "backend/app/security_v3/**"
+      - "backend/app/operational_validation_v40/**"
+      - "backend/tests/test_v36_platform_consolidation.py"
+      - "orchestration/airflow/dags/redpulse_v36_production_orchestration.py"
+      - "VALIDATE_V360_FULL.ps1"
+      - ".github/workflows/v36-full-platform-validation.yml"
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install pytest
+
+      - name: Compile
+        run: |
+          python -m compileall backend/app/orchestration_v36
+          python -m compileall backend/app/mlops
+          python -m compileall backend/app/integrations_gateway
+          python -m compileall backend/app/enterprise_integration_v38
+          python -m compileall backend/app/runtime_v3
+          python -m compileall backend/app/security_v3
+          python -m compileall backend/app/operational_validation_v40
+          python -m compileall orchestration/airflow/dags/redpulse_v36_production_orchestration.py
+
+      - name: Run v3.6 consolidation tests
+        working-directory: backend
+        run: pytest tests/test_v36_platform_consolidation.py -q
