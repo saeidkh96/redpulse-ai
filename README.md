@@ -1,144 +1,97 @@
 <div align="center">
-  <img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="520"/>
 
-# RedPulse AI
-### Behavioral Intelligence & Predictive Maintenance Platform
+<img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="720">
 
-**Behavior. Insight. Uptime.**
-</div>
-
-[![Version](https://img.shields.io/badge/version-v3.7.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.7.0)
+[![Version](https://img.shields.io/badge/version-v3.7.1-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.7.1)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+
+</div>
+
 
 ---
 
 ## Overview
 
-**RedPulse AI** is a production-oriented behavioral intelligence and predictive-maintenance platform designed to learn how individual industrial machines normally behave, detect behavioral change, estimate failure risk, support maintenance decisions, verify intervention outcomes, and reuse historical evidence across machines, fleets, and plants.
+**RedPulse AI** is a production-oriented Behavioral Intelligence & Predictive Maintenance Platform. It learns how individual industrial machines normally behave, detects behavioral change and slow drift, estimates failure risk, supports maintenance decisions, verifies intervention outcomes, and reuses historical evidence across machines, fleets, and plants.
 
-Instead of treating every machine as identical, RedPulse builds a **machine-specific behavioral fingerprint — Machine DNA** from multivariate telemetry. Sensor statistics, trends, and relationships become a versioned baseline against which future behavior can be compared.
+Instead of treating every machine as identical, RedPulse builds a **machine-specific behavioral fingerprint — Machine DNA** from multivariate telemetry. Versioned behavioral baselines provide the reference for deviation detection, drift analysis, behavioral memory, failure intelligence, health scoring, maintenance verification, and counterfactual analysis.
 
-The platform has evolved from machine-level behavioral analytics into a broader industrial intelligence architecture that includes streaming, large-scale analytics, MLOps, model-platform integration, Industrial AI, enterprise automation, multi-tenancy, production engineering, Digital Twin foundations, and a Databricks-oriented enterprise data platform.
+The architecture has expanded from machine-level predictive maintenance into streaming and large-scale analytics, MLOps, model-platform integration, Industrial AI, enterprise automation, multi-tenancy, production engineering, Digital Twin foundations, Databricks-oriented data-platform foundations, governance, and operational resilience.
 
-> **Current release — v3.7.0: Operational Resilience & Autonomous Intelligence Expansion.** This milestone strengthens RedPulse AI around failure recovery, replay safety, tenant isolation, operational lineage, performance validation, AI cost guardrails, controlled autonomous maintenance, and fleet knowledge transfer while reusing the existing orchestration, predictive-intelligence, MLOps, security, and operational-validation foundations.
+> **Current release — v3.7.1: Runtime Resilience Validation.** v3.7.1 strengthens the v3.7 resilience layer with PostgreSQL-backed durable runtime replay, lease-based execution ownership, heartbeat renewal, stale-worker recovery, ownership fencing, and concurrent/restart-safe execution validation.
 
-> **Scope:** RedPulse AI is an experimental engineering/research project. The repository demonstrates architecture, runtime contracts, APIs, deployment paths, and validation foundations; it does not claim a live industrial deployment, safety certification, a connected corporate Databricks workspace, or production identity-provider integration.
+> **Scope:** RedPulse AI is an experimental engineering/research project. It demonstrates architecture, runtime contracts, APIs, deployment paths, and validation foundations. It does not claim a live industrial deployment, safety certification, production identity-provider integration, a connected corporate Databricks workspace, or exactly-once execution of arbitrary external side effects.
 
 ---
 
 ## Why Machine DNA?
 
-Traditional monitoring often asks whether a sensor crossed a fixed threshold. RedPulse asks a different question:
+Traditional monitoring often asks whether a sensor crossed a fixed threshold. RedPulse asks:
 
 > **Is this machine behaving differently from its own learned normal behavior?**
 
-Two machines of the same model can operate under different loads, environments, ages, maintenance histories, and sensor characteristics. A single global threshold can miss that context.
-
-Machine DNA therefore captures:
+Machine DNA captures:
 
 - sensor-level statistics;
-- trend and slope behavior;
-- correlations between signals;
+- trends and slopes;
+- relationships and correlations between signals;
 - baseline metadata and versioning;
 - machine-specific behavioral context.
 
-This baseline becomes the reference point for deviation detection, drift analysis, health scoring, failure intelligence, maintenance verification, and counterfactual analysis.
+This machine-specific baseline helps RedPulse distinguish behavioral change from simple global threshold violations.
 
 ---
 
-## Current Release — v3.7.0
+## Current Release — v3.7.1
 
-### v3.2.0 — Databricks Lakehouse & Enterprise Data Platform
+### Runtime Resilience Validation
 
-The v3.2.0 milestone introduced the enterprise data-platform boundary:
+v3.7.1 validates and strengthens the runtime-resilience foundations introduced in v3.7.0:
 
-- Databricks-oriented Lakehouse architecture foundations;
-- Bronze / Silver / Gold Medallion processing boundaries;
-- Auto Loader-oriented ingestion foundations;
-- Unity Catalog governance abstractions;
-- Databricks Asset Bundle configuration;
-- Bronze-to-Silver and Silver-to-Gold job entry points;
-- GitHub Actions validation for Databricks bundle assets;
-- a dedicated v3.2 roadmap API.
+- PostgreSQL-backed durable runtime replay state;
+- tenant-aware durable execution claims;
+- expiring worker leases;
+- heartbeat-based lease renewal;
+- atomic takeover of stale `RUNNING` executions;
+- ownership-fenced state transitions;
+- durable retry, success, and failure state;
+- replay across runtime reconstruction;
+- explicit recovery from persisted failed executions;
+- concurrent-worker/idempotent replay validation;
+- cross-tenant replay protection;
+- stale-owner fencing after takeover.
 
-### v3.3.0 — Unified Data Governance
+The runtime provides **durable ownership, stale-worker recovery, and idempotent replay control**. It does not guarantee exactly-once execution of arbitrary external side effects after process failure. External operations should be idempotent or use downstream fencing/idempotency mechanisms where stronger guarantees are required.
 
-The v3.3.0 milestone deepened that foundation with:
+### v3.7.0 — Operational Resilience & Autonomous Intelligence Expansion
 
-- unified governance-policy models for enterprise data resources;
-- catalog, schema, and table-level governance abstractions;
-- access-control policy foundations;
-- lineage-aware governance metadata;
-- governance rules separated from the predictive-maintenance core;
-- environment-aware Databricks deployment targets;
-- dedicated governance validation integrated with the project test suite.
+v3.7.0 introduced:
 
-### v3.4.0 — Databricks Production Deployment
+- resilient stage execution with bounded retries and replay protection;
+- deterministic idempotency-based duplicate prevention;
+- tenant-isolation guards;
+- operational decision lineage;
+- throughput, p95 latency, error-rate and SLO evaluation;
+- tenant-scoped AI FinOps and budget guardrails;
+- human-approval boundaries for autonomous maintenance intents;
+- evidence-gated fleet knowledge transfer;
+- reuse of existing predictive-intelligence, retraining, champion/challenger, orchestration, security, and validation foundations;
+- a consolidated platform-convergence validation gate.
 
-The current milestone moves the Databricks boundary toward controlled, production-oriented deployment:
-
-- a dedicated production deployment service;
-- explicit `dev`, `staging`, and `prod` deployment targets;
-- environment-aware deployment configuration;
-- deployment-readiness validation;
-- Bronze-to-Silver and Silver-to-Gold job specifications;
-- a v3.4 Databricks Asset Bundle configuration;
-- dedicated GitHub Actions validation for the deployment layer;
-- automated tests for deployment targets and readiness.
-
-The deployment layer remains an engineering foundation. It does **not** claim a live corporate Databricks workspace or a completed production deployment.
+The release intentionally reused existing RedPulse subsystems instead of introducing duplicate predictive, MLOps, orchestration, security, or operational-validation stacks.
 
 ---
 
-### v3.5.0 — Streaming & Scale Expansion
-
-The current milestone strengthens RedPulse AI's existing streaming and distributed-processing architecture:
-
-- explicit Kafka contracts for telemetry, alert, and maintenance event streams;
-- stable machine-based partition keys for deterministic partition routing;
-- defined consumer groups for streaming workloads;
-- bounded Kafka publish retries with dead-letter queue routing;
-- streaming counters for publish, consume, failure, retry, and DLQ activity;
-- consumer-lag state and streaming health evaluation;
-- deterministic fleet partition planning and micro-batch processing foundations;
-- Lakehouse handoff planning from Kafka-backed telemetry toward Bronze → Silver → Gold processing;
-- continued use of the existing Spark analytics layer rather than a duplicate processing stack;
-- dedicated v3.5 CI and regression validation.
-
-The implementation remains infrastructure-independent at the intelligence layer: Kafka and Spark provide scalable transport and processing boundaries while Machine DNA, predictive intelligence, maintenance intelligence, and fleet analytics remain separate domain capabilities.
-
----
-
-### v3.6.0 — Production Platform Expansion
-
-The current milestone consolidates the production-platform roadmap around capabilities already present in RedPulse AI:
-
-- production orchestration contracts with deterministic dependency planning;
-- Airflow scheduling and dependency orchestration for production workflows;
-- a telemetry intelligence pipeline spanning ingestion, feature processing, machine intelligence, and fleet intelligence;
-- a maintenance learning pipeline spanning maintenance history, post-maintenance verification, and outcome learning;
-- a model operations pipeline spanning monitoring, retraining evaluation, candidate validation, and promotion decisions;
-- reuse of the existing MLflow, retraining-policy, and champion/challenger MLOps foundations;
-- reuse of the existing n8n, Microsoft Power Automate, and generic webhook integration gateway;
-- reuse of tenant-aware security policies and deterministic runtime idempotency;
-- integration with the existing operational go-live validation gate;
-- dedicated CI and local validation for the consolidated v3.6 platform boundary.
-
-Airflow owns scheduling, ordering, retries, and dependency enforcement at this boundary. Domain workload execution remains delegated to the RedPulse application runtime; the repository does not claim a live industrial Airflow deployment.
-
----
-
-## Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
     SIM[CNC Telemetry Simulator] --> API[FastAPI API]
     API --> TS[(TimescaleDB / PostgreSQL)]
-    API -. runtime/cache .-> REDIS[(Redis)]
+    API -. cache/runtime .-> REDIS[(Redis)]
 
     TS --> FE[Feature Engineering]
     FE --> DNA[Machine DNA]
@@ -150,85 +103,77 @@ flowchart TD
     DEV --> MEM[Behavioral Memory]
     DRIFT --> MEM
 
-    MEM --> FAIL[Failure Fingerprints & Trajectory Matching]
-    FAIL --> HEALTH[Machine Health]
-    DEV --> HEALTH
-    DRIFT --> HEALTH
-    HEALTH --> PRED[Failure Prediction & Explainability]
+    MEM --> FAIL[Failure Fingerprints]
+    FAIL --> TRAJ[Failure Trajectory Matching]
+    TRAJ --> HEALTH[Health Scoring]
+    HEALTH --> PRED[Failure Prediction]
+    PRED --> EXPLAIN[Explainable Evidence / Root-Cause Hints]
 
-    PRED --> MAINT[Maintenance Intelligence]
-    MAINT --> AUTOINT[Controlled Autonomous Maintenance Intent]
-    AUTOINT --> APPROVAL[Human Approval Boundary]
-    APPROVAL --> VERIFY[Post-Maintenance Verification]
-    VERIFY --> HISTORY[(Maintenance History)]
-    HISTORY --> LEARN[Outcome Learning & Counterfactual Analysis]
+    EXPLAIN --> MAINT[Maintenance Intelligence]
+    MAINT --> VERIFY[Post-Maintenance Verification]
+    VERIFY --> HISTORY[Maintenance History & Outcome Learning]
+    HISTORY --> CF[Counterfactual Maintenance Intelligence]
 
-    HISTORY --> CROSS[Cross-Machine Learning]
-    CROSS --> TRANSFER[Fleet Knowledge Transfer Gate]
-    TRANSFER --> FLEET[Fleet Intelligence]
+    MEM --> FLEET[Fleet Intelligence]
     FLEET --> PLANT[Plant Intelligence]
 
-    PLANT --> STREAM[Streaming / Kafka]
-    STREAM --> SCALE[Spark / Large-Scale Analytics]
-    SCALE --> LAKE[Databricks Lakehouse]
+    TS --> STREAM[Streaming]
+    STREAM --> KAFKA[Kafka Foundations]
+    KAFKA --> SPARK[Spark Analytics]
+    SPARK --> LAKE[Databricks / Lakehouse]
+    LAKE --> GOV[Governance & Lineage]
 
-    LAKE --> BRONZE[Bronze]
-    BRONZE --> SILVER[Silver]
-    SILVER --> GOLD[Gold]
-    GOLD --> UC[Unity Catalog / Governance]
-    UC --> GOV[Unified Data Governance]
+    PRED --> MLOPS[MLOps]
+    MLOPS --> REGISTRY[Model Registry / MLflow]
+    REGISTRY --> MODEL[Model Platform / Hugging Face]
+    MODEL --> LLM[LLM / Agent Gateway]
+    LLM --> INDUSTRIAL[Industrial AI / Copilot]
 
-    SCALE --> MLOPS[Production MLOps]
-    MLOPS --> MODEL[Hugging Face / Model Gateway]
-    MODEL --> COPILOT[Industrial AI / Copilot]
-    COPILOT --> INTEGRATION[Enterprise Integration]
+    INDUSTRIAL --> INTEGRATION[Integration Gateway]
+    INTEGRATION --> N8N[n8n]
+    INTEGRATION --> PA[Power Automate]
+    INTEGRATION --> WEBHOOK[Generic Webhooks]
+
     INTEGRATION --> PROD[Production Control Plane]
-
     PROD --> ORCH[Production Orchestration]
     ORCH --> RES[Operational Resilience]
-    RES --> IDEMP[Idempotency / Replay Protection]
 
-    PROD --> LINEAGE[Operational Decision Lineage]
+    RES --> REPLAY[(PostgreSQL Durable Replay Ledger)]
+    REPLAY --> LEASE[Lease Ownership]
+    LEASE --> HEARTBEAT[Heartbeat Renewal]
+    HEARTBEAT --> TAKEOVER[Stale-Worker Takeover]
+    TAKEOVER --> FENCE[Ownership Fencing]
+
+    PROD --> LINEAGE[Decision Lineage]
     PROD --> PERF[Performance / SLO Validation]
-    PROD --> FINOPS[AI FinOps & Budget Guardrails]
-
+    PROD --> FINOPS[AI FinOps]
     PROD --> SEC[Security / Multi-Tenancy]
-    PROD --> OBS[Observability / Reliability]
-    PROD --> TWIN[Digital Twin Foundations]
-    PROD --> DEPLOY[Kubernetes / Azure / Databricks Deployment Paths]
+    PROD --> OBS[Observability]
 
-    IDEMP --> CONV[Platform Convergence Gate]
-    LINEAGE --> CONV
-    PERF --> CONV
-    FINOPS --> CONV
-    SEC --> CONV
-    OBS --> CONV
+    MAINT --> TWIN[Digital Twin]
+    TWIN --> WHATIF[What-If Scenarios]
 ```
 
-### Architectural principle
+### Architectural Layers
 
-The behavioral and predictive-maintenance core remains independent from optional LLM, automation, MLOps, cloud, and Databricks vendors. External platforms are integrated through explicit adapters and platform boundaries rather than embedded into core machine intelligence.
-
----
-
-## Core Capabilities
-
-| Layer | Representative capabilities | Status |
-|---|---|:---:|
-| Machine intelligence | Machine DNA, deviation, slow drift, behavioral memory | ✅ |
-| Failure intelligence | Failure fingerprints, trajectory matching, health scoring, prediction, explainability | ✅ |
-| Maintenance intelligence | Recommendation, intervention tracking, verification, outcome learning, counterfactual analysis | ✅ |
-| Fleet & plant | Cross-machine learning, similarity, fleet health, prioritization, plant risk/planning | ✅ |
-| Streaming & analytics | Kafka topic contracts, deterministic machine partition routing, retry/DLQ handling, streaming health/metrics, real-time windows, Spark analytics, Lakehouse handoff | ✅ |
-| MLOps & orchestration | Experiment tracking, registry/lifecycle, monitoring, retraining, champion/challenger, MLflow foundations, Airflow scheduling, deterministic pipeline dependency planning | ✅ |
-| Model platform | Hugging Face Hub metadata/cache, embeddings, inference, PEFT/LoRA, provider-independent gateway | ✅ |
-| Industrial AI | Knowledge ingestion, evidence-grounded copilot, tool registry, maintenance-planning agent foundations | ✅ |
-| Enterprise platform | Automation, n8n/Power Automate/webhooks, multi-tenancy, RBAC, approvals, production control plane | ✅ |
-| Production engineering | Persistent runtime, idempotency, metrics, circuit breaker, CI/CD, CodeQL, deployment scaffolds | ✅ |
-| Operational resilience & autonomy | Retry/replay safety, tenant isolation, decision lineage, SLO evaluation, AI FinOps guardrails, controlled maintenance autonomy, fleet knowledge-transfer gating, platform convergence validation | ✅ |
-| Digital Twin | Machine-state representation, what-if scenarios, projected health/drift/failure risk | ✅ |
-| Databricks platform | Lakehouse, Medallion boundaries, Auto Loader foundation, Asset Bundles | ✅ |
-| Data governance | Unity Catalog abstractions, resource policies, lineage metadata, access-control foundations | ✅ |
+| Layer | Responsibility |
+|---|---|
+| Telemetry | Machine telemetry ingestion and time-series persistence |
+| Machine DNA | Machine-specific behavioral baselines and versioning |
+| Behavioral intelligence | Deviation, slow drift, behavioral memory and context |
+| Failure intelligence | Failure fingerprints, trajectory matching, health and prediction |
+| Maintenance intelligence | Decisions, verification, outcome learning and counterfactual analysis |
+| Fleet / plant | Cross-machine and plant-level intelligence |
+| Streaming / analytics | Kafka-oriented streaming and Spark-oriented analytics foundations |
+| Data platform | Databricks/Lakehouse, Medallion boundaries, governance and lineage |
+| MLOps | Monitoring, retraining evaluation, registry and champion/challenger foundations |
+| Model platform | Hugging Face integration, inference/embedding adapters and model gateway |
+| Industrial AI | Evidence-grounded Copilot, knowledge and agent/tool foundations |
+| Enterprise integration | n8n, Power Automate, webhooks and approval/workflow integration |
+| Production engineering | Persistent runtime, idempotency, observability and deployment controls |
+| Runtime resilience | Durable replay, leases, heartbeat, stale takeover and ownership fencing |
+| Digital Twin | Machine-state representation and what-if predictive scenarios |
+| Security | Tenant-aware authorization and isolation foundations |
 
 ---
 
@@ -239,377 +184,183 @@ Telemetry
    ↓
 Feature Engineering
    ↓
-Machine DNA
+Machine DNA / Versioned Baseline
    ↓
-Behavioral Deviation + Slow Drift
+Behavioral Deviation
    ↓
-Behavioral Memory
+Slow Drift + Behavioral Memory
    ↓
-Failure Fingerprints + Trajectory Matching
+Failure Fingerprints
    ↓
-Machine Health
+Trajectory Matching
    ↓
-Failure Prediction + Explainability
+Health Scoring
+   ↓
+Failure Prediction
+   ↓
+Explainable Evidence / Root-Cause Hints
    ↓
 Maintenance Decision
    ↓
-Intervention Tracking
-   ↓
 Post-Maintenance Verification
    ↓
-Outcome Learning
+Maintenance History & Outcome Learning
    ↓
 Counterfactual Maintenance Intelligence
 ```
 
-### Counterfactual maintenance
-
-RedPulse compares the current machine condition with historically supported intervention outcomes to estimate how alternative actions may affect future risk. The goal is not to claim causal certainty, but to package evidence for better maintenance decisions.
-
-### Post-maintenance verification
-
-After an intervention, RedPulse compares current behavior with the pre-maintenance snapshot. Verification can consider health improvement, risk reduction, deviation reduction, drift reduction, and failure-match reduction. Results are persisted into maintenance history so intervention outcomes can become reusable evidence.
+RedPulse connects detection and prediction to maintenance evidence rather than stopping at anomaly detection.
 
 ---
 
-## Fleet, Plant & Streaming Intelligence
+## Runtime Resilience Architecture
 
-Machine-level evidence can be reused across similar assets through cross-machine learning and similarity analysis. This supports fleet health views, failure hotspots, maintenance prioritization, plant/site risk forecasting, and maintenance planning.
+The v3.7.1 resilience layer adds PostgreSQL-backed durable execution state to the existing runtime architecture.
 
-The streaming/data-platform layer provides explicit Kafka topic contracts, machine-based partitioning, consumer-group definitions, bounded publish retries, dead-letter routing, streaming health and metrics, real-time windows and intelligence events, deterministic fleet partitioning, micro-batch foundations, Spark analytics jobs, and Lakehouse handoff planning for larger telemetry workloads.
+A durable execution record stores:
+
+- execution key;
+- tenant, workflow and stage identity;
+- execution state;
+- attempt count;
+- result/error data;
+- lease owner;
+- lease expiration;
+- creation/update timestamps.
+
+### Claim, Heartbeat and Takeover
+
+A worker claims an execution using a unique lease owner and expiration time. While an operation is running, the worker renews the lease through a heartbeat.
+
+If that worker disappears and the lease expires, another worker can atomically take over the stale `RUNNING` execution.
+
+### Ownership Fencing
+
+Database writes require the current `lease_owner`. After takeover, an old worker cannot overwrite the execution state. Successful and failed terminal states clear lease ownership.
+
+### Replay Boundary
+
+Completed executions can be replayed from durable state without rerunning the protected operation. Failed state is persisted and can be explicitly cleared for recovery.
+
+The database protects runtime ownership and replay state. A process may still fail after an external side effect but before durable success is recorded, so arbitrary external effects require their own idempotency or fencing mechanism.
 
 ---
 
-## Production MLOps & Model Platform
+## Maintenance Intelligence
 
-RedPulse includes foundations for:
+Capabilities include:
 
-- experiment tracking and model lifecycle management;
-- feature-store contracts;
-- data and model monitoring;
-- automated retraining controls;
-- champion/challenger evaluation;
-- MLflow integration;
-- Airflow retraining orchestration;
-- Hugging Face Hub/model-card synchronization;
-- local model caching;
+- maintenance intervention tracking;
+- maintenance completion;
+- post-maintenance verification;
+- maintenance history;
+- maintenance outcome learning;
+- counterfactual maintenance intelligence;
+- explainable evidence and root-cause hints.
+
+Counterfactual maintenance is a decision-support capability. RedPulse does not autonomously execute physical maintenance.
+
+---
+
+## Fleet & Plant Intelligence
+
+The architecture includes foundations for:
+
+- fleet health and behavioral comparison;
+- cross-machine learning;
+- evidence-gated knowledge transfer;
+- historical failure-pattern reuse;
+- plant-level intelligence;
+- machine-specific safeguards that avoid assuming all assets behave identically.
+
+---
+
+## Streaming & Large-Scale Analytics
+
+Scale-oriented foundations include:
+
+- Kafka-oriented telemetry/event streaming;
+- Spark-oriented large-scale telemetry processing;
+- feature engineering across larger histories;
+- fleet analytics;
+- historical failure analysis;
+- Airflow-oriented scheduled data and ML orchestration.
+
+These are architecture and validation foundations and do not by themselves imply a live high-throughput industrial deployment.
+
+---
+
+## MLOps & Model Platform
+
+The MLOps/model-platform architecture includes foundations for:
+
+- MLflow/model registry integration;
+- model monitoring;
+- retraining evaluation;
+- candidate validation;
+- champion/challenger decisions;
+- controlled promotion;
+- Hugging Face metadata/cache integration;
 - embeddings and inference adapters;
-- PEFT/LoRA integration;
-- provider-independent model routing.
-
-Important production metrics include false-alert rate, precision/recall, early-warning lead time, drift behavior, and maintenance outcome quality.
+- PEFT/LoRA;
+- provider-independent model/LLM gateway concepts.
 
 ---
 
 ## Industrial AI & Enterprise Integration
 
-The Industrial AI layer provides structured knowledge ingestion, evidence-grounded copilot foundations, machine-context construction, an agentic runtime/tool registry, and maintenance-planning agent foundations.
+Industrial AI foundations include structured knowledge ingestion, evidence-grounded Copilot capabilities, machine-context construction, an agentic runtime/tool registry, and maintenance-planning agent foundations.
 
-The enterprise integration layer provides contracts and runtime foundations for:
+Enterprise integration supports architectural contracts for:
 
-- n8n webhook workflows;
-- Microsoft Power Automate flow endpoints;
+- n8n;
+- Microsoft Power Automate;
 - generic JSON webhooks;
-- notification routing;
+- notifications;
 - tenant-aware integrations;
-- approvals, retries, and dead-letter foundations.
+- approvals;
+- retry/dead-letter patterns.
 
-These adapters can perform real HTTP calls when valid endpoints and credentials are configured. The repository does not imply that live Microsoft 365, Teams, Outlook, Jira, CMMS, ERP, n8n, or Power Automate environments are currently connected.
+The RedPulse core remains independent of a single automation vendor.
 
 ---
 
 ## Production Engineering & Digital Twin
 
-Production-oriented foundations include persistent runtime records, idempotency, tenant-aware authorization, environment-backed secret resolution, model routing, drift/retraining coordination, replay/data-quality/lineage controls, metrics, circuit-breaker primitives, Kubernetes manifests, and an Azure/Terraform deployment scaffold.
+Production-oriented foundations include persistent runtime records, idempotency, tenant-aware authorization, environment-backed secret resolution, model routing, drift/retraining coordination, replay/data-quality/lineage controls, metrics, circuit-breaker primitives, Kubernetes manifests, and Azure/Terraform deployment scaffolding.
 
-The Digital Twin layer provides machine-state representation, telemetry-driven state updates, scenario simulation, projected health, projected drift, projected failure risk, and fleet-level twin aggregation. These are engineering/reference foundations, not certified physical twins of real industrial assets.
+The Digital Twin layer provides machine-state representation, telemetry-driven updates, scenario simulation, projected health, projected drift, projected failure risk, and fleet-level twin aggregation.
+
+These are engineering/reference foundations, not certified physical twins of real industrial assets.
 
 ---
 
 ## Databricks Lakehouse & Governance
 
 ```text
-Operational / Streaming Data
-          ↓
-     Bronze Layer
-          ↓
-     Silver Layer
-          ↓
-      Gold Layer
-          ↓
-Enterprise Analytics / ML / Fleet Intelligence
-          ↓
-Unity Catalog & Unified Governance
+Machine / Platform Data
+        ↓
+Bronze
+Raw / append-oriented ingestion
+        ↓
+Silver
+Validated / normalized data
+        ↓
+Gold
+Analytics / ML-ready data
+        ↓
+Governance + Lineage + Operational Validation
 ```
 
-The Databricks boundary is designed to support governed enterprise data workloads without coupling the machine-intelligence core to a single platform. Current repository foundations include Medallion processing boundaries, Auto Loader-oriented ingestion, Asset Bundle configuration, job entry points, governance abstractions, lineage-aware metadata, access-control policy foundations, environment-aware `dev` / `staging` / `prod` targets, deployment-readiness checks, and dedicated CI validation for the v3.4 deployment layer.
+The repository contains Databricks-oriented Lakehouse/Medallion foundations, Auto Loader-oriented ingestion concepts, Asset Bundle structure, governance abstractions, lineage metadata, and access-control foundations.
 
----
-
-## Machine DNA Example
-
-A Machine DNA baseline is generated from synchronized telemetry and
-persisted for later comparison.
-
-```json
-{
-  "baseline_version": "1",
-  "sample_count": 1010,
-  "sensor_features": {
-    "vibration": {
-      "mean": 2.1508,
-      "std": 0.0832,
-      "median": 2.149,
-      "minimum": 1.875,
-      "maximum": 2.382
-    },
-    "temperature": {
-      "mean": 64.157,
-      "std": 1.2313
-    }
-  },
-  "correlations": {
-    "current__load": 0.8667,
-    "load__temperature": 0.8225,
-    "rpm__vibration": 0.3433
-  }
-}
-```
-
-The baseline is not just a collection of independent thresholds. The
-correlations preserve part of the **relationship structure** between
-machine signals.
-
-------------------------------------------------------------------------
-
-## CNC Telemetry Simulator
-
-RedPulse includes a deterministic CNC simulator for development and
-validation.
-
-It currently generates five signals:
-
-```text
-rpm
-load
-temperature
-current
-vibration
-```
-
-The signals are intentionally related. For example, load influences
-temperature and current, while RPM contributes to vibration.
-
-Seeded generation makes experiments reproducible. The simulator also
-supports normal, moderate-degradation, and severe-degradation profiles
-so the intelligence pipeline can be validated against controlled
-deterioration scenarios.
-
-------------------------------------------------------------------------
-
-## Behavioral Intelligence Example
-
-With degradation telemetry, RedPulse can distinguish healthy operation
-from meaningful behavioral change.
-
-A behavioral-memory event can preserve evidence such as:
-
-```json
-{
-  "event_type": "drift",
-  "severity": "anomalous",
-  "score": 0.60999,
-  "baseline_version": "3",
-  "summary": "Slow behavioral drift detected with score 0.610 and state drifting",
-  "evidence": {
-    "state": "drifting",
-    "top_signals": [
-      {
-        "signal": "vibration__mean_zscore",
-        "score": 0.86,
-        "state": "drifting"
-      },
-      {
-        "signal": "overall_deviation",
-        "score": 0.72,
-        "state": "drifting"
-      },
-      {
-        "signal": "current__mean_zscore",
-        "score": 0.66,
-        "state": "drifting"
-      }
-    ]
-  }
-}
-```
-
-Behavioral Memory converts individual analyses into structured
-historical evidence used by failure intelligence and maintenance
-reasoning.
-
-------------------------------------------------------------------------
-
-## Technology Stack
-
-| Area | Technologies / foundations |
-|---|---|
-| Backend | Python 3.12, FastAPI, Pydantic, SQLAlchemy, Alembic, asyncpg |
-| Operational data | PostgreSQL 17, TimescaleDB, Redis |
-| Streaming & scale | Apache Kafka, Apache Spark, Apache Airflow |
-| Enterprise data | Databricks Lakehouse, Medallion Architecture, Auto Loader foundation, Unity Catalog governance foundation, Asset Bundles |
-| MLOps / models | MLflow adapter, Hugging Face integration, embeddings/inference adapters, PEFT/LoRA, model gateway |
-| Automation | n8n, Microsoft Power Automate, generic webhooks |
-| Deployment | Docker Compose, Kubernetes manifests, Terraform Azure scaffold |
-| Quality | pytest, migration validation, CI/release validation, Docker build validation, CodeQL |
-
----
-
-## Repository Structure
-
-```text
-redpulse-ai/
-├── backend/
-│   ├── alembic/
-│   ├── app/
-│   │   ├── api/v1/
-│   │   ├── agents/
-│   │   ├── automation/
-│   │   ├── copilot/
-│   │   ├── data_platform/
-│   │   ├── deviation/
-│   │   ├── drift/
-│   │   ├── enterprise/
-│   │   ├── failure/
-│   │   ├── features/
-│   │   ├── fleet/
-│   │   ├── governance_v33/
-│   │   ├── databricks_deploy_v34/
-│   │   ├── health/
-│   │   ├── integrations/
-│   │   ├── maintenance/
-│   │   ├── memory/
-│   │   ├── mlops/
-│   │   ├── plant/
-│   │   ├── prediction/
-│   │   ├── production/
-│   │   ├── runtime_v3/
-│   │   ├── security_v3/
-│   │   ├── streaming/
-│   │   └── tenancy/
-│   └── tests/
-├── analytics/spark/
-├── orchestration/airflow/dags/
-├── databricks/
-│   ├── databricks.yml
-│   ├── databricks_v34.yml
-│   ├── targets.yml
-│   └── jobs/
-├── infra/
-│   ├── k8s/
-│   └── terraform/azure/
-├── simulator/
-├── docs/images/
-├── docker-compose.yml
-├── docker-compose.streaming.yml
-└── README.md
-```
-
-> The tree is intentionally summarized to show the major architectural boundaries rather than every implementation file.
-
----
-
-## Quick Start
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/saeidkh96/redpulse-ai.git
-cd redpulse-ai
-```
-
-### 2. Create and activate a virtual environment
-
-Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-### 3. Install backend dependencies
-
-```powershell
-pip install -r backend\requirements.txt
-```
-
-### 4. Start TimescaleDB and Redis
-
-```powershell
-docker compose up -d
-docker ps
-```
-
-Development infrastructure:
-
-```text
-TimescaleDB / PostgreSQL : localhost:5433
-Redis                    : localhost:6379
-```
-
-### 5. Apply database migrations
-
-```powershell
-cd backend
-alembic upgrade head
-```
-
-### 6. Start the API
-
-```powershell
-python -m uvicorn app.main:app --reload --port 8001
-```
-
-API root:
-
-```text
-http://127.0.0.1:8001/
-```
-
-Interactive API documentation:
-
-```text
-http://127.0.0.1:8001/docs
-```
-
-------------------------------------------------------------------------
-
-
-### v3.7.0 — Operational Resilience & Autonomous Intelligence Expansion
-
-The v3.7.0 milestone consolidates the next platform-evolution themes around operational evidence, controlled autonomy, and platform convergence:
-
-- resilient stage execution with bounded retries and replay protection;
-- deterministic idempotency-based duplicate prevention for workflow stages;
-- tenant-isolation guards for recovery and replay execution;
-- operational decision lineage across telemetry, datasets, features, models, predictions, maintenance decisions, and outcomes;
-- performance and SLO evaluation for throughput, p95 latency, and error rate;
-- tenant-scoped AI FinOps accounting with workload attribution and budget guardrails;
-- human-approval boundaries for autonomous maintenance intents;
-- evidence-gated fleet knowledge transfer between machines;
-- reuse of existing advanced predictive intelligence, retraining, champion/challenger, and production-orchestration foundations;
-- a consolidated platform-convergence gate combining operational validation, performance, recovery, replay safety, lineage, tenant isolation, and cost guardrails;
-- dedicated CI and local validation for the v3.7 platform-convergence layer.
-
-The release intentionally reuses existing RedPulse subsystems rather than introducing duplicate predictive, MLOps, orchestration, security, or operational-validation stacks.
-
-The implementation remains an engineering and validation foundation. It does **not** claim live industrial deployment, safety-certified autonomous maintenance, or unattended control of physical equipment.
+A connected corporate Databricks workspace is not claimed.
 
 ---
 
 ## API Surface
 
-The FastAPI application exposes endpoint groups for machine registry, telemetry, Machine DNA, deviation, drift, behavioral memory, failure intelligence, machine health, failure prediction/explanation, maintenance intelligence, fleet/plant intelligence, data-platform operations, MLOps/model-platform services, Industrial AI, enterprise automation, production controls, Digital Twin foundations, Databricks roadmap/platform operations, and governance.
+The FastAPI application exposes endpoint groups across machine registry, telemetry, Machine DNA, deviation, drift, behavioral memory, failure intelligence, machine health, prediction/explanation, maintenance intelligence, fleet/plant intelligence, data-platform operations, MLOps/model-platform services, Industrial AI, enterprise automation, production controls, Digital Twin foundations, Databricks-oriented platform operations, and governance.
 
 Representative maintenance endpoints:
 
@@ -622,67 +373,174 @@ GET    /api/v1/maintenance-outcomes
 POST   /api/v1/machines/{machine_id}/counterfactual-maintenance
 ```
 
-Use `/docs` for the complete current OpenAPI surface.
+Use `/docs` on a running backend for the complete current OpenAPI surface.
+
+---
+
+## Technology Stack
+
+| Area | Technologies / foundations |
+|---|---|
+| Backend | Python, FastAPI, Pydantic, SQLAlchemy, Alembic |
+| Data | PostgreSQL 17, TimescaleDB, Redis |
+| Analytics | Pandas, NumPy, scikit-learn |
+| Streaming / scale | Kafka foundations, Spark analytics |
+| Orchestration | Airflow foundations |
+| MLOps / models | MLflow, Hugging Face integration, model gateway |
+| Industrial AI | LLM/agent foundations, evidence-grounded Copilot, tool registry |
+| Automation | n8n, Microsoft Power Automate, generic webhooks |
+| Deployment | Docker Compose, Kubernetes manifests, Terraform/Azure scaffold |
+| Observability | Prometheus/Grafana/OpenTelemetry-oriented foundations |
+| Quality | pytest, migration validation, CI/release validation, Docker validation, CodeQL |
+
+---
+
+## Repository Structure
+
+```text
+redpulse-ai/
+├── backend/
+│   ├── alembic/
+│   │   └── versions/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── models/
+│   │   ├── repositories/
+│   │   ├── services/
+│   │   ├── maintenance/
+│   │   ├── platform_expansion_v37/
+│   │   │   ├── autonomy.py
+│   │   │   ├── benchmarking.py
+│   │   │   ├── durable_replay.py
+│   │   │   ├── evidence.py
+│   │   │   ├── finops.py
+│   │   │   ├── release.py
+│   │   │   ├── resilience.py
+│   │   │   └── transfer.py
+│   │   ├── runtime_v3/
+│   │   ├── security_v3/
+│   │   ├── streaming/
+│   │   └── tenancy/
+│   └── tests/
+├── simulator/
+│   └── tests/
+├── analytics/
+│   └── spark/
+├── orchestration/
+│   └── airflow/
+├── databricks/
+├── deployment/
+├── docker-compose.yml
+└── README.md
+```
+
+This is a high-level architecture map, not an exhaustive file listing.
+
+---
+
+## Local Development
+
+### Requirements
+
+- Python environment compatible with the repository
+- Docker / Docker Compose
+- PostgreSQL / TimescaleDB
+- Redis
+
+### Database migrations
+
+From `backend`:
+
+```powershell
+python -m alembic upgrade head
+python -m alembic current
+```
+
+Current v3.7.1 Alembic head:
+
+```text
+e371f044bd60
+```
+
+### API Documentation
+
+With the development API running on the configured local port:
+
+```text
+http://127.0.0.1:8001/docs
+```
 
 ---
 
 ## Testing
 
-Run the backend and simulator suites from the repository root:
+From the repository root:
 
 ```powershell
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the **v3.7.0** milestone:
+Validated on `main` for v3.7.1:
 
 ```text
-280 passed
+281 passed, 1 warning
 ```
 
-Validation covers the machine-intelligence pipeline, maintenance intelligence, fleet/plant services, model-platform and Industrial AI foundations, enterprise automation, production runtime/control-plane components, Databricks assets, governance and deployment foundations, service behavior, API/OpenAPI integration, migrations, simulator behavior, CI/CD, Docker validation, and security scanning.
+The remaining warning is the existing Starlette/httpx test-client deprecation warning and is unrelated to v3.7.1.
+
+The dedicated v3.7.1 runtime-resilience integration test validates:
+
+- durable replay across runner reconstruction;
+- retry followed by persisted success;
+- persisted failure and explicit recovery;
+- concurrent workers executing the protected operation once;
+- expired `RUNNING` lease takeover;
+- heartbeat protection for a live long-running worker;
+- stale-owner fencing after takeover.
+
+The stale-worker scenario uses injected stale durable state to validate lease-expiration recovery. It does not claim an OS-level process-kill test.
 
 ---
 
 ## Release Timeline
 
 ```text
-v0.x    Machine intelligence → failure intelligence → maintenance learning
+v0.x     Machine intelligence → failure intelligence → maintenance learning
   ↓
-v1.0    Fleet, plant, streaming & large-scale data platform
+v1.0     Fleet, plant, streaming & large-scale data platform
   ↓
-v1.2    Production MLOps
+v1.2     Production MLOps
   ↓
-v1.3    Hugging Face integration platform
+v1.3     Hugging Face integration platform
   ↓
-v1.4    Industrial Intelligence / Copilot foundations
+v1.4     Industrial Intelligence / Copilot foundations
   ↓
-v1.6    Enterprise automation & multi-tenancy
+v1.6     Enterprise automation & multi-tenancy
   ↓
-v2.0    Production platform foundation
+v2.0     Production platform foundation
   ↓
-v2.1–2.9
-        Runtime, security, integrations, observability, model serving,
-        data runtime, Copilot v2, Kubernetes, Azure/Terraform
+v2.1–2.9 Runtime, security, integrations, observability, model serving,
+          data runtime, Copilot v2, Kubernetes, Azure/Terraform
   ↓
-v3.0    Production demonstration platform
+v3.0     Production demonstration platform
   ↓
-v3.1    Production engineering + Digital Twin + advanced predictive intelligence
+v3.1     Production engineering + Digital Twin + advanced predictive intelligence
   ↓
-v3.2    Databricks Lakehouse & enterprise data platform
+v3.2     Databricks Lakehouse & enterprise data platform
   ↓
-v3.3    Unified Data Governance
+v3.3     Unified Data Governance
   ↓
-v3.4    Databricks Production Deployment
+v3.4     Databricks Production Deployment
   ↓
-v3.5    Streaming & Scale Expansion
+v3.5     Streaming & Scale Expansion
   ↓
-v3.6    Production Platform Expansion
+v3.6     Production Platform Expansion
   ↓
-v3.7    Operational Resilience & Autonomous Intelligence Expansion  ← current
+v3.7     Operational Resilience & Autonomous Intelligence Expansion
+  ↓
+v3.7.1   Runtime Resilience Validation  ← current
 ```
-
-For detailed historical release contents, use the repository release history and tags.
 
 ---
 
@@ -694,60 +552,53 @@ For detailed historical release contents, use the repository release history and
 | v3.3.0 | Unified Data Governance | ✅ Completed |
 | v3.4.0 | Databricks Production Deployment | ✅ Completed |
 | v3.5.0 | Streaming & Scale Expansion | ✅ Completed |
-| v3.6.0 | Production Platform Expansion — orchestration, MLOps consolidation, enterprise integration, hardening & operational validation | ✅ Completed |
-| **v3.7.0** | **Operational Resilience & Autonomous Intelligence Expansion — recovery, replay safety, lineage, performance validation, AI FinOps, controlled autonomy & platform convergence** | **✅ Current** |
+| v3.6.0 | Production Platform Expansion | ✅ Completed |
+| v3.7.0 | Operational Resilience & Autonomous Intelligence Expansion | ✅ Completed |
+| **v3.7.1** | **Runtime Resilience Validation — durable PostgreSQL replay, leases, heartbeat renewal, stale-worker recovery and ownership fencing** | **✅ Current** |
 
-### Next phase: real deployment & operational validation
+### Next Phase — Real Deployment & Operational Validation
 
-Future work should increasingly validate the existing architecture in realistic environments rather than only adding new modules. Priority areas include:
+Priorities should increasingly validate the existing architecture under realistic conditions rather than add duplicate platform layers:
 
-- durable database-backed runtime state;
-- production identity, authorization, and secret management;
+- production identity, authorization and secret-management integration;
 - live external-integration environments;
-- stronger observability, SLOs, and failure recovery;
-- load, recovery, and resilience testing;
+- stronger observability and sustained SLO validation;
+- OS/process-level crash and recovery testing;
+- realistic concurrency/load resilience testing;
 - Kubernetes/AKS deployment validation;
 - reproducible cloud infrastructure;
 - realistic industrial datasets and model validation;
 - live Databricks workspace deployment/promotion validation;
-- high-throughput Kafka/Spark streaming and scale validation.
+- high-throughput Kafka/Spark scale validation.
 
 ---
 
-## Engineering Principles
+## Engineering Boundaries
 
-1. **Every machine has its own normal.** Learn machine-specific behavior rather than relying only on universal thresholds.
-2. **Relationships matter.** Behavioral change can appear in relationships between signals before individual values look abnormal.
-3. **Failures have trajectories.** Historical degradation patterns can become reusable evidence.
-4. **Predictions need evidence.** Risk and maintenance recommendations should expose the signals and patterns behind them.
-5. **Maintenance should be verifiable.** An intervention is not successful merely because it was completed.
-6. **Maintenance history should become reusable knowledge.** Outcomes should improve future decisions.
-7. **Decisions should consider alternatives.** Counterfactual analysis should compare historically supported options without pretending to establish causal certainty.
-8. **Core intelligence stays vendor-independent.** Automation, LLM, MLOps, cloud, and data-platform integrations remain behind explicit boundaries.
+RedPulse AI distinguishes implemented engineering foundations from real-world production claims.
+
+The repository does **not** claim:
+
+- a live industrial deployment;
+- safety certification;
+- unattended physical maintenance execution;
+- exactly-once arbitrary external side effects;
+- a live corporate Databricks deployment;
+- production identity-provider integration;
+- validated industrial-scale throughput merely because scale-oriented architecture exists.
 
 ---
 
-## Development Status
+## Status
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v3.7.0` release extends the existing behavioral and predictive-maintenance platform with operational-resilience controls, replay-safe execution, tenant-aware lineage, performance/SLO evaluation, AI cost guardrails, controlled autonomous-maintenance decisions, fleet knowledge-transfer validation, and a consolidated platform-convergence gate.
+The current `v3.7.1` release strengthens the existing platform with PostgreSQL-backed durable runtime replay, lease-based execution ownership, heartbeat renewal, stale-worker recovery, ownership fencing, and validated concurrent replay behavior.
 
-The next phase will focus on proving these foundations in increasingly realistic operating conditions: executing concrete workloads, injecting partial failures, validating recovery and replay boundaries, measuring performance under sustained load, exercising deployed integrations, and evaluating the platform with realistic industrial telemetry and failure scenarios.
+The next phase focuses on proving the broader platform in increasingly realistic operating conditions.
 
 ---
 
 ## Author
 
 **Saeid Khalilian**
-
----
-
-## License
-
-See the repository license for usage terms.
-
-<div align="center">
-  <strong>RedPulse AI</strong><br/>
-  <em>Behavior. Insight. Uptime.</em>
-</div>
