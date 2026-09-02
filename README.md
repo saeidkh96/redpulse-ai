@@ -7,7 +7,7 @@
 **Behavior. Insight. Uptime.**
 </div>
 
-[![Version](https://img.shields.io/badge/version-v3.6.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.6.0)
+[![Version](https://img.shields.io/badge/version-v3.7.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.7.0)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-Telemetry-FDB515)](https://www.timescale.com/)
@@ -24,7 +24,7 @@ Instead of treating every machine as identical, RedPulse builds a **machine-spec
 
 The platform has evolved from machine-level behavioral analytics into a broader industrial intelligence architecture that includes streaming, large-scale analytics, MLOps, model-platform integration, Industrial AI, enterprise automation, multi-tenancy, production engineering, Digital Twin foundations, and a Databricks-oriented enterprise data platform.
 
-> **Current release — v3.6.0: Production Platform Expansion.** This milestone consolidates production orchestration, advanced MLOps, enterprise integration, platform hardening, and operational validation around the existing RedPulse architecture. Airflow provides scheduling and dependency orchestration while the platform reuses the existing MLOps, integration gateway, security/runtime, and operational-validation foundations rather than introducing duplicate subsystems.
+> **Current release — v3.7.0: Operational Resilience & Autonomous Intelligence Expansion.** This milestone strengthens RedPulse AI around failure recovery, replay safety, tenant isolation, operational lineage, performance validation, AI cost guardrails, controlled autonomous maintenance, and fleet knowledge transfer while reusing the existing orchestration, predictive-intelligence, MLOps, security, and operational-validation foundations.
 
 > **Scope:** RedPulse AI is an experimental engineering/research project. The repository demonstrates architecture, runtime contracts, APIs, deployment paths, and validation foundations; it does not claim a live industrial deployment, safety certification, a connected corporate Databricks workspace, or production identity-provider integration.
 
@@ -50,7 +50,7 @@ This baseline becomes the reference point for deviation detection, drift analysi
 
 ---
 
-## Current Release — v3.6.0
+## Current Release — v3.7.0
 
 ### v3.2.0 — Databricks Lakehouse & Enterprise Data Platform
 
@@ -564,6 +564,29 @@ http://127.0.0.1:8001/docs
 
 ------------------------------------------------------------------------
 
+
+### v3.7.0 — Operational Resilience & Autonomous Intelligence Expansion
+
+The v3.7.0 milestone consolidates the next platform-evolution themes around operational evidence, controlled autonomy, and platform convergence:
+
+- resilient stage execution with bounded retries and replay protection;
+- deterministic idempotency-based duplicate prevention for workflow stages;
+- tenant-isolation guards for recovery and replay execution;
+- operational decision lineage across telemetry, datasets, features, models, predictions, maintenance decisions, and outcomes;
+- performance and SLO evaluation for throughput, p95 latency, and error rate;
+- tenant-scoped AI FinOps accounting with workload attribution and budget guardrails;
+- human-approval boundaries for autonomous maintenance intents;
+- evidence-gated fleet knowledge transfer between machines;
+- reuse of existing advanced predictive intelligence, retraining, champion/challenger, and production-orchestration foundations;
+- a consolidated platform-convergence gate combining operational validation, performance, recovery, replay safety, lineage, tenant isolation, and cost guardrails;
+- dedicated CI and local validation for the v3.7 platform-convergence layer.
+
+The release intentionally reuses existing RedPulse subsystems rather than introducing duplicate predictive, MLOps, orchestration, security, or operational-validation stacks.
+
+The implementation remains an engineering and validation foundation. It does **not** claim live industrial deployment, safety-certified autonomous maintenance, or unattended control of physical equipment.
+
+---
+
 ## API Surface
 
 The FastAPI application exposes endpoint groups for machine registry, telemetry, Machine DNA, deviation, drift, behavioral memory, failure intelligence, machine health, failure prediction/explanation, maintenance intelligence, fleet/plant intelligence, data-platform operations, MLOps/model-platform services, Industrial AI, enterprise automation, production controls, Digital Twin foundations, Databricks roadmap/platform operations, and governance.
@@ -591,10 +614,10 @@ Run the backend and simulator suites from the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-At the **v3.6.0** milestone:
+At the **v3.7.0** milestone:
 
 ```text
-267 passed
+280 passed
 ```
 
 Validation covers the machine-intelligence pipeline, maintenance intelligence, fleet/plant services, model-platform and Industrial AI foundations, enterprise automation, production runtime/control-plane components, Databricks assets, governance and deployment foundations, service behavior, API/OpenAPI integration, migrations, simulator behavior, CI/CD, Docker validation, and security scanning.
@@ -649,7 +672,8 @@ For detailed historical release contents, use the repository release history and
 | v3.3.0 | Unified Data Governance | ✅ Completed |
 | v3.4.0 | Databricks Production Deployment | ✅ Completed |
 | v3.5.0 | Streaming & Scale Expansion | ✅ Completed |
-| **v3.6.0** | **Production Platform Expansion — orchestration, MLOps consolidation, enterprise integration, hardening & operational validation** | **✅ Current** |
+| v3.6.0 | Production Platform Expansion — orchestration, MLOps consolidation, enterprise integration, hardening & operational validation | ✅ Completed |
+| **v3.7.0** | **Operational Resilience & Autonomous Intelligence Expansion — recovery, replay safety, lineage, performance validation, AI FinOps, controlled autonomy & platform convergence** | **✅ Current** |
 
 ### Next phase: real deployment & operational validation
 
@@ -685,9 +709,9 @@ Future work should increasingly validate the existing architecture in realistic 
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v3.6.0` release combines the existing behavioral/predictive-maintenance core with fleet and plant intelligence, Kafka/Spark scale foundations, the Databricks-oriented data platform, production MLOps, enterprise integrations, security/runtime controls, operational validation, and a consolidated Airflow-oriented orchestration boundary.
+The current `v3.7.0` release extends the existing behavioral and predictive-maintenance platform with operational-resilience controls, replay-safe execution, tenant-aware lineage, performance/SLO evaluation, AI cost guardrails, controlled autonomous-maintenance decisions, fleet knowledge-transfer validation, and a consolidated platform-convergence gate.
 
-The next phase will focus on deeper real-world operational validation: executing orchestration against concrete RedPulse workloads, validating resilience and recovery behavior, exercising integrations against deployed services, and evaluating the platform with realistic industrial telemetry and failure scenarios.
+The next phase will focus on proving these foundations in increasingly realistic operating conditions: executing concrete workloads, injecting partial failures, validating recovery and replay boundaries, measuring performance under sustained load, exercising deployed integrations, and evaluating the platform with realistic industrial telemetry and failure scenarios.
 
 ---
 
