@@ -1,0 +1,27 @@
+name: v3.7 Platform Convergence Validation
+
+on:
+  pull_request:
+    paths:
+      - "backend/app/platform_expansion_v37/**"
+      - "backend/tests/test_v37_full_roadmap_consolidation.py"
+      - ".github/workflows/v37-platform-convergence-validation.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+      - name: Compile v3.7 platform expansion
+        run: python -m compileall backend/app/platform_expansion_v37
+      - name: Dedicated consolidation tests
+        run: PYTHONPATH=backend python -m pytest backend/tests/test_v37_full_roadmap_consolidation.py -q
