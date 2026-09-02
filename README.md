@@ -155,13 +155,17 @@ flowchart TD
     DEV --> HEALTH
     DRIFT --> HEALTH
     HEALTH --> PRED[Failure Prediction & Explainability]
+
     PRED --> MAINT[Maintenance Intelligence]
-    MAINT --> VERIFY[Post-Maintenance Verification]
+    MAINT --> AUTOINT[Controlled Autonomous Maintenance Intent]
+    AUTOINT --> APPROVAL[Human Approval Boundary]
+    APPROVAL --> VERIFY[Post-Maintenance Verification]
     VERIFY --> HISTORY[(Maintenance History)]
     HISTORY --> LEARN[Outcome Learning & Counterfactual Analysis]
 
     HISTORY --> CROSS[Cross-Machine Learning]
-    CROSS --> FLEET[Fleet Intelligence]
+    CROSS --> TRANSFER[Fleet Knowledge Transfer Gate]
+    TRANSFER --> FLEET[Fleet Intelligence]
     FLEET --> PLANT[Plant Intelligence]
 
     PLANT --> STREAM[Streaming / Kafka]
@@ -177,13 +181,28 @@ flowchart TD
     SCALE --> MLOPS[Production MLOps]
     MLOPS --> MODEL[Hugging Face / Model Gateway]
     MODEL --> COPILOT[Industrial AI / Copilot]
-    COPILOT --> AUTO[Enterprise Automation]
-    AUTO --> PROD[Production Control Plane]
+    COPILOT --> INTEGRATION[Enterprise Integration]
+    INTEGRATION --> PROD[Production Control Plane]
+
+    PROD --> ORCH[Production Orchestration]
+    ORCH --> RES[Operational Resilience]
+    RES --> IDEMP[Idempotency / Replay Protection]
+
+    PROD --> LINEAGE[Operational Decision Lineage]
+    PROD --> PERF[Performance / SLO Validation]
+    PROD --> FINOPS[AI FinOps & Budget Guardrails]
 
     PROD --> SEC[Security / Multi-Tenancy]
     PROD --> OBS[Observability / Reliability]
     PROD --> TWIN[Digital Twin Foundations]
     PROD --> DEPLOY[Kubernetes / Azure / Databricks Deployment Paths]
+
+    IDEMP --> CONV[Platform Convergence Gate]
+    LINEAGE --> CONV
+    PERF --> CONV
+    FINOPS --> CONV
+    SEC --> CONV
+    OBS --> CONV
 ```
 
 ### Architectural principle
@@ -206,6 +225,7 @@ The behavioral and predictive-maintenance core remains independent from optional
 | Industrial AI | Knowledge ingestion, evidence-grounded copilot, tool registry, maintenance-planning agent foundations | ✅ |
 | Enterprise platform | Automation, n8n/Power Automate/webhooks, multi-tenancy, RBAC, approvals, production control plane | ✅ |
 | Production engineering | Persistent runtime, idempotency, metrics, circuit breaker, CI/CD, CodeQL, deployment scaffolds | ✅ |
+| Operational resilience & autonomy | Retry/replay safety, tenant isolation, decision lineage, SLO evaluation, AI FinOps guardrails, controlled maintenance autonomy, fleet knowledge-transfer gating, platform convergence validation | ✅ |
 | Digital Twin | Machine-state representation, what-if scenarios, projected health/drift/failure risk | ✅ |
 | Databricks platform | Lakehouse, Medallion boundaries, Auto Loader foundation, Asset Bundles | ✅ |
 | Data governance | Unity Catalog abstractions, resource policies, lineage metadata, access-control foundations | ✅ |
@@ -657,7 +677,9 @@ v3.4    Databricks Production Deployment
   ↓
 v3.5    Streaming & Scale Expansion
   ↓
-v3.6    Production Platform Expansion  ← current
+v3.6    Production Platform Expansion
+  ↓
+v3.7    Operational Resilience & Autonomous Intelligence Expansion  ← current
 ```
 
 For detailed historical release contents, use the repository release history and tags.
