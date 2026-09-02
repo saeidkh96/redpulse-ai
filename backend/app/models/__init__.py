@@ -13,6 +13,7 @@ from app.models.maintenance_intervention import (
 )
 from app.models.machine_baseline import MachineBaseline
 from app.models.telemetry import Telemetry
+from app.models.runtime_replay_execution import RuntimeReplayExecution
 
 __all__ = [
     "Base",
@@ -27,5 +28,6 @@ __all__ = [
     "MaintenanceOutcomeLabel",
     "MachineBaseline",
     "Telemetry",
+    "RuntimeReplayExecution",
 ]
 

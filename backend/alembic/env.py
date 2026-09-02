@@ -6,8 +6,15 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-from app.models import Base, BehaviorEvent, FailureFingerprint, Machine, MachineBaseline, Telemetry  # noqa: F401
-
+from app.models import (  # noqa: F401
+    Base,
+    BehaviorEvent,
+    FailureFingerprint,
+    Machine,
+    MachineBaseline,
+    RuntimeReplayExecution,
+    Telemetry,
+)
 
 config = context.config
 
