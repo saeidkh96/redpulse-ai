@@ -422,6 +422,19 @@ redpulse-ai/
 │   │   │   ├── release.py
 │   │   │   ├── resilience.py
 │   │   │   └── transfer.py
+│   │   ├── platform_v38/
+│   │   │   ├── agents.py
+│   │   │   ├── benchmark.py
+│   │   │   ├── events.py
+│   │   │   ├── failure_intelligence.py
+│   │   │   ├── fleet.py
+│   │   │   ├── integrations.py
+│   │   │   ├── mlops.py
+│   │   │   ├── outbox.py
+│   │   │   ├── release.py
+│   │   │   ├── runtime.py
+│   │   │   ├── security.py
+│   │   │   └── sre.py
 │   │   ├── runtime_v3/
 │   │   ├── security_v3/
 │   │   ├── streaming/
@@ -485,13 +498,13 @@ From the repository root:
 python -m pytest backend\tests simulator\tests -q
 ```
 
-Validated on `main` for v3.7.1:
+Validated on `main` for v3.8.0:
 
 ```text
-281 passed, 1 warning
+282 passed, 1 warning
 ```
 
-The remaining warning is the existing Starlette/httpx test-client deprecation warning and is unrelated to v3.7.1.
+The remaining warning is the existing Starlette/httpx test-client deprecation warning and is unrelated to the v3.8.0 implementation.
 
 The dedicated v3.7.1 runtime-resilience integration test validates:
 
@@ -600,7 +613,7 @@ The repository does **not** claim:
 
 RedPulse AI is under active development and is currently an **experimental engineering/research project**, not a production safety system.
 
-The current `v3.7.1` release strengthens the existing platform with PostgreSQL-backed durable runtime replay, lease-based execution ownership, heartbeat renewal, stale-worker recovery, ownership fencing, and validated concurrent replay behavior.
+The current `v3.8.0` release consolidates platform capabilities across failure engineering, event and outbox contracts, fleet intelligence, MLOps lifecycle controls, advanced failure intelligence, human-approved maintenance assistance, enterprise integration contracts, tenant-aware authorization, SRE/SLO primitives, benchmarking, Kubernetes worker deployment contracts, and explicit release-evidence validation. It retains the v3.7.1 durable replay, lease ownership, heartbeat renewal, stale-worker recovery, and ownership-fencing foundations.
 
 The next phase focuses on proving the broader platform in increasingly realistic operating conditions.
 
