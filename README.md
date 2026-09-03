@@ -2,7 +2,7 @@
 
 <img src="docs/images/redpulse-logo.png" alt="RedPulse AI" width="720">
 
-[![Version](https://img.shields.io/badge/version-v3.7.1-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.7.1)
+[![Version](https://img.shields.io/badge/version-v3.8.0-e11d2e)](https://github.com/saeidkh96/redpulse-ai/releases/tag/v3.8.0)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
@@ -21,7 +21,7 @@ Instead of treating every machine as identical, RedPulse builds a **machine-spec
 
 The architecture has expanded from machine-level predictive maintenance into streaming and large-scale analytics, MLOps, model-platform integration, Industrial AI, enterprise automation, multi-tenancy, production engineering, Digital Twin foundations, Databricks-oriented data-platform foundations, governance, and operational resilience.
 
-> **Current release — v3.7.1: Runtime Resilience Validation.** v3.7.1 strengthens the v3.7 resilience layer with PostgreSQL-backed durable runtime replay, lease-based execution ownership, heartbeat renewal, stale-worker recovery, ownership fencing, and concurrent/restart-safe execution validation.
+> **Current release - v3.8.0: Platform Consolidation.** v3.8.0 consolidates RedPulse AI's production-readiness capabilities across failure engineering, event and outbox contracts, fleet intelligence, MLOps lifecycle controls, advanced failure intelligence, human-approved agentic maintenance, enterprise integrations, tenant authorization, SRE/SLO primitives, benchmarking, Kubernetes worker deployment contract, and explicit release-evidence validation.
 
 > **Scope:** RedPulse AI is an experimental engineering/research project. It demonstrates architecture, runtime contracts, APIs, deployment paths, and validation foundations. It does not claim a live industrial deployment, safety certification, production identity-provider integration, a connected corporate Databricks workspace, or exactly-once execution of arbitrary external side effects.
 
@@ -45,7 +45,11 @@ This machine-specific baseline helps RedPulse distinguish behavioral change from
 
 ---
 
-## Current Release — v3.7.1
+## Current Release — v3.8.0
+### v3.8.0 — Platform Consolidation
+
+v3.8.0 consolidates the production-readiness expansion into one release line. It adds failure-engineering policies, outbox and idempotent event contracts, fleet-intelligence primitives, MLOps lifecycle controls, advanced failure estimation, human-approved agentic maintenance, enterprise integration contracts, tenant authorization, SRE/SLO primitives, reproducible benchmarking, Kubernetes worker deployment contract, and an explicit release-evidence gate while reusing the existing Kafka, Spark, Airflow, Kubernetes, Databricks, observability, security, and durable-runtime foundations.
+
 
 ### Runtime Resilience Validation
 
@@ -539,7 +543,9 @@ v3.6     Production Platform Expansion
   ↓
 v3.7     Operational Resilience & Autonomous Intelligence Expansion
   ↓
-v3.7.1   Runtime Resilience Validation  ← current
+v3.7.1   Runtime Resilience Validation
+  ↓
+v3.8.0   Platform Consolidation  ← current
 ```
 
 ---
@@ -554,7 +560,8 @@ v3.7.1   Runtime Resilience Validation  ← current
 | v3.5.0 | Streaming & Scale Expansion | ✅ Completed |
 | v3.6.0 | Production Platform Expansion | ✅ Completed |
 | v3.7.0 | Operational Resilience & Autonomous Intelligence Expansion | ✅ Completed |
-| **v3.7.1** | **Runtime Resilience Validation — durable PostgreSQL replay, leases, heartbeat renewal, stale-worker recovery and ownership fencing** | **✅ Current** |
+| v3.7.1 | Runtime Resilience Validation — durable PostgreSQL replay, leases, heartbeat renewal, stale-worker recovery and ownership fencing | ✅ Completed |
+| **v3.8.0** | **Platform Consolidation — failure engineering, event contracts, MLOps, advanced failure intelligence, agentic maintenance, integrations, security, SRE and benchmarking** | **✅ Current** |
 
 ### Next Phase — Real Deployment & Operational Validation
 

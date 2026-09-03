@@ -1,4 +1,5 @@
-﻿from app.api.v1.v32_platform import router as v32_platform_router
+from app.api.v1.v38_platform import router as v38_platform_router
+from app.api.v1.v32_platform import router as v32_platform_router
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -235,4 +236,5 @@ app.include_router(
 # RedPulse AI v3.2.0 roadmap bundle
 app.include_router(v32_platform_router)
 
-
+# RedPulse AI v3.8.0 consolidated production-readiness platform
+app.include_router(v38_platform_router, prefix=settings.api_v1_prefix)
