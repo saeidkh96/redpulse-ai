@@ -1,10 +1,12 @@
+from app.api.v1.v40_platform import router as v40_platform_router
 from app.api.v1.v38_platform import router as v38_platform_router
 from app.api.v1.v32_platform import router as v32_platform_router
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from app.platform_v40.hardening import RequestContext
 from app.api.v1.v31_platform import router as v31_platform_router
 from app.api.v1.production_demo_v3 import router as production_demo_v3_router
 
@@ -70,6 +72,18 @@ app = FastAPI(
     debug=settings.debug,
     lifespan=lifespan,
 )
+
+
+@app.middleware("http")
+async def v40_platform_headers(request: Request, call_next):
+    incoming = request.headers.get("x-correlation-id")
+    context = RequestContext.create(correlation_id=incoming)
+    response = await call_next(request)
+    response.headers["X-Correlation-ID"] = context.correlation_id
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    return response
 
 
 app.include_router(
@@ -236,5 +250,13 @@ app.include_router(
 # RedPulse AI v3.2.0 roadmap bundle
 app.include_router(v32_platform_router)
 
+
+
 # RedPulse AI v3.8.0 consolidated production-readiness platform
 app.include_router(v38_platform_router, prefix=settings.api_v1_prefix)
+
+
+app.include_router(
+    v40_platform_router,
+    prefix=settings.api_v1_prefix,
+)

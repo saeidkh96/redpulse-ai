@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpulse-api-v40
+  labels:
+    app.kubernetes.io/name: redpulse-ai
+    app.kubernetes.io/version: "4.0.0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redpulse-api-v40
+  template:
+    metadata:
+      labels:
+        app: redpulse-api-v40
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: api
+          image: redpulse-ai:4.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_VERSION
+              value: "4.0.0"
+            - name: ENVIRONMENT
+              value: "production"
+          readinessProbe:
+            httpGet:
+              path: /api/v1/ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpulse-api-v40
+spec:
+  selector:
+    app: redpulse-api-v40
+  ports:
+    - port: 80
+      targetPort: 8000

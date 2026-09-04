@@ -1,0 +1,14 @@
+{
+  "title": "RedPulse AI v4.0 Platform Overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {"type":"stat","title":"Machine Health Score","targets":[{"expr":"machine_health_score"}]},
+    {"type":"stat","title":"Failure Probability","targets":[{"expr":"failure_probability"}]},
+    {"type":"timeseries","title":"Model Drift","targets":[{"expr":"model_drift_score"}]},
+    {"type":"timeseries","title":"Prediction Latency","targets":[{"expr":"prediction_latency_ms"}]},
+    {"type":"timeseries","title":"Kafka Consumer Lag","targets":[{"expr":"kafka_consumer_lag"}]},
+    {"type":"stat","title":"Integration Delivery Failures","targets":[{"expr":"integration_delivery_failure_total"}]}
+  ]
+}

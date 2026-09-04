@@ -5,13 +5,20 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "RedPulse AI"
-    app_version: str = "3.8.0"
+    app_version: str = "4.0.0"
     environment: str = "development"
     debug: bool = False
     api_v1_prefix: str = "/api/v1"
 
     database_url: str = "postgresql+asyncpg://redpulse:redpulse@localhost:5433/redpulse"
     redis_url: str = "redis://localhost:6379/0"
+
+    kafka_bootstrap_servers: str = "localhost:9092"
+    kafka_consumer_group: str = "redpulse-v40-intelligence"
+    telemetry_topic: str = "redpulse.telemetry.v1"
+    integration_max_attempts: int = 3
+    api_rate_limit_per_minute: int = 120
+    otel_service_name: str = "redpulse-ai"
 
     model_config = SettingsConfigDict(
         env_file=".env",
